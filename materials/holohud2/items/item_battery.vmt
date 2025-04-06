@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"holohud2/items/item_battery"
+	"$vertexalpha"	"1"
+	"$vertexcolor"	"1"
+}

@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"holohud2/health/pulse"
+	"$vertexalpha"	"1"
+	"$vertexcolor"	"1"
+}

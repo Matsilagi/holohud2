@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"holohud2/radar/dot1"
+	"$vertexalpha"	"1"
+	"$vertexcolor"	"1"
+}

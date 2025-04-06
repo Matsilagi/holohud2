@@ -1,0 +1,68 @@
+---
+--- Derma
+---
+HOLOHUD2.AddCSLuaFile( "vgui/dframe.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dhint.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dbuttongroup.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcolorbutton.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcolorpopup.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dlistline.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcategorylist.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dproceduralcategorylist.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcollapsiblepanel.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcheckboxlist.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameters.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dpreviewimage.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dpreview.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/delementproperties.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcolorrangeseditor.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcolorrangesviewer.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dlistlinelabel.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dpresets.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dpreseteditor.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dbrowser.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dproperties_options.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dproperties_advanced.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dexportwindow.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dcredits.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dabout.lua" )
+
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_bool.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_string.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_number.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_range.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_textalign.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_vector.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_option.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_color.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_font.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_colorranges.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_direction.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_dock.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_growdirection.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dparameter_stringlist.lua" )
+
+HOLOHUD2.AddCSLuaFile( "vgui/dpreviewprop_numberwang.lua" )
+HOLOHUD2.AddCSLuaFile( "vgui/dpreviewprop_numslider.lua" )
+
+if SERVER then return end
+
+---
+--- Define default parameter types controls.
+---
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_BOOL, "HOLOHUD2_DParameter_Bool" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_STRING, "HOLOHUD2_DParameter_String" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_NUMBER, "HOLOHUD2_DParameter_Number" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_RANGE, "HOLOHUD2_DParameter_Range" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_TEXTALIGN, "HOLOHUD2_DParameter_TextAlign" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_VECTOR, "HOLOHUD2_DParameter_Vector" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_OPTION, "HOLOHUD2_DParameter_Option" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_COLOR, "HOLOHUD2_DParameter_Color" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_FONT, "HOLOHUD2_DParameter_Font" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_COLORRANGES, "HOLOHUD2_DParameter_ColorRanges" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_DIRECTION, "HOLOHUD2_DParameter_Direction" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_DOCK, "HOLOHUD2_DParameter_Dock" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_GROWDIRECTION, "HOLOHUD2_DParameter_GrowDirection" )
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_ORDER, "HOLOHUD2_DParameter_Number" ) -- TODO: custom control warning about colliding orders
+HOLOHUD2.vgui.DefineParameterControl( HOLOHUD2.PARAM_STRINGTABLE, "HOLOHUD2_DParameter_StringList" )

@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"holohud2/ammo/rpg_round"
+	"$vertexalpha"	"1"
+	"$vertexcolor"	"1"
+}
