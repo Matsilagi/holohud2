@@ -253,6 +253,8 @@ end
 ---
 --- Startup
 ---
+local valid_selection = false -- it's set here because we need to cancel the selection when starting up
+
 local time = 0
 local alpha = 0
 
@@ -265,6 +267,7 @@ local startup_time = 0
 
 function ELEMENT:QueueStartup()
 
+    valid_selection = false
     alpha = 0
     hudweaponselection:SetSlot( 0 )
     hudweaponselection:SetSlotPos( 0 )
@@ -309,7 +312,7 @@ end
 ---
 local localplayer
 local cache, invalid_cache = {}, false
-local valid_selection, has_ammo = false, false
+local has_ammo = false
 local has_selected = false
 function ELEMENT:PreDraw( settings )
 
