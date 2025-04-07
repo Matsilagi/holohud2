@@ -11,6 +11,8 @@ local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 local GetMinimumGlow = HOLOHUD2.render.GetMinimumGlow
 
+local hud_fastswitch = GetConVar( "hud_fastswitch" )
+
 local WEAPON_PHYSGUN = "weapon_physgun"
 local IN_INVNEXT, IN_INVPREV, IN_SLOT, IN_SELECT, IN_CANCEL = "invnext", "invprev", "slot", "+attack", "+attack2"
 local FADEIN_TIME, FADEOUT_TIME, DELAY = .1, .4, 2
@@ -613,6 +615,7 @@ end
 UnintrusiveBindPress.add( "holohud2", function( ply, bind, pressed, code )
 
     if not HOLOHUD2.IsEnabled() or not HOLOHUD2.IsVisible() or not ELEMENT:IsVisible() then return end
+    if hud_fastswitch:GetBool() then return end
     if startup_phase ~= STARTUP_NONE and ( bind == IN_INVNEXT or bind == IN_INVPREV ) then return true end
     if table.IsEmpty( cache ) or not ply:Alive() or ( ply:InVehicle() and not ply:GetAllowWeaponsInVehicle() ) then return end
     if not pressed then return end
