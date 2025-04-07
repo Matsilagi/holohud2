@@ -58,6 +58,15 @@ function COMPONENT:PerformLayout( force )
 
 end
 
+function COMPONENT:Copy( parent )
+
+    self:SetPos( parent.x, parent.y )
+    self:SetText( parent.text )
+    self:SetFont( parent.font )
+    self:SetAlign( parent.align )
+
+end
+
 function COMPONENT:SetVisible( visible )
 
     if self.visible == visible then return end

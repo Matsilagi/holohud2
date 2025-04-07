@@ -3,7 +3,7 @@ local FrameTime = FrameTime
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 
--- TODO: improve look of blinking health warn (text on background, pulse, or at least brackets, on background)
+-- TODO: improve look of blinking health warn (pulse, or at least brackets, on background)
 
 local BaseClass = HOLOHUD2.component.Get( "LayeredMeterDisplay" )
 
@@ -94,6 +94,8 @@ function COMPONENT:Init()
     bracket1:SetReversed( true )
     self.Bracket1 = bracket1
 
+    self.TextBackground = HOLOHUD2.component.Create( "Text" )
+
 end
 
 function COMPONENT:InvalidateLayout()
@@ -103,6 +105,7 @@ function COMPONENT:InvalidateLayout()
     self.Pulse:InvalidateLayout()
     self.Bracket0:InvalidateLayout()
     self.Bracket1:InvalidateLayout()
+    self.TextBackground:InvalidateLayout()
 
 end
 
@@ -314,6 +317,7 @@ function COMPONENT:Think()
     self.Pulse:Think()
     self.Bracket0:PerformLayout()
     self.Bracket1:PerformLayout()
+    self.TextBackground:PerformLayout()
 
     -- low health warning animation
     if self.healthwarn ~= HEALTHWARN_NONE and self.value <= self.healthwarn_threshold then
@@ -331,6 +335,7 @@ function COMPONENT:Think()
         elseif self.healthwarn == HEALTHWARN_WAVEBLINK then
             
             self._alpha = math.abs( time / self.healthwarn_rate - .5 ) * 2
+            self.TextBackground:SetVisible( self._alpha == 0 )
 
         else
 
@@ -350,6 +355,8 @@ function COMPONENT:Think()
 
             end
 
+            self.TextBackground:SetVisible( true )
+
         end
 
         if self._healthwarn_time < curtime then
@@ -361,6 +368,7 @@ function COMPONENT:Think()
     else
 
         self._alpha = 1
+        self.TextBackground:SetVisible( false )
 
     end
 
@@ -399,8 +407,10 @@ function COMPONENT:PaintBackground( x, y )
 
     BaseClass.PaintBackground( self, x, y )
 
+    self.TextBackground:Paint( x, y )
+
     if self.icon_background and self.value <= self.healthwarn_threshold and self.healthwarn > HEALTHWARN_PULSE and self.icon_mode == ICONRENDERMODE_STATIC then
-            
+        
         self.IconBackground:Paint( x, y )
     
     end
@@ -420,7 +430,7 @@ function COMPONENT:Paint( x, y )
     StartAlphaMultiplier( self._alpha )
 
     BaseClass.Paint( self, x, y )
-    self.DamageBar:Paint(x, y)
+    self.DamageBar:Paint( x, y )
 
     if not self.pulse_on_background then
         
@@ -452,7 +462,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     self.Colors:SetColors( settings.health_color )
     self.Colors2:SetColors( settings.health_color2 )
 
-    local color, color2 = self.Colors:GetColor(), self.Colors:GetColor()
+    local color, color2 = self.Colors:GetColor(), self.Colors2:GetColor()
 
     self:SetHealthWarnAnimation( settings.healthwarn )
     self:SetHealthWarnThreshold( settings.healthwarn_threshold )
@@ -515,7 +525,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     pulse:SetVisible( settings.healthpulse )
     pulse:SetPos( settings.healthpulse_pos.x, settings.healthpulse_pos.y )
     pulse:SetSize( settings.healthpulse_size.x, settings.healthpulse_size.y )
-    pulse:SetColor( settings.healthpulse_on_background and self.Colors2:GetColor() or self.Colors:GetColor() )
+    pulse:SetColor( settings.healthpulse_on_background and color2 or color )
     pulse:SetAnimation( settings.healthpulse_style )
     self:SetDrawPulseOnBackground( settings.healthpulse_on_background )
 
@@ -536,9 +546,14 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetPos( settings.healthtext_pos.x, settings.healthtext_pos.y )
     text:SetFont( fonts.healthtext_font )
     text:SetAlign( settings.healthtext_align )
-    text:SetColor( settings.healthtext_on_background and self.Colors2:GetColor() or self.Colors:GetColor() )
+    text:SetColor( settings.healthtext_on_background and color2 or color )
     text:SetText( settings.healthtext_text )
     self:SetDrawTextOnBackground( settings.healthtext_on_background )
+
+    local text_background = self.TextBackground
+    text_background:SetVisible( not settings.healthtext_on_background and self.value <= settings.healthwarn_threshold and settings.healthwarn > HEALTHWARN_PULSE )
+    text_background:SetColor( color2 )
+    text_background:Copy( text )
 
     self:SetOversizeTransform( {
         number_pos          = settings.health_oversize_numberpos,

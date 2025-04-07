@@ -10,7 +10,7 @@ local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 
 local STYLE_NOTHING     = 1
-local STYLE_INMEDIATE   = 2
+local STYLE_IMMEDIATE   = 2
 local STYLE_DELAYED     = 3
 local STYLE_DEFAULT     = 4
 
@@ -235,6 +235,12 @@ HOLOHUD2.element.Register( "death", ELEMENT )
 --- Presets
 ---
 HOLOHUD2.presets.Register( "death", "element/death" )
+
+HOLOHUD2.presets.Add( "death", "Alternate - Minimal", {
+    style   = STYLE_IMMEDIATE,
+    text    = false,
+    icon    = false
+} )
 
 ---
 --- Hide HUD after sequence is over

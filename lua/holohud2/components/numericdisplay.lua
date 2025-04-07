@@ -59,6 +59,9 @@ end
 
 function COMPONENT:SetDrawTextOnBackground( on_background )
 
+    if self.text_on_background == on_background then return end
+
+    self.Text:SetColor( on_background and self.Colors2:GetColor() or self.Colors:GetColor() )
     self.text_on_background = on_background
 
 end
