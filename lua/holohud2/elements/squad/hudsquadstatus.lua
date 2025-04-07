@@ -474,7 +474,7 @@ function COMPONENT:PaintBackground( x, y )
 
     if not self.text_on_background then return end
 
-    self.Text:PaintBackground( x, y )
+    self.Text:Paint( x, y )
 
 end
 
@@ -557,7 +557,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetPos( settings.text_pos.x, settings.text_pos.y )
     text:SetFont( fonts.text_font )
     text:SetText( settings.text_text )
-    text:SetColor( settings.color )
+    text:SetColor( settings.text_on_background and settings.color2 or settings.color )
     text:SetAlign( settings.text_align )
     self:SetDrawTextOnBackground( settings.text_on_background )
     

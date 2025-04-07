@@ -5,6 +5,8 @@ HOLOHUD2.AddCSLuaFile( "health/hudbattery.lua" )
 
 if SERVER then return end
 
+-- TODO: dynamic sizing for suit battery when health is oversized
+
 local CurTime = CurTime
 local LocalPlayer = LocalPlayer
 local FrameTime = FrameTime
@@ -108,7 +110,7 @@ local ELEMENT = {
         health_suit_oversize_size               = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_BOOL, value = true },
         health_suit_oversize_numberpos          = { name = "#holohud2.dynamic_sizing.number_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
         health_suit_oversize_progressbarpos     = { name = "#holohud2.health.healthbar_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
-        health_suit_oversize_progressbarsize    = { name = "#holohud2.health.healthbar_pos", type = HOLOHUD2.PARAM_BOOL, value = true },
+        health_suit_oversize_progressbarsize    = { name = "#holohud2.health.healthbar_size", type = HOLOHUD2.PARAM_BOOL, value = true },
         health_suit_oversize_iconpos            = { name = "#holohud2.dynamic_sizing.icon_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
         health_suit_oversize_pulsepos           = { name = "#holohud2.health.ecg_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
         health_suit_oversize_pulsesize          = { name = "#holohud2.health.ecg_size", type = HOLOHUD2.PARAM_BOOL, value = true },
