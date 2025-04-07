@@ -23,6 +23,7 @@ local function open_properties()
     frame:SetSize( math.max( ScrW() * .4, 640 ), math.max( ScrH() * .8, 480 ) )
     frame:Center()
     frame:MakePopup()
+    frame:ShowCloseButton( false )
     frame.DoApply = function( _ )
 
         HOLOHUD2.client.SubmitModifiers( table.Copy( modifiers ) )
