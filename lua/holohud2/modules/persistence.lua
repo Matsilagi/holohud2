@@ -63,6 +63,8 @@ end
 --- @param modifiers table
 function HOLOHUD2.persistence.WriteTemp( settings, modifiers )
 
+    if not file.Exists( DIR, "DATA" ) then file.CreateDir( DIR ) end
+
     file.Write( TEMP, util.TableToJSON( { settings = settings, modifiers = modifiers }, true ) )
 
 end
