@@ -3,15 +3,15 @@ HOLOHUD2.persistence = {}
 
 local hardcoded = {}
 
-local TEMP  = HOLOHUD2.DIR .. "/_temp.json"
-local DIR   = HOLOHUD2.DIR .. "/presets"
+local TEMP  = HOLOHUD2.DIR .. "\\_temp.json"
+local DIR   = HOLOHUD2.DIR .. "\\presets"
 
 --- Returns the path of the given file.
 --- @param name string
 --- @return string path
 local function get_path( name )
 
-    return DIR .. "/" .. string.StripExtension( name ) .. ".json"
+    return DIR .. "\\" .. string.StripExtension( name ) .. ".json"
 
 end
 
@@ -80,7 +80,7 @@ end
 --- @return table files
 function HOLOHUD2.persistence.Find()
 
-    return file.Find( DIR .. "/*.json", "DATA" )
+    return file.Find( DIR .. "\\*.json", "DATA" )
 
 end
 

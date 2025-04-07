@@ -11,7 +11,6 @@ function PANEL:Init()
     end
 
     self:SetTitle( "" )
-    self:ShowCloseButton( false )
 
     local colormixer = vgui.Create( "DColorMixer", self )
     colormixer:Dock( FILL )
