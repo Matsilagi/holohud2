@@ -252,7 +252,14 @@ local ELEMENT = {
     }
 }
 
-local POD_CLASS = "prop_vehicle_prisoner_pod"
+local POD_BLACKLIST = {
+    [ "prop_vehicle_prisoner_pod" ] = true,
+    [ "prop_vehicle_choreo_generic" ] = true
+}
+
+local POD_PARENT_BLACKLIST = {
+    [ "func_tracktrain" ] = true
+}
 
 ---
 --- Components
@@ -415,7 +422,7 @@ function ELEMENT:PreDraw( settings )
             
             local vehicle = localplayer:GetVehicle()
 
-            if vehicle:GetClass() == POD_CLASS and not IsValid( vehicle:GetMoveParent() ) then
+            if POD_BLACKLIST[ vehicle:GetClass() ] and ( not IsValid( vehicle:GetMoveParent() ) or POD_PARENT_BLACKLIST[ vehicle:GetMoveParent():GetClass() ] ) then
 
                 panel:SetDeployed( settings.invehicle and not settings.nopod )
 

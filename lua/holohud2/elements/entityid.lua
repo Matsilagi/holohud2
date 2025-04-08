@@ -143,6 +143,7 @@ local FILTER_WEAPONS    = {
 local FILTER_CLASS      = {
     [ "class C_BaseEntity" ]    = true,
     [ "class C_BaseAnimating" ] = true,
+    prop_vehicle_choreo_generic = true,
     func_monitor                = true,
     func_brush                  = true,
     func_detail                 = true,

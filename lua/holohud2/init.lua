@@ -130,7 +130,7 @@ HOLOHUD2.AddCSLuaFile( "toolmenu.lua" )
 ---
 --- Load third-party add-ons
 ---
-timer.Simple( 0, function() -- HACK
+timer.Simple( .16, function() -- HACK
 
     for _, addon in ipairs( file.Find( "holohud2/add-ons/*.lua", "LUA" ) ) do
 
@@ -145,7 +145,7 @@ end)
 ---
 if SERVER then return end
 
-timer.Simple( .16, function() HOLOHUD2.render.RefreshScreenTextures() end) -- HACK: we need a timer otherwise the render targets won't generate correctly
+timer.Simple( .08, function() HOLOHUD2.render.RefreshScreenTextures() end) -- HACK: we need a timer otherwise the render targets won't generate correctly
 
 local IsValid = IsValid
 local LocalPlayer = LocalPlayer
@@ -330,7 +330,7 @@ cvars.AddChangeCallback( "gmod_language", function() HOLOHUD2.element.OnScreenSi
 ---
 --- Initialize
 ---
-timer.Simple( 0, function() -- HACK
+timer.Simple( .16, function() -- HACK
 
     HOLOHUD2.settings.Register( HOLOHUD2.element.GetDefaultValues(), HOLOHUD2.SETTINGS_DEFAULT )
 

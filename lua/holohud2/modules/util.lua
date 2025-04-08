@@ -313,7 +313,7 @@ hook.Add( "PreDrawHUD", "holohud2_util", function()
 
         local vehicle = localplayer:GetVehicle()
 
-        if IsValid( vehicle ) then
+        if IsValid( vehicle ) and vehicle.GetAmmo then
 
             local ammotype, max_ammo, ammo = vehicle:GetAmmo()
 

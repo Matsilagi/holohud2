@@ -145,7 +145,7 @@ function COMPONENT:SetInvertedDamage( inverted )
 
     if self.damage_inverted == inverted then return end
 
-    if not self.damagebar_lerp then self.DamageBar:SetValue( inverted and ( 1 - damage ) or damage ) end
+    if not self.damagebar_lerp then self.DamageBar:SetValue( inverted and ( 1 - self.damage ) or self.damage ) end
 
     self.damage_inverted = inverted
 
