@@ -952,7 +952,7 @@ HOLOHUD2.modifier.Add( "text_pos", "weaponselection", { "selection_name_pos", "n
 --- Presets
 ---
 HOLOHUD2.presets.Register( "weaponselection", "element/weaponselection" )
-HOLOHUD2.presets.Add( "weaponselection", "Default sounds", {
+HOLOHUD2.presets.Add( "weaponselection", "Alternate - Default Sounds", {
     sound_move_path     = "common/wpn_moveselect.wav",
     sound_move_pitch    = 100,
     sound_select_path   = "common/wpn_select.wav",

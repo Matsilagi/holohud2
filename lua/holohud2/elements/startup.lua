@@ -692,7 +692,7 @@ HOLOHUD2.hook.Add( "WelcomeSecretMessage", "startup", function()
     end
 
     -- A message for the future
-    if math.random( 1, 50 ) == 1 then
+    if math.random( 1, 30 ) == 1 then
 
         if date.year >= 2030 and date.year < 2035 then
             

@@ -13,7 +13,7 @@ if CLIENT then
     -- addon properties
     HOLOHUD2.Name           = "D/GL4 HUD"
     HOLOHUD2.Version        = "1.0.7"
-    HOLOHUD2.Date           = 1744109280 -- epoch timestamp of the build date
+    HOLOHUD2.Date           = 1744109515 -- epoch timestamp of the build date
     HOLOHUD2.Credits        = { -- { name, { contribution, ... } }
 
         { "DyaMetR", { "code", "design", "art", "locale_es-ES" } }
