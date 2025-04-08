@@ -5,8 +5,6 @@ HOLOHUD2.AddCSLuaFile( "health/hudbattery.lua" )
 
 if SERVER then return end
 
--- TODO: dynamic sizing for suit battery when health is oversized
-
 local CurTime = CurTime
 local LocalPlayer = LocalPlayer
 local FrameTime = FrameTime
@@ -84,7 +82,7 @@ local ELEMENT = {
 
         healthpulse                             = { name = "#holohud2.health.ecg", type = HOLOHUD2.PARAM_BOOL, value = false },
         healthpulse_pos                         = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 4 } },
-        healthpulse_size                        = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 48, y = 24 } },
+        healthpulse_size                        = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 48, y = 24 }, min_x = 1, min_y = 1 },
         healthpulse_style                       = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.ECGANIMATIONS, value = HOLOHUD2.ECGANIMATION_GAME },
         healthpulse_brackets                    = { name = "#holohud2.health.ecg_brackets", type = HOLOHUD2.PARAM_BOOL, value = true },
         healthpulse_brackets_margin             = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 6 },

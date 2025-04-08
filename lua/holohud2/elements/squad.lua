@@ -526,7 +526,7 @@ function ELEMENT:PreviewInit( panel )
 
             preview_hudsquadstatus:RemoveMember( 1, true )
 
-            timer.Simple( .5, function()
+            timer.Simple( .56, function()
             
                 if not preview_hudsquadstatus.members[ 1 ] then return end
                 preview_hudsquadstatus.members[ 1 ]:SetHighlighted( true )

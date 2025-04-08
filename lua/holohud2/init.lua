@@ -145,7 +145,7 @@ end)
 ---
 if SERVER then return end
 
-timer.Simple( 0, function() HOLOHUD2.render.RefreshScreenTextures() end) -- HACK: we need a timer otherwise the render targets won't generate correctly
+timer.Simple( .16, function() HOLOHUD2.render.RefreshScreenTextures() end) -- HACK: we need a timer otherwise the render targets won't generate correctly
 
 local IsValid = IsValid
 local LocalPlayer = LocalPlayer

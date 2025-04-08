@@ -91,7 +91,7 @@ end
 ---
 local function invalidate_materials()
     
-    timer.Simple( 0, function() -- HACK: wait for the game to resume before invalidating materials
+    timer.Simple( .16, function() -- HACK: wait for the game to resume before invalidating materials
     
         HOLOHUD2.hook.Call( "InvalidateMaterials" )
 
