@@ -36,9 +36,17 @@ local COMPONENT = {
         icon_pos            = false,
         text_pos            = false
     },
+    transform_health_oversize = {
+        number_pos          = false,
+        progressbar_pos     = false,
+        progressbar_size    = false,
+        icon_pos            = false,
+        text_pos            = false
+    },
     _number_size        = 0,
     _last_number_size   = 0,
     _last_offset        = 0,
+    _last_health_offset = 0,
     _num_rendermode     = NUMBERRENDERMODE_STATIC,
     _text_on_background = false
 }
@@ -52,6 +60,12 @@ end
 function COMPONENT:SetOversizeTransform( transform )
 
     self.transform_oversize = transform
+
+end
+
+function COMPONENT:SetHealthOversizeTransform( transform )
+
+    self.transform_health_oversize = transform
 
 end
 
@@ -81,6 +95,31 @@ end
 function COMPONENT:RevertOversizeTransform( silent )
 
     self:ApplyOversizeTransform( -self._last_offset, silent )
+
+end
+
+function COMPONENT:ApplyHealthOversizeTransform( offset )
+
+    -- WARNING: remember to reset these transforms when applying a new configuration!
+
+    if self.transform_health_oversize.number_pos then self.Number:SetPos( self.Number.x + offset, self.Number.y ) end
+    if self.transform_health_oversize.progressbar_pos then self.ProgressBar:SetPos( self.ProgressBar.x + offset, self.ProgressBar.y ) end
+    if self.transform_health_oversize.progressbar_size then self.ProgressBar:SetSize( self.ProgressBar.w + offset, self.ProgressBar.h ) end
+    if self.transform_health_oversize.icon then
+        
+        self.IconBackground:SetPos( self.IconBackground.x + offset, self.IconBackground.y )
+        self.Icon:Copy( self.IconBackground )
+    
+    end
+    if self.transform_health_oversize.text_pos then self.Text:SetPos( self.Text.x + offset, self.Text.y ) end
+
+    self._last_health_offset = self._last_health_offset + offset
+
+end
+
+function COMPONENT:RevertHealthOversizeTransform()
+
+    self:ApplyHealthOversizeTransform( -self._last_health_offset )
 
 end
 
@@ -154,6 +193,7 @@ function COMPONENT:ApplySettings( settings, fonts )
 
     -- silently revert oversize transform
     self:RevertOversizeTransform( true )
+    self:RevertHealthOversizeTransform()
 
     self.Colors:SetColors( settings.suit_color )
     self.Colors2:SetColors( settings.suit_color2 )
@@ -225,6 +265,16 @@ function COMPONENT:ApplySettings( settings, fonts )
         pulse_pos           = settings.suit_oversize_pulsepos,
         pulse_size          = settings.suit_oversize_pulsesize,
         text_pos            = settings.suit_oversize_textpos
+    } )
+
+    self:SetHealthOversizeTransform( {
+        number_pos          = settings.suit_health_oversize_numberpos,
+        progressbar_pos     = settings.suit_health_oversize_progressbarpos,
+        progressbar_size    = settings.suit_health_oversize_progressbarsize,
+        icon_pos            = settings.suit_health_oversize_iconpos,
+        pulse_pos           = settings.suit_health_oversize_pulsepos,
+        pulse_size          = settings.suit_health_oversize_pulsesize,
+        text_pos            = settings.suit_health_oversize_textpos
     } )
     
     self:InvalidateLayout()

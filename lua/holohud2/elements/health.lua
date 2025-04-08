@@ -59,7 +59,7 @@ local ELEMENT = {
 
         healthbar                               = { name = "#holohud2.component.percentage_bar", type = HOLOHUD2.PARAM_BOOL, value = true },
         healthbar_pos                           = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 2, y = 34 } },
-        healthbar_size                          = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 109, y = 6 } },
+        healthbar_size                          = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 109, y = 6 }, min_x = 1, min_y = 1 },
         healthbar_style                         = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_TEXTURED },
         healthbar_growdirection                 = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_RIGHT },
         healthbar_layered                       = { name = "#holohud2.component.percentage_bar.layered", type = HOLOHUD2.PARAM_BOOL, value = true, helptext = "#holohud2.component.percentage_bar.layered.helptext" },
@@ -157,7 +157,7 @@ local ELEMENT = {
 
         suitbar                                 = { name = "#holohud2.component.percentage_bar", type = HOLOHUD2.PARAM_BOOL, value = false },
         suitbar_pos                             = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 3, y = 5 } },
-        suitbar_size                            = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 24 } },
+        suitbar_size                            = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 24 }, min_x = 1, min_y = 1 },
         suitbar_style                           = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_DOT },
         suitbar_growdirection                   = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP },
         suitbar_layered                         = { name = "#holohud2.component.percentage_bar.layered", type = HOLOHUD2.PARAM_BOOL, value = true, helptext = "#holohud2.component.percentage_bar.layered.helptext" },
@@ -188,7 +188,13 @@ local ELEMENT = {
         suit_oversize_progressbarpos            = { name = "#holohud2.health.suitbar_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
         suit_oversize_progressbarsize           = { name = "#holohud2.health.suitbar_size", type = HOLOHUD2.PARAM_BOOL, value = false },
         suit_oversize_iconpos                   = { name = "#holohud2.dynamic_sizing.icon_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
-        suit_oversize_textpos                   = { name = "#holohud2.dynamic_sizing.label_pos", type = HOLOHUD2.PARAM_BOOL, value = false }
+        suit_oversize_textpos                   = { name = "#holohud2.dynamic_sizing.label_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
+
+        suit_health_oversize_numberpos          = { name = "#holohud2.dynamic_sizing.number_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
+        suit_health_oversize_progressbarpos     = { name = "#holohud2.health.suitbar_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
+        suit_health_oversize_progressbarsize    = { name = "#holohud2.health.suitbar_size", type = HOLOHUD2.PARAM_BOOL, value = false },
+        suit_health_oversize_iconpos            = { name = "#holohud2.dynamic_sizing.icon_pos", type = HOLOHUD2.PARAM_BOOL, value = false },
+        suit_health_oversize_textpos            = { name = "#holohud2.dynamic_sizing.label_pos", type = HOLOHUD2.PARAM_BOOL, value = false }
     },
     menu = {
         { tab = "#holohud2.health.tab.health", icon = "icon16/heart.png", parameters = {
@@ -395,6 +401,14 @@ local ELEMENT = {
                 { id = "suit_oversize_progressbarsize" },
                 { id = "suit_oversize_iconpos" },
                 { id = "suit_oversize_textpos" }
+            } },
+
+            { category = "#holohud2.health.category.health_oversize", helptext = "#holohud2.health.category.health_oversize.helptext", parameters = {
+                { id = "suit_health_oversize_numberpos" },
+                { id = "suit_health_oversize_progressbarpos" },
+                { id = "suit_health_oversize_progressbarsize" },
+                { id = "suit_health_oversize_iconpos" },
+                { id = "suit_health_oversize_textpos" }
             } }
         } }
     },
@@ -526,6 +540,20 @@ suit_panel.PaintOverScanlines = function( self, x, y )
     hudbattery:PaintScanlines( x, y )
 
     hook_Call( "DrawOverArmor", x, y, self._w, self._h, LAYER_SCANLINES, hudbattery )
+
+end
+
+---
+--- Connect component oversize
+---
+hudhealth.OnOversizeTransformApplied = function( _, offset )
+
+    hudbattery:ApplyHealthOversizeTransform( offset )
+
+end
+hudbattery.OnOversizeTransformApplied = function( _, offset )
+
+    hudhealth:ApplySuitOversizeTransform( offset )
 
 end
 

@@ -29,6 +29,8 @@ local ELEMENT = {
     helptext        = "#holohud2.weaponselection.helptext",
     on_overlay      = true,
     parameters      = {
+        autohide                            = { name = "#holohud2.parameter.autohide", type = HOLOHUD2.PARAM_BOOL, value = true },
+
         pos                                 = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 186, y = 72 } },
         background                          = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
         background_color                    = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 0, 0, 0, 94 ) },
@@ -53,7 +55,7 @@ local ELEMENT = {
         
         selection_ammo1_pos                 = { name = "#holohud2.weaponselection.ammo1_pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 106, y = 4 } },
         selection_ammo2_pos                 = { name = "#holohud2.weaponselection.ammo2_pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 68, y = 4 } },
-        selection_ammo_size                 = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 34, y = 5 } },
+        selection_ammo_size                 = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 34, y = 5 }, min_x = 1, min_y = 1 },
         selection_ammo_style                = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_DOT_CONTINUOUS },
         selection_ammo_background           = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
         selection_ammo_growdirection        = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_LEFT },
@@ -92,6 +94,7 @@ local ELEMENT = {
     },
 
     menu = {
+        { id = "autohide" },
         { id = "pos" },
         { id = "animation" },
         { id = "background", parameters = {
@@ -315,7 +318,7 @@ end
 local localplayer
 local cache, invalid_cache = {}, false
 local has_ammo = false
-local has_selected = false
+local has_selected = true
 function ELEMENT:PreDraw( settings )
 
     if startup_phase == STARTUP_QUEUED then return end
@@ -420,6 +423,13 @@ function ELEMENT:PreDraw( settings )
 
     end
 
+    -- if automatic hiding is disabled, make the time never run out
+    if not settings.autohide and not has_selected then
+        
+        time = CurTime()
+
+    end
+
     -- run animations
     if time < CurTime() then
 
@@ -479,7 +489,7 @@ function ELEMENT:MoveCursor( forward )
     valid_selection = false
     local last_class = hudweaponselection.weapons[ hudweaponselection.slot ] and hudweaponselection.weapons[ hudweaponselection.slot ][ hudweaponselection.pos ] and hudweaponselection.weapons[ hudweaponselection.slot ][ hudweaponselection.pos ].class
     
-    if time <= CurTime() then
+    if time < CurTime() then
 
         -- we don't have a valid starting position -- skip
         if not self:FindActiveWeapon() then return end
@@ -559,7 +569,7 @@ function ELEMENT:CycleSlot( slot )
 
     if weapons <= 0 then
 
-        if time <= CurTime() then
+        if time < CurTime() then
 
             localplayer:EmitSound( open_sound, nil, open_pitch, volume, CHAN_WEAPON )
 
@@ -573,7 +583,7 @@ function ELEMENT:CycleSlot( slot )
 
     end
 
-    if time <= CurTime() or hudweaponselection.slot ~= slot then
+    if time < CurTime() or hudweaponselection.slot ~= slot then
 
         localplayer:EmitSound( open_sound, nil, open_pitch, volume, CHAN_WEAPON )
         hudweaponselection:SetSlotPos( 0 )
@@ -591,9 +601,9 @@ function ELEMENT:CycleSlot( slot )
 
     local class = hudweaponselection.weapons[ hudweaponselection.slot ][ hudweaponselection.pos ].class
 
-    if last_class ~= class or time <= CurTime() then
+    if last_class ~= class or time < CurTime() then
         
-        if time > CurTime() then
+        if time >= CurTime() then
 
             localplayer:EmitSound( move_sound, nil, move_pitch, volume, CHAN_WEAPON )
 
@@ -658,7 +668,7 @@ UnintrusiveBindPress.add( "holohud2", function( ply, bind, pressed, code )
 
     end
 
-    if time <= CurTime() then return end
+    if time < CurTime() then return end
 
     -- select
     if bind == IN_SELECT then

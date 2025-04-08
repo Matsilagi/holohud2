@@ -132,7 +132,7 @@ function ELEMENT:DefineClip( id, tab, label, order, copy, firemode )
 
         [ id .. "bar" ]                     = { name = "#holohud2.component.percentage_bar", type = HOLOHUD2.PARAM_BOOL, value = false },
         [ id .. "bar_pos" ]                 = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 2, y = 34 } },
-        [ id .. "bar_size" ]                = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 114, y = 6 } },
+        [ id .. "bar_size" ]                = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 114, y = 6 }, min_x = 1, min_y = 1 },
         [ id .. "bar_style" ]               = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_TEXTURED },
         [ id .. "bar_growdirection" ]       = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_RIGHT },
         [ id .. "bar_background" ]          = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
@@ -140,7 +140,7 @@ function ELEMENT:DefineClip( id, tab, label, order, copy, firemode )
 
         [ id .. "tray" ]                    = { name = "#holohud2.ammo.tray", type = HOLOHUD2.PARAM_BOOL, value = true },
         [ id .. "tray_pos" ]                = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 3, y = 32 } },
-        [ id .. "tray_size" ]               = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 110, y = 12 } },
+        [ id .. "tray_size" ]               = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 110, y = 12 }, min_x = 1, min_y = 1 },
         [ id .. "tray_direction" ]          = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_RIGHT },
         
         [ id .. "icon" ]                    = { name = "#holohud2.component.icon", type = HOLOHUD2.PARAM_BOOL, value = false },
@@ -358,7 +358,7 @@ function ELEMENT:DefineReserve( id, tab, label, order, copy )
 
         [ id .. "bar" ]                     = { name = "#holohud2.component.percentage_bar", type = HOLOHUD2.PARAM_BOOL, value = false },
         [ id .. "bar_pos" ]                 = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 2, y = 34 } },
-        [ id .. "bar_size" ]                = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 60, y = 6 } },
+        [ id .. "bar_size" ]                = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 60, y = 6 }, min_x = 1, min_y = 1 },
         [ id .. "bar_style" ]               = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_TEXTURED },
         [ id .. "bar_growdirection" ]       = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_RIGHT },
         [ id .. "bar_background" ]          = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
@@ -366,7 +366,7 @@ function ELEMENT:DefineReserve( id, tab, label, order, copy )
 
         [ id .. "tray" ]                    = { name = "#holohud2.ammo.tray", type = HOLOHUD2.PARAM_BOOL, value = true },
         [ id .. "tray_pos" ]                = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 2, y = 32 } },
-        [ id .. "tray_size" ]               = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 59, y = 12 } },
+        [ id .. "tray_size" ]               = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 59, y = 12 }, min_x = 1, min_y = 1 },
         [ id .. "tray_direction" ]          = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_RIGHT },
 
         [ id .. "icon" ]                    = { name = "#holohud2.component.icon", type = HOLOHUD2.PARAM_BOOL, value = false },

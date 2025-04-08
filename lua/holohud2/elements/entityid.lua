@@ -45,7 +45,7 @@ local ELEMENT = {
         healthbar_anchor        = { name = "#holohud2.parameter.anchor", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.ENTID_ANCHORS, value = HOLOHUD2.ENTID_ANCHOR_DETAILS },
         healthbar_pos           = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.ENTID_POS, value = HOLOHUD2.ENTID_BOTTOM },
         healthbar_margin        = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 2, min = 0 },
-        healthbar_size          = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 72, y = 4 } },
+        healthbar_size          = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 72, y = 4 }, min_x = 1, min_y = 1 },
         healthbar_growdirection = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_RIGHT },
         healthbar_style         = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_DOT },
         healthbar_color         = { name = "#holohud2.entityid.health_bar_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 200, 70, 60 ) },

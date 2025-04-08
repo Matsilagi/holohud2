@@ -214,7 +214,7 @@ function COMPONENT:SetValue( value )
 
 end
 
-function COMPONENT:ApplyOversizeTransform( offset )
+function COMPONENT:ApplyOversizeTransform( offset, silent )
 
     -- WARNING: remember to reset these transforms when applying a new configuration!
 
@@ -238,11 +238,15 @@ function COMPONENT:ApplyOversizeTransform( offset )
 
     self._last_offset = self._last_offset + offset
 
+    if silent then return end
+
+    self:OnOversizeTransformApplied( offset )
+
 end
 
-function COMPONENT:RevertOversizeTransform()
+function COMPONENT:RevertOversizeTransform( silent )
 
-    self:ApplyOversizeTransform( -self._last_offset )
+    self:ApplyOversizeTransform( -self._last_offset, silent )
 
 end
 
@@ -302,6 +306,7 @@ function COMPONENT:GetOversizeOffset()
 
 end
 
+function COMPONENT:OnOversizeTransformApplied( offset ) end
 
 function COMPONENT:Think()
 
@@ -456,7 +461,7 @@ function COMPONENT:ApplySettings( settings, fonts )
 
     -- undo current transforms
     self:SetSuitDepleted( false )
-    self:RevertOversizeTransform()
+    self:RevertOversizeTransform( true )
     self:RevertSuitOversizeTransform()
 
     self.Colors:SetColors( settings.health_color )

@@ -187,7 +187,7 @@ function COMPONENT:SetAmmoType( ammotype )
     if self.ammotype == ammotype then return end
 
     self.Icon:SetAmmoType( ammotype )
-    self.Name:SetText( language.GetPhrase( string.format( FORMAT_AMMONAME, game.GetAmmoName( ammotype ) ) ) )
+    self.Name:SetText( language.GetPhrase( string.format( FORMAT_AMMONAME, game.GetAmmoName( ammotype ) or "NULL" ) ) )
 
     self.ammotype = ammotype
     self:InvalidateLayout()

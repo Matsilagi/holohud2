@@ -67,7 +67,7 @@ local ELEMENT = {
         healthbar                       = { name = "#holohud2.npcid.health_bar", type = HOLOHUD2.PARAM_BOOL, value = true },
         healthbar_pos                   = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.NPCID_POS, value = HOLOHUD2.NPCID_BOTTOM },
         healthbar_margin                = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 2 },
-        healthbar_size                  = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 132, y = 6 } },
+        healthbar_size                  = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 132, y = 6 }, min_x = 1, min_y = 1 },
         healthbar_dynamic               = { name = "#holohud2.dynamic_sizing", type = HOLOHUD2.PARAM_BOOL, value = true },
         healthbar_growdirection         = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_RIGHT },
         healthbar_style                 = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_TEXTURED },

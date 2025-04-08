@@ -198,6 +198,9 @@ end
 
 function COMPONENT:SetSize( w, h )
 
+    w = math.max( w, 1 )
+    h = math.max( h, 1 )
+
     if self.w == w and self.h == h then return end
 
     self.w = w

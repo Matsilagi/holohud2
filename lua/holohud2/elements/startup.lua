@@ -677,6 +677,13 @@ HOLOHUD2.hook.Add( "WelcomeSecretMessage", "startup", function()
 
     end
 
+    -- April Fools
+    if date.month == 4 and date.day == 1 then
+        
+        return "#holohud2.holiday.aprilfools"
+
+    end
+
     -- Weekend
     if date.wday == 1 or date.wday == 7 then
 

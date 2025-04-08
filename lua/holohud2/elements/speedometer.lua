@@ -77,7 +77,7 @@ local ELEMENT = {
         damagebar_color2            = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_COLORRANGES, value = { colors = { [0] = Color( 255, 255, 255, 12 ) }, fraction = true, gradual = true } },
         damagebar_inverted          = { name = "#holohud2.speedometer.damage_bar", type = HOLOHUD2.PARAM_BOOL, value = false, helptext = "#holohud2.speedometer.damage_bar.helptext" },
         damagebar_pos               = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 7, y = 34 } },
-        damagebar_size              = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 48, y = 8 } },
+        damagebar_size              = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 48, y = 8 }, min_x = 1, min_y = 1 },
         damagebar_style             = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_DOT },
         damagebar_growdirection     = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_RIGHT },
         damagebar_background        = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },

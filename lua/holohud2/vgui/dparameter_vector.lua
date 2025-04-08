@@ -1,3 +1,4 @@
+DEFINE_BASECLASS( "HOLOHUD2_DParameter" )
 
 local PANEL = {}
 
@@ -62,6 +63,17 @@ end
 function PANEL:GetValue()
 
     return self.Value
+
+end
+
+function PANEL:Populate( parameter )
+
+    BaseClass.Populate( self, parameter )
+
+    if parameter.min_x then self.XWang:SetMin( parameter.min_x ) end
+    if parameter.min_y then self.YWang:SetMin( parameter.min_y ) end
+    if parameter.max_x then self.XWang:SetMax( parameter.min_x ) end
+    if parameter.max_y then self.YWang:SetMax( parameter.max_y ) end
 
 end
 
