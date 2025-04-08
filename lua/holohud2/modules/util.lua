@@ -359,9 +359,9 @@ hook.Add( "PreDrawHUD", "holohud2_util", function()
             
             end
 
-            primary = ( ammo.PrimaryClip or ammo.PrimaryAmmo ) and 1 or 0
+            primary = weapon:GetPrimaryAmmoType()
+            secondary = weapon:GetSecondaryAmmoType()
             ammo2, max_ammo2 = ammo.SecondaryAmmo or 0, 1
-            secondary = ammo.SecondaryAmmo and 1 or 0
 
             return
 
