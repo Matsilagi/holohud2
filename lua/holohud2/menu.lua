@@ -500,7 +500,7 @@ local function open_properties()
             default:SetDeleteSelf( false )
 
                 default:AddOption( "#holohud2.derma.properties.server.default.submit", function() HOLOHUD2.server.SubmitDefaults( table.Copy( settings ), modifiers ) end):SetIcon( "icon16/script_go.png" )
-                local reset = default:AddOption( "##holohud2.derma.properties.server.default.restore", function() HOLOHUD2.server.ClearDefaults() end )
+                local reset = default:AddOption( "#holohud2.derma.properties.server.default.restore", function() HOLOHUD2.server.ClearDefaults() end )
                 reset:SetIcon( "icon16/arrow_refresh.png" )
                 reset.Think = function() -- HACK
                     

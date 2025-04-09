@@ -79,6 +79,10 @@ local ELEMENT = {
     },
     menu = {
         { id = "singleplayer" },
+        { id = "autohide", parameters = {
+            { id = "autohide_delay" },
+            { id = "autohide_threshold" }
+        } },
         
         { category = "#holohud2.category.panel", parameters = {
             { id = "autohide", parameters = {
@@ -157,6 +161,7 @@ local ELEMENT = {
     },
     quickmenu = {
         { id = "singleplayer" },
+        { id = "autohide" },
         
         { category = "#holohud2.category.panel", parameters = {
             { id = "pos" },

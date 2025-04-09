@@ -295,11 +295,11 @@ function ELEMENT:PreDraw( settings )
         if ent == localplayer then continue end
 
         -- check visibility hook
-        local hook_val = hook_Call( "VisibleOnRadar", ent )
+        local override = hook_Call( "VisibleOnRadar", ent, not settings.insight or util_IsInSight( ent, settings.insight_fov ) )
 
-        if hook_val ~= nil then
+        if override ~= nil then
 
-            if hook_val then
+            if override then
                 
                 table.insert( entities, ent )
 

@@ -12,7 +12,7 @@ function PANEL:AddContribution( contribution )
     
     local data = HOLOHUD2.credits.Get( contribution )
     
-    if not contribution then return end
+    if not data then return end
 
     local image = vgui.Create( "DImageButton", self )
     image:Dock( RIGHT )

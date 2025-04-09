@@ -112,9 +112,9 @@ function COMPONENT:PaintBackground( x, y )
 
 end
 
-function COMPONENT:Paint(x, y)
+function COMPONENT:Paint( x, y )
 
-    BaseClass.Paint(self, x, y)
+    BaseClass.Paint( self, x, y )
 
     if not self.range_on_background then
         

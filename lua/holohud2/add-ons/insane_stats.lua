@@ -125,6 +125,8 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "autohide" },
+        
         { category = "#holohud2.category.panel", parameters = {
             { id = "pos" },
             { id = "size" }

@@ -123,6 +123,7 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "autohide" },
         { id = "smooth" },
 
         { category = "#holohud2.category.panel", parameters = {

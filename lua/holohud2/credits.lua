@@ -8,9 +8,9 @@ HOLOHUD2.credits.Register( "art", "icon16/palette.png", "#holohud2.credits.art" 
 HOLOHUD2.credits.Register( "sound", "icon16/sound.png", "#holohud2.credits.sounds" )
 
 HOLOHUD2.credits.Register( "test", "icon16/computer_error.png", "#holohud2.credits.test" )
-HOLOHUD2.credits.Register( "bugfix", "icon16/bug.png", "##holohud2.credits.bugfix" )
-HOLOHUD2.credits.Register( "optimization", "icon16/wrench.png", "##holohud2.credits.optimization" )
-HOLOHUD2.credits.Register( "feature", "icon16/brick_add.png", "##holohud2.credits.feature" )
+HOLOHUD2.credits.Register( "bugfix", "icon16/bug.png", "#holohud2.credits.bugfix" )
+HOLOHUD2.credits.Register( "optimization", "icon16/wrench.png", "#holohud2.credits.optimization" )
+HOLOHUD2.credits.Register( "feature", "icon16/brick_add.png", "#holohud2.credits.feature" )
 HOLOHUD2.credits.Register( "plugin", "icon16/plugin.png", "#holohud2.credits.plugin" )
 HOLOHUD2.credits.Register( "misc", "icon16/comment.png", "#holohud2.credits.misc" )
 
@@ -43,5 +43,5 @@ HOLOHUD2.credits.Register( "locale_th", "flags16/th.png", "#holohud2.credits.loc
 HOLOHUD2.credits.Register( "locale_tr", "flags16/tr.png", "#holohud2.credits.locale_tr" )
 HOLOHUD2.credits.Register( "locale_uk", "flags16/ua.png", "#holohud2.credits.locale_uk" )
 HOLOHUD2.credits.Register( "locale_vi", "flags16/vn.png", "#holohud2.credits.locale_vi" )
-HOLOHUD2.credits.Register( "locale_zh-CN", "flags16/cn.png", "#holohud2.credits.locale_zh-CN" )
-HOLOHUD2.credits.Register( "locale_zh-TW", "flags16/tw.png", "#holohud2.credits.locale_zh-TW" )
+HOLOHUD2.credits.Register( "locale_zh-CN", "flags16/cn.png", "#holohud2.credits.locale_cn" )
+HOLOHUD2.credits.Register( "locale_zh-TW", "flags16/tw.png", "#holohud2.credits.locale_tw" )

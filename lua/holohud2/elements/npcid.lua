@@ -389,11 +389,18 @@ function ELEMENT:PreDraw( settings )
     end
 
     local class = target:GetClass()
+    local is_friend = hook_Call( "IsFriendEntityName", class )
+
+    if is_friend == nil then
+        
+        is_friend = IsFriendEntityName( class )
+
+    end
 
     hudnpcid.Blur:SetEnabled( false )
     hudnpcid:SetHealth( target:Health() )
     hudnpcid:SetMaxHealth( target:GetMaxHealth() )
-    hudnpcid:SetHealthBarColor( IsFriendEntityName( class ) and settings.healthbar_colorfriend or settings.healthbar_colorfoe )
+    hudnpcid:SetHealthBarColor( is_friend and settings.healthbar_colorfriend or settings.healthbar_colorfoe )
     hudnpcid._health = hudnpcid.health
     hudnpcid:InvalidateLayout()
 

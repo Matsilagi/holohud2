@@ -74,6 +74,7 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "autohide" },
         { id = "firemode", parameters = {
             { id = "firemode_pos" },
             { id = "firemode_size" },

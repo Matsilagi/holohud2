@@ -178,6 +178,7 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "autohide" },
         { id = "pos" },
 
         { category = "#holohud2.category.coloring", parameters = {

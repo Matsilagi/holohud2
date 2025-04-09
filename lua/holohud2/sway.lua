@@ -70,9 +70,9 @@ local function calculate()
     movement.y = Lerp( delta * MOVEMENT_SWAY_SPEED, movement.y, math.min( fall_velocity, MOVEMENT_MAX_SPEED ) ) -- + math.abs( math.cos( curtime * rate + 1 ) ) * amount )
     
     -- head bobbing
-    if swaying == SWAY_HEADBOB then
+    if swaying == SWAY_HEADBOB and localplayer:OnGround() and not localplayer:InVehicle() then
 
-        local velocity = localplayer:OnGround() and math.min( localplayer:GetVelocity():Length() / 350, 1 ) or 0
+        local velocity = math.min( localplayer:GetVelocity():Length() / 350, 1 )
         
         camera.x = camera.x + math.sin( headbob * 3 ) * .45 * velocity
         camera.y = camera.y + math.sin( headbob * 9 ) * .45 * velocity

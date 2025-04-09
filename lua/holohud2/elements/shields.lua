@@ -1,20 +1,11 @@
----
---- Sandbox Shields
---- https://steamcommunity.com/sharedfiles/filedetails/?id=2808893375
----
-
-if not Draconic then return end
-
-HOLOHUD2.AddCSLuaFile( "drc_shields/hudshields.lua" )
-
-if SERVER then return end
 
 local CurTime = CurTime
 local LocalPlayer = LocalPlayer
+local hook_Call = HOLOHUD2.hook.Call
 
 local ELEMENT = {
-    name        = "#holohud2.sandbox_shields",
-    helptext    = "#holohud2.sandbox_shields.helptext",
+    name        = "#holohud2.shields",
+    helptext    = "#holohud2.shields.helptext",
     parameters  = {
         autohide                = { name = "#holohud2.parameter.autohide", type = HOLOHUD2.PARAM_BOOL, value = true },
         autohide_delay          = { name = "#holohud2.parameter.delay", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },
@@ -62,7 +53,7 @@ local ELEMENT = {
         text                    = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_BOOL, value = false },
         text_pos                = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 2, y = 2 } },
         text_font               = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000, italic = false } },
-        text_text               = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "SHIELDS" },
+        text_text               = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "#holohud2.SHIELDS" },
         text_align              = { name = "#holohud2.parameter.align", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_LEFT },
         text_on_background      = { name = "#holohud2.parameter.on_background", type = HOLOHUD2.PARAM_BOOL, value = false }
     },
@@ -131,6 +122,8 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "autohide" },
+        
         { category = "#holohud2.category.panel", parameters = {
             { id = "pos" },
             { id = "size" }
@@ -168,8 +161,8 @@ local ELEMENT = {
 ---
 --- Composition
 ---
-local hudshields = HOLOHUD2.component.Create( "DRC_HudShields" )
-local layout = HOLOHUD2.layout.Register( "drc_shields" )
+local hudshields = HOLOHUD2.component.Create( "HudExtensionShields" )
+local layout = HOLOHUD2.layout.Register( "shields" )
 local panel = HOLOHUD2.component.Create( "AnimatedPanel" )
 panel:SetLayout( layout )
 
@@ -218,9 +211,7 @@ function ELEMENT:PreDraw( settings )
 
     if startup then return end
 
-    local localplayer = LocalPlayer()
-
-    if not localplayer:GetNWBool( "DRC_Shielded" ) then
+    if not hook_Call( "ShouldDrawShields" ) then
 
         panel:SetDeployed( false )
         panel:Think()
@@ -229,8 +220,9 @@ function ELEMENT:PreDraw( settings )
 
     end
 
+    local localplayer = LocalPlayer()
     local curtime = CurTime()
-    local shields, max_shields = DRC:GetShield( localplayer )
+    local shields, max_shields = hook_Call( "GetShields" ), hook_Call( "GetMaxShields" )
 
     if last_shields ~= shields then
 
@@ -281,7 +273,7 @@ end
 ---
 --- Preview
 ---
-local preview_hudshields = HOLOHUD2.component.Create( "DRC_HudShields" )
+local preview_hudshields = HOLOHUD2.component.Create( "HudExtensionShields" )
 
 preview_hudshields:SetValue( 100 )
 preview_hudshields:SetMaxValue( 100 )
@@ -375,22 +367,24 @@ function ELEMENT:OnScreenSizeChanged()
 
 end
 
-HOLOHUD2.element.Register( "drc_shields", ELEMENT )
+HOLOHUD2.element.Register( "shields", ELEMENT )
 
 ---
 --- Add common parameters to modifiers
 ---
-HOLOHUD2.modifier.Add( "color2", "drc_shields", "color2" )
-HOLOHUD2.modifier.Add( "number2_offset", "drc_shields", "num_pos" )
-HOLOHUD2.modifier.Add( "number2_font", "drc_shields", "num_font" )
-HOLOHUD2.modifier.Add( "text_offset", "drc_shields", "text_pos" )
-HOLOHUD2.modifier.Add( "text_font", "drc_shields", "text_font" )
+HOLOHUD2.modifier.Add( "background", "shields", "background" )
+HOLOHUD2.modifier.Add( "background_color", "shields", "background_color" )
+HOLOHUD2.modifier.Add( "color2", "shields", "color2" )
+HOLOHUD2.modifier.Add( "number2_offset", "shields", "num_pos" )
+HOLOHUD2.modifier.Add( "number2_font", "shields", "num_font" )
+HOLOHUD2.modifier.Add( "text_offset", "shields", "text_pos" )
+HOLOHUD2.modifier.Add( "text_font", "shields", "text_font" )
 
 ---
 --- Presets
 ---
-HOLOHUD2.presets.Register( "drc_shields", "element/drc_shields" )
-HOLOHUD2.presets.Add( "drc_shields", "Alternate - Halo", {
+HOLOHUD2.presets.Register( "shields", "element/shields" )
+HOLOHUD2.presets.Add( "shields", "Alternate - Halo", {
     dock                = 2,
     size                = { x = 197, y = 24 },
     animation_direction = 6,

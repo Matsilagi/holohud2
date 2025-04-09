@@ -152,6 +152,7 @@ local ELEMENT = {
     },
     quickmenu = {
         { id = "singleplayer" },
+        { id = "autohide" },
         
         { category = "#holohud2.category.panel", parameters = {
             { id = "pos" },

@@ -34,7 +34,7 @@ local ELEMENT = {
         min_alpha               = { name = "#holohud2.quickinfo.min_alpha", type = HOLOHUD2.PARAM_RANGE, value = 64, min = 0, max = 255 },
         warning                 = { name = "#holohud2.quickinfo.warning", type = HOLOHUD2.PARAM_BOOL, value = true },
         warning_sound           = { name = "#holohud2.parameter.sound", type = HOLOHUD2.PARAM_BOOL, value = true },
-        warning_sound_volume    = { name = "#holohud2.parameter.sound_volume", type = HOLOHUD2.PARAM_NUMBER, value = 80, min = 0, max = 100 },
+        warning_sound_volume    = { name = "#holohud2.parameter.sound_volume", type = HOLOHUD2.PARAM_RANGE, value = 80, min = 0, max = 200 },
         warning_sound_path      = { name = "#holohud2.parameter.sound_path", type = HOLOHUD2.PARAM_STRING, value = "hl1/fvox/buzz.wav" },
         warning_sound_pitch     = { name = "#holohud2.parameter.sound_pitch", type = HOLOHUD2.PARAM_RANGE, value = 80, min = 0, max = 255 },
         health                  = { name = "#holohud2.health", type = HOLOHUD2.PARAM_BOOL, value = true },
@@ -341,6 +341,12 @@ function ELEMENT:PreDraw( settings )
     if warned and settings.warning and settings.warning_sound then
 
         localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, settings.warning_sound_volume / 100, CHAN_ITEM )
+
+        if settings.warning_sound_volume > 100 then
+            
+            localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, ( settings.warning_sound_volume / 100 ) - 1, CHAN_ITEM )
+
+        end
 
     end
 

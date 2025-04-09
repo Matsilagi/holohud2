@@ -412,6 +412,8 @@ local ELEMENT = {
     },
     quickmenu = {
         { tab = "#holohud2.health.tab.health", icon = "icon16/heart.png", parameters = {
+            { id = "autohide" },
+
             { category = "#holohud2.category.panel", parameters = {
                 { id = "pos" },
                 { id = "size" }
@@ -449,6 +451,7 @@ local ELEMENT = {
         { tab = "#holohud2.health.tab.suit", icon = "icon16/shield.png", parameters = {
             { category = "#holohud2.category.panel", parameters = {
                 { id = "suit_separate" },
+                { id = "suit_autohide" },
                 { id = "suit_pos" },
                 { id = "suit_size" }
             } },

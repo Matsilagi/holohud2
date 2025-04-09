@@ -5,7 +5,7 @@ local COMPONENT = {}
 function COMPONENT:Init()
 
     BaseClass.Init( self )
-    self.IconBackground:SetTexture( surface.GetTextureID( "holohud2/draconic/shields" ), 64, 64 )
+    self.IconBackground:SetTexture( surface.GetTextureID( "holohud2/shields" ), 64, 64 )
 
 end
 
@@ -56,4 +56,4 @@ function COMPONENT:ApplySettings( settings, fonts )
 
 end
 
-HOLOHUD2.component.Register( "DRC_HudShields", COMPONENT, "MeterDisplay" )
+HOLOHUD2.component.Register( "HudExtensionShields", COMPONENT, "MeterDisplay" )
