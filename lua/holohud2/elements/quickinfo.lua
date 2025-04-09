@@ -340,11 +340,11 @@ function ELEMENT:PreDraw( settings )
     -- play warning sound
     if warned and settings.warning and settings.warning_sound then
 
-        localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, settings.warning_sound_volume / 100, CHAN_ITEM )
-
+        localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, settings.warning_sound_volume / 100 )
+        
         if settings.warning_sound_volume > 100 then
             
-            localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, ( settings.warning_sound_volume / 100 ) - 1, CHAN_ITEM )
+            localplayer:EmitSound( settings.warning_sound_path, SNDLVL_NONE, settings.warning_sound_pitch, ( settings.warning_sound_volume - 100 ) / 100 )
 
         end
 
@@ -496,7 +496,11 @@ function ELEMENT:PreviewInit( panel )
         sound:SetImage( "icon16/sound.png" )
         sound.DoClick = function()
 
-            LocalPlayer():EmitSound( preview_sound, SNDLVL_NONE, preview_pitch, preview_volume / 100, CHAN_ITEM )
+            LocalPlayer():EmitSound( preview_sound, SNDLVL_NONE, preview_pitch, preview_volume / 100 )
+
+            if preview_volume <= 100 then return end
+
+            LocalPlayer():EmitSound( preview_sound, SNDLVL_NONE, preview_pitch, ( preview_volume - 100 ) / 100 )
 
         end
 
