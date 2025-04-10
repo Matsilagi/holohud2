@@ -70,18 +70,18 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
 
         panel:ToolPresets( "holohud2_access",  CVAR_ACCESSIBILITY )
 
+        panel:CheckBox( "#holohud2.accessibility.nosuit", "holohud2_nosuit" )
+        panel:CheckBox( "#holohud2.accessibility.panel_lerp", "holohud2_draw_smoothpaneltransforms" )
+
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header0" ) )
         panel:CheckBox( "#holohud2.accessibility.flickering", "holohud2_r_flickering" )
         panel:ControlHelp( "#holohud2.accessibility.flickering.helptext" )
         panel:CheckBox( "#holohud2.accessibility.shaking", "holohud2_r_shaking" )
         panel:ControlHelp( "#holohud2.accessibility.shaking.helptext" )
         panel:NumSlider( "#holohud2.accessibility.shaking_min", "holohud2_r_shaking_min", 0, 16, 1 )
         panel:NumSlider( "#holohud2.accessibility.shaking_add", "holohud2_r_shaking_add", 0, 16, 1 )
-
-        panel:Help("")
-        panel:CheckBox( "#holohud2.accessibility.nosuit", "holohud2_nosuit" )
-        panel:CheckBox( "#holohud2.accessibility.panel_lerp", "holohud2_draw_smoothpaneltransforms" )
         
-        panel:Help( "" )
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header1" ) )
         local sway = panel:ComboBox( "#holohud2.accessibility.sway", "holohud2_sway" )
         sway:SetSortItems(false)
         sway:AddChoice( "#holohud2.accessibility.sway_0", 0 )
@@ -92,12 +92,11 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
         panel:NumSlider( "#holohud2.accessibility.sway_mul", "holohud2_sway_mul", 0, 4, 1 )
         panel:NumSlider( "#holohud2.accessibility.sway_speed", "holohud2_sway_speed", 0, 2, 1 )
 
-        panel:Help( "" )
-        
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header2" ) )
         panel:KeyBinder( "#holohud2.accessibility.inspect_hud", "holohud2_inspect_key" )
         panel:CheckBox( "#holohud2.accessibility.weapon_inspect", "holohud2_hideonweaponinspect" )
 
-        panel:Help( "" )
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header3" ) )
         panel:NumSlider( "#holohud2.accessibility.minglow", "holohud2_draw_minglow", 0, 1, 1 )
         
         panel:NumSlider( "#holohud2.accessibility.scanlinesmul", "holohud2_r_scanlinesmul", 0, 10, 0 )
@@ -110,12 +109,12 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
         panel:NumSlider( "#holohud2.accessibility.scanlinesdist", "holohud2_r_scanlinesdist", 1, 16, 0 )
         panel:ControlHelp( "#holohud2.accessibility.scanlinesdist.helptext" )
 
-        panel:Help( "" )
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header4" ) )
         panel:CheckBox( "#holohud2.accessibility.shortnumbers", "holohud2_shortnumbers" )
         panel:ControlHelp( "#holohud2.accessibility.shortnumbers.helptext" )
         panel:NumSlider( "#holohud2.accessibility.shortnumbers_decimals", "holohud2_shortnumbers_decimals", 0, 5, 0 )
 
-        panel:Help( "" )
+        panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header5" ) )
         panel:NumSlider( "#holohud2.accessibility.aberrationdist", "holohud2_r_aberrationdist", 1, 16, 0 )
         panel:ControlHelp( "#holohud2.accessibility.aberrationdist.helptext" )
 

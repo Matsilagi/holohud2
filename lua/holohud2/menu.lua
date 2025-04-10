@@ -550,6 +550,27 @@ local function open_properties()
             dialog:DoModal()
 
         end):SetIcon( "icon16/information.png" )
+    
+    if game.SinglePlayer() then return end -- NOTE: ignore warning if on singleplayer
+
+    ---
+    --- Server overrides warning
+    ---
+    local warning = vgui.Create( "HOLOHUD2_DHint", frame )
+    warning:Dock( TOP )
+    warning:DockMargin( 0, 2, 0, 0 )
+    warning:SetIcon( "icon16/error.png" )
+    warning:SetText( "#holohud2.properties.override_warning" )
+    frame.Think = function()
+        
+        local visible = not table.IsEmpty( HOLOHUD2.server.Get() )
+
+        if warning:IsVisible() == visible then return end
+
+        warning:SetVisible( visible )
+        frame:InvalidateLayout()
+
+    end
 
 end
 concommand.Add( "holohud2_properties", open_properties )

@@ -95,7 +95,7 @@ function ELEMENT:DefineClip( id, tab, label, order, copy, firemode )
         [ id .. "_dock" ]                   = { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_RIGHT },
         [ id .. "_direction" ]              = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_LEFT },
         [ id .. "_margin" ]                 = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },
-        [ id .. "_order" ]                  = { name = "#holohud2.parameter.priority", type = HOLOHUD2.PARAM_NUMBER, value = order },
+        [ id .. "_order" ]                  = { name = "#holohud2.parameter.order", type = HOLOHUD2.PARAM_NUMBER, value = order },
         
         [ id .. "_size" ]                   = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 114, y = 46 } },
         [ id .. "_background" ]             = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
@@ -332,7 +332,7 @@ function ELEMENT:DefineReserve( id, tab, label, order, copy )
 
         [ id .. "_always" ]                 = { name = "#holohud2.ammo.always", type = HOLOHUD2.PARAM_BOOL, value = false, helptext = "#holohud2.ammo.always.helptext" },
         
-        [ id .. "_pos" ]                    = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 12 } },
+        [ id .. "_pos" ]                    = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 12 }, helptext = "#holohud2.ammo.reserve_pos.helptext" },
         [ id .. "_dock" ]                   = { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_RIGHT },
         [ id .. "_direction" ]              = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_LEFT },
         [ id .. "_margin" ]                 = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },

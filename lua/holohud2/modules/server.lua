@@ -6,11 +6,11 @@ if game.SinglePlayer() then return end -- NOTE: this makes no sense in singlepla
 
 HOLOHUD2.server = {}
 
-local NET_SETTINGS  = "holohud2_server_settings"
 local NET_DEFAULT   = "holohud2_server_default"
+local NET_OVERRIDE  = "holohud2_server_override"
 
 local default   = {}
-local settings  = {}
+local override  = {}
 
 --- Returns the default values set by the server.
 --- @return table default
@@ -24,19 +24,19 @@ end
 --- @return table settings
 function HOLOHUD2.server.Get()
 
-    return settings
+    return override
 
 end
 
 if SERVER then
 
     util.AddNetworkString( NET_DEFAULT )
-    util.AddNetworkString( NET_SETTINGS )
+    util.AddNetworkString( NET_OVERRIDE )
 
     local DEFAULT_PATH  = "/default.json"
     local SETTINGS_PATH = "/settings.json"
 
-    local superadmin = CreateConVar('holohud2_superadminonly', 1, { FCVAR_ARCHIVE }, 'Limits server-wide override changes to super admins only (instead of admins only)')
+    local superadmin = CreateConVar( "holohud2_superadminonly", 1, { FCVAR_ARCHIVE }, "Limits server-wide override changes to super admins only (instead of admins only)" )
 
     ---
     --- Receive defaults.
@@ -66,15 +66,15 @@ if SERVER then
     ---
     --- Receive settings.
     ---
-    net.Receive( NET_SETTINGS, function( len, ply )
+    net.Receive( NET_OVERRIDE, function( len, ply )
     
         if not ply:IsAdmin() then return end
         if superadmin:GetBool() and not ply:IsSuperAdmin() then return end
 
-        settings = net.ReadTable()
+        override = net.ReadTable()
 
-        net.Start( NET_SETTINGS )
-        net.WriteTable( settings )
+        net.Start( NET_OVERRIDE )
+        net.WriteTable( override )
         net.Broadcast()
 
         if not file.Exists( HOLOHUD2.DIR, "DATA" ) then
@@ -83,7 +83,7 @@ if SERVER then
 
         end
 
-        file.Write( HOLOHUD2.DIR .. SETTINGS_PATH, util.TableToJSON( settings ) )
+        file.Write( HOLOHUD2.DIR .. SETTINGS_PATH, util.TableToJSON( override ) )
 
     end)
 
@@ -104,7 +104,7 @@ if SERVER then
 
         if settings_file then
 
-            settings = util.JSONToTable( settings_file )
+            override = util.JSONToTable( settings_file )
 
         end
 
@@ -119,8 +119,8 @@ if SERVER then
         net.WriteTable( default )
         net.Send( ply )
 
-        net.Start( NET_SETTINGS )
-        net.WriteTable( settings )
+        net.Start( NET_OVERRIDE )
+        net.WriteTable( override )
         net.Send( ply )
 
     end)
@@ -130,7 +130,7 @@ if SERVER then
 end
 
 HOLOHUD2.settings.Register( default, HOLOHUD2.SETTINGS_SERVERDEFAULT )
-HOLOHUD2.settings.Register( settings, HOLOHUD2.SETTINGS_SERVER )
+HOLOHUD2.settings.Register( override, HOLOHUD2.SETTINGS_SERVER )
 
 --- Submits the given default settings to the server.
 --- @param settings table
@@ -138,7 +138,7 @@ HOLOHUD2.settings.Register( settings, HOLOHUD2.SETTINGS_SERVER )
 function HOLOHUD2.server.SubmitDefaults( settings, modifiers )
 
     net.Start( NET_DEFAULT )
-    net.WriteTable( table.Merge( settings, HOLOHUD2.modifier.Call( HOLOHUD2.element.GetDefaultValues(), modifiers ) ) )
+    net.WriteTable( table.Merge( HOLOHUD2.modifier.Call( HOLOHUD2.element.GetDefaultValues(), modifiers ) , settings ) )
     net.SendToServer()
 
 end
@@ -159,7 +159,7 @@ end
 function HOLOHUD2.server.Submit( settings, modifiers, force )
 
     local defaults = HOLOHUD2.element.GetDefaultValues()
-    local values = table.Merge( settings, HOLOHUD2.modifier.Call( defaults, modifiers ) )
+    local values = table.Merge( HOLOHUD2.modifier.Call( defaults, modifiers ), settings )
 
     if force then
 
@@ -167,7 +167,7 @@ function HOLOHUD2.server.Submit( settings, modifiers, force )
 
     end
 
-    net.Start( NET_SETTINGS )
+    net.Start( NET_OVERRIDE )
     net.WriteTable( values )
     net.SendToServer()
 
@@ -176,7 +176,7 @@ end
 --- Submits an override reset to the server.
 function HOLOHUD2.server.Clear()
 
-    net.Start( NET_SETTINGS )
+    net.Start( NET_OVERRIDE )
     net.WriteTable( {} )
     net.SendToServer()
 
@@ -195,9 +195,9 @@ end)
 ---
 --- Receive settings.
 ---
-net.Receive( NET_SETTINGS, function( len )
+net.Receive( NET_OVERRIDE, function( len )
 
-    table.CopyFromTo( net.ReadTable(), settings )
+    table.CopyFromTo( net.ReadTable(), override )
     HOLOHUD2.settings.Merge()
 
 end)

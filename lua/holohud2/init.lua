@@ -130,7 +130,7 @@ HOLOHUD2.AddCSLuaFile( "toolmenu.lua" )
 ---
 --- Load third-party add-ons
 ---
-timer.Simple( .16, function() -- HACK
+timer.Simple( 0, function() -- HACK
 
     for _, addon in ipairs( file.Find( "holohud2/add-ons/*.lua", "LUA" ) ) do
 
@@ -330,7 +330,7 @@ cvars.AddChangeCallback( "gmod_language", function() HOLOHUD2.element.OnScreenSi
 ---
 --- Initialize
 ---
-timer.Simple( .16, function() -- HACK
+timer.Simple( 0, function() -- HACK
 
     HOLOHUD2.settings.Register( HOLOHUD2.element.GetDefaultValues(), HOLOHUD2.SETTINGS_DEFAULT )
 

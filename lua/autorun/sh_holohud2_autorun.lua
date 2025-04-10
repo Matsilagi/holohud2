@@ -1,7 +1,7 @@
 ---
 --- D/GL4: Customizable Holographic HUD
---- 1.1.0
---- April 9th, 2025
+--- 1.1.1
+--- April 10th, 2025
 --- Made by DyaMetR
 --- * full credits found in the details below
 ---
@@ -12,7 +12,7 @@ if CLIENT then
 
     -- addon properties
     HOLOHUD2.Name           = "D/GL4 HUD"
-    HOLOHUD2.Version        = "1.1.0"
+    HOLOHUD2.Version        = "1.1.1"
     HOLOHUD2.Date           = 1744231883 -- epoch timestamp of the build date
     HOLOHUD2.Credits        = { -- { name, { contribution, ... } }
 

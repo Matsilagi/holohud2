@@ -391,7 +391,7 @@ function ELEMENT:DoStartupSequence()
     end
 
     -- startup HUD elements
-    if next < #index then
+    if next <= #index then
 
         local element = elements[ index[ next ] ]
 

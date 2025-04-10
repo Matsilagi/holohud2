@@ -402,6 +402,9 @@ end
 function HOLOHUD2.render.RenderHUDBackground( settings )
 
     if not r_pp:GetBool() then return end
+    
+    -- if we couldn't compute the post processing, skip
+    if not computed then return end
 
     if r_3d:GetBool() then
         

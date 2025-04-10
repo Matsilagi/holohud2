@@ -78,6 +78,9 @@ local ELEMENT = {
     },
     menu = {
         { id = "singleplayer" },
+        { id = "autohide", parameters = {
+            { id = "autohide_delay" }
+        } },
         
         { category = "#holohud2.category.panel", parameters = {
             { id = "pos", parameters = {

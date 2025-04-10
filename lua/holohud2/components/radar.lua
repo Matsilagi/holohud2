@@ -152,7 +152,7 @@ function COMPONENT:Think()
         blip.x = -(cos * pos.x * radius + sin * pos.y * radius)
         blip.y = cos * pos.y * radius - sin * pos.x * radius
         blip.texture = (heightdiff < -HEIGHT_DIFFERENCE and RES_DOT_UNDER) or (heightdiff > HEIGHT_DIFFERENCE and RES_DOT_ABOVE) or RES_DOT
-        blip.alpha = math.abs(heightdiff) > HEIGHT_DIFFERENCE and .66 * (1 - math.abs(heightdiff / math.max(self.range - HEIGHT_DIFFERENCE, 1))) or 1
+        blip.alpha = math.abs(heightdiff) > HEIGHT_DIFFERENCE and .8 * (1 - math.abs(heightdiff / math.max(self.range - HEIGHT_DIFFERENCE, 1))) or 1
 
     end
 

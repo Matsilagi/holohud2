@@ -17,7 +17,7 @@ local CurTime = CurTime
 ---
 --- Coin counter
 ---
-local ELEMENT = {
+local ELEMENT_COINS = {
     name        = "#holohud2.insane_stats_coins",
     helptext    = "#holohud2.insane_stats_coins.helptext",
     parameters  = {
@@ -167,19 +167,19 @@ panel.PaintOverScanlines = function( _, x, y ) hudcoins:PaintScanlines( x, y ) e
 -- Startup
 local startup -- is the element awaiting startup
 
-function ELEMENT:QueueStartup()
+function ELEMENT_COINS:QueueStartup()
     
     panel:Close()
     startup = true
 
 end
 
-function ELEMENT:Startup() startup = false end
+function ELEMENT_COINS:Startup() startup = false end
 
 -- Logic
 local time = 0
 local last_coins = 0
-function ELEMENT:PreDraw( settings )
+function ELEMENT_COINS:PreDraw( settings )
 
     if startup then return end
 
@@ -204,7 +204,7 @@ function ELEMENT:PreDraw( settings )
     end
 
     panel:Think()
-    panel:SetDeployed( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or InsaneStats:GetConVarValue( "coins_enabled" ) and ( not settings.autohide or time > curtime ) )
+    panel:SetDeployed( not self:IsMinimized() and ( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or InsaneStats:GetConVarValue( "coins_enabled" ) and ( not settings.autohide or time > curtime ) ) )
     
     layout:SetSize( settings.size.x + ( settings.oversize_size and hudcoins:GetOversizeOffset() or 0 ), settings.size.y )
     layout:SetVisible( panel:IsVisible() )
@@ -216,15 +216,15 @@ function ELEMENT:PreDraw( settings )
 end
 
 -- Paint
-function ELEMENT:PaintFrame( settings, x, y ) panel:PaintFrame( x, y ) end
-function ELEMENT:Paint( settings, x, y ) panel:Paint( x, y ) end
-function ELEMENT:PaintBackground( settings, x, y ) panel:PaintBackground( x, y ) end
-function ELEMENT:PaintScanlines( settings, x, y ) panel:PaintScanlines( x, y ) end
+function ELEMENT_COINS:PaintFrame( settings, x, y ) panel:PaintFrame( x, y ) end
+function ELEMENT_COINS:Paint( settings, x, y ) panel:Paint( x, y ) end
+function ELEMENT_COINS:PaintBackground( settings, x, y ) panel:PaintBackground( x, y ) end
+function ELEMENT_COINS:PaintScanlines( settings, x, y ) panel:PaintScanlines( x, y ) end
 
 -- Preview
 local preview_hudcoins = HOLOHUD2.component.Create( "InsaneStats_HudCoins" )
 
-function ELEMENT:PreviewPaint( x, y, w, h, settings )
+function ELEMENT_COINS:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2, y + h / 2
 
@@ -245,7 +245,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
 end
 
-function ELEMENT:OnPreviewChanged( settings )
+function ELEMENT_COINS:OnPreviewChanged( settings )
 
     preview_hudcoins:ApplySettings( settings, self.preview_fonts )
 
@@ -256,7 +256,7 @@ function ELEMENT:OnPreviewChanged( settings )
 end
 
 -- Apply settings
-function ELEMENT:OnSettingsChanged( settings )
+function ELEMENT_COINS:OnSettingsChanged( settings )
 
     if not settings._visible then
 
@@ -282,7 +282,7 @@ function ELEMENT:OnSettingsChanged( settings )
 end
 
 --- Screen size changed
-function ELEMENT:OnScreenSizeChanged()
+function ELEMENT_COINS:OnScreenSizeChanged()
 
     panel:InvalidateLayout()
     hudcoins:InvalidateLayout()
@@ -290,7 +290,7 @@ function ELEMENT:OnScreenSizeChanged()
 end
 
 
-HOLOHUD2.element.Register( "insanestats_coins", ELEMENT )
+HOLOHUD2.element.Register( "insanestats_coins", ELEMENT_COINS )
 
 -- Add common parameters to modifiers
 HOLOHUD2.modifier.Add( "panel_animation", "insanestats_coins", "animation" )
@@ -311,7 +311,7 @@ HOLOHUD2.presets.Register( "insanestats_coins", "element/insanestats_coins" )
 ---
 --- Experience bar
 ---
-local ELEMENT = {
+local ELEMENT_EXPERIENCE = {
     name        = "#holohud2.insane_stats_exp",
     helptext    = "#holohud2.insane_stats_exp.helptext",
     parameters  = {
@@ -505,19 +505,19 @@ panel.PaintOverScanlines = function( _, x, y ) hudexperience:PaintScanlines( x, 
 -- Startup
 local startup -- is the element awaiting startup
 
-function ELEMENT:QueueStartup()
+function ELEMENT_EXPERIENCE:QueueStartup()
     
     panel:Close()
     startup = true
 
 end
 
-function ELEMENT:Startup() startup = false end
+function ELEMENT_EXPERIENCE:Startup() startup = false end
 
 -- Logic
 local time = 0
 local last_exp = 0
-function ELEMENT:PreDraw( settings )
+function ELEMENT_EXPERIENCE:PreDraw( settings )
     
     if startup then return end
 
@@ -542,7 +542,7 @@ function ELEMENT:PreDraw( settings )
     end
 
     panel:Think()
-    panel:SetDeployed( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or InsaneStats:GetConVarValue( "xp_enabled" ) and ( not settings.autohide or time > curtime ) )
+    panel:SetDeployed( not self:IsMinimized() and ( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or InsaneStats:GetConVarValue( "xp_enabled" ) and ( not settings.autohide or time > curtime ) ) )
     layout:SetVisible( panel:IsVisible() )
 
     if not panel:IsVisible() then return end
@@ -555,15 +555,15 @@ function ELEMENT:PreDraw( settings )
 end
 
 -- Paint
-function ELEMENT:PaintFrame( settings, x, y ) panel:PaintFrame( x, y ) end
-function ELEMENT:Paint( settings, x, y ) panel:Paint( x, y ) end
-function ELEMENT:PaintBackground( settings, x, y ) panel:PaintBackground( x, y ) end
-function ELEMENT:PaintScanlines( settings, x, y ) panel:PaintScanlines( x, y ) end
+function ELEMENT_EXPERIENCE:PaintFrame( settings, x, y ) panel:PaintFrame( x, y ) end
+function ELEMENT_EXPERIENCE:Paint( settings, x, y ) panel:Paint( x, y ) end
+function ELEMENT_EXPERIENCE:PaintBackground( settings, x, y ) panel:PaintBackground( x, y ) end
+function ELEMENT_EXPERIENCE:PaintScanlines( settings, x, y ) panel:PaintScanlines( x, y ) end
 
 -- Preview
 local preview_hudexperience = HOLOHUD2.component.Create( "InsaneStats_HudExperience" )
 
-function ELEMENT:PreviewPaint( x, y, w, h, settings )
+function ELEMENT_EXPERIENCE:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2, y + h / 2
 
@@ -584,7 +584,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
 end
 
-function ELEMENT:OnPreviewChanged( settings )
+function ELEMENT_EXPERIENCE:OnPreviewChanged( settings )
 
     preview_hudexperience:ApplySettings( settings, self.preview_fonts )
 
@@ -599,7 +599,7 @@ function ELEMENT:OnPreviewChanged( settings )
 end
 
 -- Apply settings
-function ELEMENT:OnSettingsChanged( settings )
+function ELEMENT_EXPERIENCE:OnSettingsChanged( settings )
 
     if not settings._visible then
 
@@ -625,14 +625,14 @@ function ELEMENT:OnSettingsChanged( settings )
 end
 
 --- Screen size changed
-function ELEMENT:OnScreenSizeChanged()
+function ELEMENT_EXPERIENCE:OnScreenSizeChanged()
 
     panel:InvalidateLayout()
     hudexperience:InvalidateLayout()
 
 end
 
-HOLOHUD2.element.Register( "insanestats_experience", ELEMENT )
+HOLOHUD2.element.Register( "insanestats_experience", ELEMENT_EXPERIENCE )
 
 -- Add common parameters to modifiers
 HOLOHUD2.modifier.Add( "panel_animation", "insanestats_experience", "animation" )
