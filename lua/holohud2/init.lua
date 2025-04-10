@@ -350,5 +350,5 @@ local function initialize()
     init = true
 
 end
-hook.Add( "OnGamemodeLoaded", "holohud2", initialize )
+hook.Add( "PostGamemodeLoaded", "holohud2", initialize )
 if GAMEMODE then initialize() end
