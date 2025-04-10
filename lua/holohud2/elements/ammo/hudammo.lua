@@ -133,6 +133,7 @@ end
 
 function COMPONENT:SetDrawTextOnBackground( on_background )
 
+    self.Text:SetColor( on_background and self.Colors2:GetColor() or self.Colors:GetColor() )
     self.text_on_background = on_background
 
 end
@@ -308,7 +309,7 @@ function COMPONENT:PaintBackground( x, y )
 
 end
 
-function COMPONENT:Paint(x, y)
+function COMPONENT:Paint( x, y )
 
     if self.ammotype <= 0 then return end
 

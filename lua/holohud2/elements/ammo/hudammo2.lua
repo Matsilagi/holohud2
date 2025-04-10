@@ -32,6 +32,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     local ammotext = settings.ammo2text
     local ammotext_pos = settings.ammo2text_pos
     local ammotext_font = fonts.ammo2text_font
+    local ammotext_text = settings.ammo2text_text
     local ammotext_align = settings.ammo2text_align
     local ammotext_on_background = settings.ammo2text_on_background
 
@@ -66,6 +67,7 @@ function COMPONENT:ApplySettings( settings, fonts )
         ammotext = settings.ammo1text
         ammotext_pos = settings.ammo1text_pos
         ammotext_font = fonts.ammo1text_font
+        ammotext_text = settings.ammo1text_text
         ammotext_align = settings.ammo1text_align
         ammotext_on_background = settings.ammo1text_on_background
 
@@ -123,6 +125,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetVisible( ammotext )
     text:SetPos( ammotext_pos.x, ammotext_pos.y )
     text:SetFont( ammotext_font )
+    text:SetText( ammotext_text )
     text:SetAlign( ammotext_align )
     self:SetDrawTextOnBackground( ammotext_on_background )
     

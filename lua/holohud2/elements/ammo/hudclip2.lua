@@ -45,6 +45,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     local cliptext = settings.clip2text
     local cliptext_pos = settings.clip2text_pos
     local cliptext_font = fonts.clip2text_font
+    local cliptext_text = settings.clip2text_text
     local cliptext_align = settings.clip2text_align
     local cliptext_on_background = settings.clip2text_on_background
 
@@ -91,6 +92,7 @@ function COMPONENT:ApplySettings( settings, fonts )
         clipicon_on_background = settings.clip1icon_on_background
         cliptext = settings.clip1text
         cliptext_pos = settings.clip1text_pos
+        cliptext_text = settings.clip1text_text
         cliptext_font = fonts.clip1text_font
         cliptext_align = settings.clip1text_align
         cliptext_on_background = settings.clip1text_on_background
@@ -166,6 +168,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetVisible( cliptext )
     text:SetPos( cliptext_pos.x, cliptext_pos.y )
     text:SetFont( cliptext_font )
+    text:SetText( cliptext_text )
     text:SetAlign( cliptext_align )
     self:SetDrawTextOnBackground( cliptext_on_background )
     

@@ -72,6 +72,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetVisible( settings.clip1text )
     text:SetPos( settings.clip1text_pos.x, settings.clip1text_pos.y )
     text:SetFont( fonts.clip1text_font )
+    text:SetText( settings.clip1text_text )
     text:SetAlign( settings.clip1text_align )
     self:SetDrawTextOnBackground( settings.clip1text_on_background )
 

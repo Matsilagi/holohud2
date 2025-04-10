@@ -65,6 +65,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     local text = self.Text
     text:SetVisible( settings.ammo1text )
     text:SetPos( settings.ammo1text_pos.x, settings.ammo1text_pos.y )
+    text:SetText( settings.ammo1text_text )
     text:SetFont( fonts.ammo1text_font )
     text:SetAlign( settings.ammo1text_align )
     self:SetDrawTextOnBackground( settings.ammo1text_on_background )
