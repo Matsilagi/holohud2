@@ -871,6 +871,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     draw.RoundedBox( 0, x, y, w, h, settings.background_color )
 
+    surface.SetDrawColor( HOLOHUD2.WIREFRAME_COLOR )
+    surface.DrawOutlinedRect( x, y, w, h )
+
     preview_hudweaponbucket:Think()
     preview_hudweaponbucket:PaintBackground( x, y )
     preview_hudweaponbucket:Paint( x, y )

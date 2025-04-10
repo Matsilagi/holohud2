@@ -898,6 +898,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2, y + h / 2
 
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = HOLOHUD2.scale.Get()
 
     local w, h = ( settings.size.x + preview_hudhealth:GetOversizeOffset() ) * scale, settings.size.y * scale
@@ -942,6 +943,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( wireframe_color )
+    surface.DrawOutlinedRect( x, y, w, h )
+
     preview_hudhealth:PaintBackground( x, y )
     preview_hudhealth:Paint( x, y )
 
@@ -957,6 +961,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w2, h2 )
+    
     end
 
     preview_hudbattery:PaintBackground( x, y )

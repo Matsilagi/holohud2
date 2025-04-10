@@ -1,6 +1,7 @@
 ---
 --- Modules
 ---
+HOLOHUD2.AddSharedFile( "modules/system.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/ammo.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/bind_press.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/component.lua" )
@@ -22,7 +23,6 @@ HOLOHUD2.AddCSLuaFile( "modules/vgui.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/weapon.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/element.lua" ) -- requires: hook
 HOLOHUD2.AddCSLuaFile( "modules/settings.lua" ) -- requires: hook
-HOLOHUD2.AddSharedFile( "modules/system.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/client.lua" ) -- requires: settings
 HOLOHUD2.AddSharedFile( "modules/server.lua" ) -- requires: settings
 HOLOHUD2.AddCSLuaFile( "modules/gamemode.lua" ) -- requires: settings
@@ -34,6 +34,8 @@ if CLIENT then
 
     local LocalPlayer = LocalPlayer
     local hook_Call = HOLOHUD2.hook.Call
+
+    HOLOHUD2.WIREFRAME_COLOR = Color( 255, 0, 0, 144 )
 
     local enabled       = CreateClientConVar( "holohud2", 1, true, false, "Should the HUD render.", 0, 1 )
     local nosuit        = CreateClientConVar( "holohud2_nosuit", 0, true, false, "Should the HUD render without needing to have the suit equipped.", 0, 1 )

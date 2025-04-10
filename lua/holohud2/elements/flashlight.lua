@@ -301,6 +301,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( HOLOHUD2.WIREFRAME_COLOR )
+    surface.DrawOutlinedRect( x, y, u, v )
+
     preview_hudflashlight:Think()
     preview_hudflashlight:PaintBackground( x, y )
     preview_hudflashlight:Paint( x, y )

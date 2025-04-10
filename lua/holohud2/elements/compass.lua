@@ -384,6 +384,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2, y + h / 2
 
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = HOLOHUD2.scale.Get()
     local w0, h0 = settings.size.x * scale, settings.size.y * scale
     local w1, h1 = 0, 0
@@ -403,6 +404,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( wireframe_color )
+    surface.DrawOutlinedRect( x0, y0, w0, h0 )
+
     preview_hudcompass:Think()
     preview_hudcompass:PaintBackground( x0, y0 )
     preview_hudcompass:Paint( x0, y0 )
@@ -416,6 +420,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
         draw.RoundedBox( 0, x1, y1, w1, h1, settings.background_color )
 
     end
+
+    surface.SetDrawColor( wireframe_color )
+    surface.DrawOutlinedRect( x1, y1, w1, h1 )
 
     preview_gauge:PerformLayout()
     preview_gauge:PaintBackground( x1, y1 )

@@ -405,6 +405,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( HOLOHUD2.WIREFRAME_COLOR )
+    surface.DrawOutlinedRect( x, y, w, h )
+
     preview_hudfps:Think()
     preview_hudfps:PaintBackground( x, y )
     preview_hudfps:Paint( x, y )

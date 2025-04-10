@@ -74,8 +74,8 @@ function COMPONENT:ApplySettings( settings, fonts )
     -- undo current transforms
     self:RevertOversizeTransform()
 
-    self.Colors:SetColors( settings.ammo2_separate and ammo_color or settings.clip2_color )
-    self.Colors2:SetColors( settings.ammo2_separate and ammo_color2 or settings.clip2_color2 )
+    self.Colors:SetColors( ammo_color )
+    self.Colors2:SetColors( ammo_color2 )
     local color, color2 = self.Colors:GetColor(), self.Colors2:GetColor()
 
     local num = self.Number

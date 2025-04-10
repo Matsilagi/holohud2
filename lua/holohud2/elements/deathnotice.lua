@@ -503,6 +503,7 @@ end
 
 function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = HOLOHUD2.scale.Get()
 
     preview_deathnotice0:PerformLayout()
@@ -520,6 +521,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( wireframe_color )
+    surface.DrawOutlinedRect( x - u0 / 2, y, u0, v0 )
+
     preview_deathnotice0:Paint( x - u0 / 2 + padding, y + padding )
 
     y = y + v1 + 4 * scale
@@ -530,6 +534,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
         draw.RoundedBox( 0, x - u1 / 2, y, u1, v1, settings.background_color )
 
     end
+
+    surface.SetDrawColor( wireframe_color )
+    surface.DrawOutlinedRect( x - u1 / 2, y, u1, v1 )
 
     preview_deathnotice1:Paint( x - u1 / 2 + padding, y + padding )
 

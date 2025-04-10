@@ -238,14 +238,14 @@ HOLOHUD2.hook.Add( "PopulateOptionsMenu", "holohud2", function( modifiers )
     ---
     HOLOHUD2.vgui.AddOptionControls( function( panel, parent )
     
-        local WIREFRAME_COLOR   = Color( 255, 0, 0, 144 )
+        local WIREFRAME_COLOR = HOLOHUD2.WIREFRAME_COLOR
 
-        local fonts             = {
+        local fonts = {
             { name = "#holohud2.derma.properties.common.font_0", font = "holohud2_preview0", size = 37, value = "number_font", offset = "number_offset", default = { font = "Roboto Light", size = 0, weight = 1000, italic = false } },
             { name = "#holohud2.derma.properties.common.font_1", font = "holohud2_preview1", size = 22, value = "number2_font", offset = "number2_offset", default = { font = "Roboto Condensed Light", size = 0, weight = 1000, italic = false } },
             { name = "#holohud2.derma.properties.common.font_2", font = "holohud2_preview2", size = 16, value = "number3_font", offset = "number3_offset", default = { font = "Roboto Condensed Light", size = 0, weight = 1000, italic = false } }
         }
-        local font_previews     = {}
+        local font_previews = {}
         for i, font in ipairs( fonts ) do
 
             local values = modifiers[ font.value ] or font.default

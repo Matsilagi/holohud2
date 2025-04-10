@@ -1003,10 +1003,22 @@ function ELEMENT:PreDraw( settings )
     if clip1 then
         
         if settings.ammo1_separate or has_clip1 then
-            
+
+            clip1_layout:SetPos( settings.clip1_pos.x, settings.clip1_pos.y )
+            clip1_panel:SetAnimation( settings.clip1_animation )
+            clip1_panel:SetAnimationDirection( settings.clip1_animation_direction )
+            clip1_panel:SetDrawBackground( settings.clip1_background )
+            clip1_panel:SetColor( settings.clip1_background_color )
+
             hudclip1:Think()
         
         else
+
+            clip1_layout:SetPos( settings.ammo1_pos.x, settings.ammo1_pos.y )
+            clip1_panel:SetAnimation( settings.ammo1_animation )
+            clip1_panel:SetAnimationDirection( settings.ammo1_animation_direction )
+            clip1_panel:SetDrawBackground( settings.ammo1_background )
+            clip1_panel:SetColor( settings.ammo1_background_color )
 
             hudammo1:Think()
 
@@ -1026,9 +1038,21 @@ function ELEMENT:PreDraw( settings )
         
         if settings.ammo2_separate or has_clip2 then
             
+            clip2_layout:SetPos( settings.clip2_pos.x, settings.clip2_pos.y )
+            clip2_panel:SetAnimation( settings.clip2_animation )
+            clip2_panel:SetAnimationDirection( settings.clip2_animation_direction )
+            clip2_panel:SetDrawBackground( settings.clip2_background )
+            clip2_panel:SetColor( settings.clip2_background_color )
+
             hudclip2:Think()
         
         else
+
+            clip2_layout:SetPos( settings.ammo2_pos.x, settings.ammo2_pos.y )
+            clip2_panel:SetAnimation( settings.ammo2_animation )
+            clip2_panel:SetAnimationDirection( settings.ammo2_animation_direction )
+            clip2_panel:SetDrawBackground( settings.ammo2_background )
+            clip2_panel:SetColor( settings.ammo2_background_color )
 
             hudammo2:Think()
 
@@ -1280,6 +1304,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2, y + h / 2
 
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = HOLOHUD2.scale.Get()
 
     if preview_option == 1 then
@@ -1295,6 +1320,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
             draw.RoundedBox( 0, x, y, w, h, settings.clip1_background_color )
 
         end
+
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
 
         preview_hudclip1:PaintBackground( x, y )
         preview_hudclip1:Paint( x, y )
@@ -1317,8 +1345,11 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
         if settings.ammo1_background then
 
             draw.RoundedBox( 0, x, y, w, h, settings.ammo1_background_color )
-
+            
         end
+
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
 
         preview_hudammo1:PaintBackground( x, y )
         preview_hudammo1:Paint( x, y )
@@ -1345,6 +1376,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
+
         preview_hudclip2:PaintBackground( x, y )
         preview_hudclip2:Paint( x, y )
     
@@ -1370,6 +1404,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
+        
         preview_hudammo2:PaintBackground( x, y )
         preview_hudammo2:Paint( x, y )
 

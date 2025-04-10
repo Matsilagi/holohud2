@@ -408,6 +408,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     end
 
+    surface.SetDrawColor( HOLOHUD2.WIREFRAME_COLOR )
+    surface.DrawOutlinedRect( x, y, w, h )
+
     preview_hudradar:Think()
     preview_hudradar:PaintBackground( x, y )
     preview_hudradar:Paint( x, y )

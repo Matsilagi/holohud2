@@ -808,6 +808,7 @@ end
 
 function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = scale_Get()
     x, y = x + w / 2, y + h / 2
 
@@ -822,6 +823,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
+    
         preview_weapon:Think()
         preview_weapon:PaintFrame( x, y )
         preview_weapon:PaintBackground( x, y )
@@ -838,6 +842,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, w, h )
+    
         preview_ammo:Think()
         preview_ammo:PaintBackground( x, y )
         preview_ammo:Paint( x, y )
@@ -861,6 +868,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, backgroundsize, backgroundsize )
+    
         preview_item:PerformLayout()
         preview_item:Paint( x + backgroundsize / 2 - size / 2, y + backgroundsize / 2 - size / 2 )
 
@@ -872,6 +882,9 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         end
 
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, textw + padding * 2, texth + padding * 2 )
+    
         surface.SetTextPos( x + padding, y + padding )
         surface.DrawText( PREVIEW_ITEMNAME )
 

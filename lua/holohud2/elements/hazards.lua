@@ -486,6 +486,7 @@ end
 function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     local curtime = CurTime()
+    local wireframe_color = HOLOHUD2.WIREFRAME_COLOR
     local scale = HOLOHUD2.scale.Get()
     local marginx, marginy = 1, 0
 
@@ -503,9 +504,12 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
     x, y = x + w / 2 - trayw / 2, y + h / 2 - trayh / 2
 
-    if settings.singletray and settings.background then
+    if settings.singletray then
 
-        draw.RoundedBox( 0, x, y, trayw, trayh, settings.background_color ) 
+        if settings.background then draw.RoundedBox( 0, x, y, trayw, trayh, settings.background_color ) end
+
+        surface.SetDrawColor( wireframe_color )
+        surface.DrawOutlinedRect( x, y, trayw, trayh )
 
     end
 
@@ -513,12 +517,15 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
 
         local x, y = x + marginx * ( backgroundsize + margin ) * ( i - 1 ), y + marginy * ( backgroundsize + margin ) * ( i - 1 )
 
-        if not settings.singletray and settings.background then
+        if not settings.singletray then
 
-            draw.RoundedBox( 0, x, y, backgroundsize, backgroundsize, settings.background_color )
+            if settings.background then draw.RoundedBox( 0, x, y, backgroundsize, backgroundsize, settings.background_color ) end
+
+            surface.SetDrawColor( wireframe_color )
+            surface.DrawOutlinedRect( x, y, backgroundsize, backgroundsize )
 
         end
-
+    
         if settings.damage and preview_damage < curtime then
 
             hazard:Damage()
