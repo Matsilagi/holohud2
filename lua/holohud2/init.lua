@@ -22,6 +22,7 @@ HOLOHUD2.AddCSLuaFile( "modules/vgui.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/weapon.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/element.lua" ) -- requires: hook
 HOLOHUD2.AddCSLuaFile( "modules/settings.lua" ) -- requires: hook
+HOLOHUD2.AddSharedFile( "modules/system.lua" )
 HOLOHUD2.AddCSLuaFile( "modules/client.lua" ) -- requires: settings
 HOLOHUD2.AddSharedFile( "modules/server.lua" ) -- requires: settings
 HOLOHUD2.AddCSLuaFile( "modules/gamemode.lua" ) -- requires: settings
@@ -130,15 +131,20 @@ HOLOHUD2.AddCSLuaFile( "toolmenu.lua" )
 ---
 --- Load third-party add-ons
 ---
-timer.Simple( 0, function() -- HACK
+local function load_addons()
+
+    HOLOHUD2.system.Log( HOLOHUD2.LOG_WARN, "Reading third-party add-ons..." )
 
     for _, addon in ipairs( file.Find( "holohud2/add-ons/*.lua", "LUA" ) ) do
 
         HOLOHUD2.AddSharedFile( "holohud2/add-ons/" .. addon )
+        HOLOHUD2.system.Log( HOLOHUD2.LOG_INFO, "Found " .. addon )
 
     end
 
-end)
+end
+hook.Add( "OnGamemodeLoaded", "holohud2_addons", load_addons )
+if GAMEMODE then load_addons() end
 
 ---
 --- Initialization
@@ -330,8 +336,8 @@ cvars.AddChangeCallback( "gmod_language", function() HOLOHUD2.element.OnScreenSi
 ---
 --- Initialize
 ---
-timer.Simple( 0, function() -- HACK
-
+local function initialize()
+    
     HOLOHUD2.settings.Register( HOLOHUD2.element.GetDefaultValues(), HOLOHUD2.SETTINGS_DEFAULT )
 
     local settings, modifiers = HOLOHUD2.persistence.ReadTemp()
@@ -343,4 +349,6 @@ timer.Simple( 0, function() -- HACK
     hook_Call( "OnInitialized" )
     init = true
 
-end)
+end
+hook.Add( "OnGamemodeLoaded", "holohud2", initialize )
+if GAMEMODE then initialize() end
