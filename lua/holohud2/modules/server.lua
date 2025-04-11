@@ -129,7 +129,7 @@ if SERVER then
 
 end
 
-HOLOHUD2.settings.Register( default, HOLOHUD2.SETTINGS_SERVERDEFAULT )
+HOLOHUD2.settings.Register( default, HOLOHUD2.SETTINGS_SERVER_DEFAULT )
 HOLOHUD2.settings.Register( override, HOLOHUD2.SETTINGS_SERVER )
 
 --- Submits the given default settings to the server.

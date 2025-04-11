@@ -27,6 +27,15 @@ function COMPONENT:Init()
 
 end
 
+function COMPONENT:InvalidateLayout()
+
+    self.Numbers:InvalidateLayout()
+    self.ProgressBarBackground:InvalidateLayout()
+    self.ProgressBar:InvalidateLayout()
+    self.Level:InvalidateLayout()
+
+end
+
 function COMPONENT:SetNumberLerp( lerp )
 
     if self.number_lerp == lerp then return end

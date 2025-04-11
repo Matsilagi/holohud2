@@ -17,6 +17,7 @@ local COMPONENT = {
     _w              = 0,
     _h              = 0,
     _texture        = surface.GetTextureID( "debug/debugempty" ),
+    _settexture     = surface.SetTexture,
     __w             = 0,
     __h             = 0
 }
@@ -35,6 +36,7 @@ function COMPONENT:PerformLayout( force )
 
     local icon = HOLOHUD2.ammo.Get( self.ammotype )
     self._texture = icon.texture
+    self._settexture = type( self._texture ) == "IMaterial" and surface.SetMaterial or surface.SetTexture
 
     -- calculate size
     local h = self.size * icon.icon_scale * ( icon.fileh / icon.h )
@@ -150,7 +152,7 @@ function COMPONENT:Paint( x, y )
 
     if not self.visible then return end
 
-    surface.SetTexture( self._texture )
+    self._settexture( self._texture )
     surface.SetDrawColor( self.color.r, self.color.g, self.color.b, self.color.a )
     surface.DrawTexturedRectRotated( x + self._x, y + self._y, self._w, self._h, self.angle )
 

@@ -91,10 +91,10 @@ HOLOHUD2.UNIT_HAMMER    = "#holohud2.common.hammer_units"
 HOLOHUD2.UNIT_METRIC    = "#holohud2.common.meters"
 HOLOHUD2.UNIT_IMPERIAL  = "#holohud2.common.feet"
 
-local SHORTNUMBER_ABBREVIATIONS = { "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "De" }
+local SHORTNUMBER_ABBREVIATIONS = { "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "De", "e" }
 local SHORTNUMBER_SCALE         = 1e3 -- every how much do we change abbreviations
 local SHORTNUMBER_MIN           = 1e6 -- when do numbers start to get shortened
-local SHORTNUMBER_MAX           = 1e36 -- when do we stop shortening numbers because they'll already look shortened enough
+local SHORTNUMBER_MAX           = 1e36
 local SHORTNUMBER_INF           = "∞"
 local SHORTNUMBER_INF_NEG       = "-∞"
 local SHORTNUMBER_FORMAT        = "%.2f"
@@ -240,17 +240,23 @@ end
 --- @param number number
 --- @param raw boolean should be returned unformatted
 --- @return string readable version of the number
---- @return string|nil if unformatted, returns the abbreviation
+--- @return string|number|nil if unformatted, returns the abbreviation
 function HOLOHUD2.util.ShortenNumber( number, raw )
     
     if not shortnumbers:GetBool() then return number end
-    if number < SHORTNUMBER_MIN or number >= SHORTNUMBER_MAX then return number end
+    if number < SHORTNUMBER_MIN then return number end
     if number == math.huge then return SHORTNUMBER_INF end
     if number == -math.huge then return SHORTNUMBER_INF_NEG end
 
     local order = math.floor( math.log10( number ) / 3 ) - 1
     local abbreviation = SHORTNUMBER_ABBREVIATIONS[ order ]
     local decimal = string.format( SHORTNUMBER_FORMAT, number / ( SHORTNUMBER_SCALE ^ ( order + 1 ) ) )
+
+    if number >= SHORTNUMBER_MAX then
+        
+        abbreviation = SHORTNUMBER_ABBREVIATIONS[ #SHORTNUMBER_ABBREVIATIONS ] .. math.floor( math.log10( number ) )
+
+    end
 
     if raw then return decimal, abbreviation end
 

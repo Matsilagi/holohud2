@@ -48,8 +48,8 @@ hook.Add( "PreDrawHUD", "holohud2_settings", function()
 
     settings = {}
 
-    for _, layer in SortedPairsByMemberValue( layers, "priority" ) do
-        
+    for i, layer in SortedPairsByMemberValue( layers, "priority" ) do
+
         for element, values in pairs( layer.values ) do
 
             if not settings[ element ] then settings[ element ] = {} end
@@ -71,3 +71,14 @@ hook.Add( "PreDrawHUD", "holohud2_settings", function()
     refresh = false
 
 end)
+
+---
+--- Settings layers
+---
+HOLOHUD2.SETTINGS_DEFAULT               = 0
+HOLOHUD2.SETTINGS_LUA_DEFAULT           = 1
+HOLOHUD2.SETTINGS_SERVER_DEFAULT        = 2
+HOLOHUD2.SETTINGS_CLIENT_MODIFIERS      = 3
+HOLOHUD2.SETTINGS_CLIENT                = 4
+HOLOHUD2.SETTINGS_LUA                   = 5
+HOLOHUD2.SETTINGS_SERVER                = 6

@@ -19,6 +19,7 @@ local COMPONENT = {
     w               = 0,
     h               = 0,
     scale           = 1,
+    _settexture     = surface.SetTexture,
     _x              = 0,
     _y              = 0,
     _w              = 0,
@@ -43,6 +44,8 @@ function COMPONENT:PerformLayout( force )
     local scale = scale_Get()
     self._x, self._y = (self.x - w / 2) * scale, (self.y - h / 2) * scale
     self._w, self._h = w * scale, h * scale
+
+    self._settexture = type( self.texture ) == "IMaterial" and surface.SetMaterial or surface.SetTexture
 
     self.invalid_layout = false
     return true

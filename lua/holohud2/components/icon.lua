@@ -16,6 +16,7 @@ local COMPONENT = {
     v0              = 0,
     u1              = 0,
     v1              = 0,
+    _settexture     = surface.SetTexture,
     _x              = 0,
     _y              = 0,
     _w              = 0,
@@ -53,6 +54,8 @@ function COMPONENT:PerformLayout( force )
 
     self._u0, self._v0, self._u1, self._v1 = u0 / self.w, v0 / self.h, u1 / self.w, v1 / self.h
     self.__w, self.__h = w, h
+
+    self._settexture = type( self.texture ) == "IMaterial" and surface.SetMaterial or surface.SetTexture
 
     self.invalid_layout = false
     return true
@@ -133,7 +136,7 @@ function COMPONENT:Paint(x, y)
 
     if not self.visible then return end
 
-    surface.SetTexture( self.texture )
+    self._settexture( self.texture )
     surface.SetDrawColor( self.color.r, self.color.g, self.color.b, self.color.a )
     surface.DrawTexturedRectUV( x + self._x, y + self._y, self._w, self._h, self._u0, self._v0, self._u1, self._v1 )
 

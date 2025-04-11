@@ -8,7 +8,7 @@ local modifiers     = {} -- modifier values
 local settings_mods = {} -- layer of changed values
 local settings      = {} -- element settings
 
-HOLOHUD2.settings.Register( settings_mods, HOLOHUD2.SETTINGS_CLIENTMODS )
+HOLOHUD2.settings.Register( settings_mods, HOLOHUD2.SETTINGS_CLIENT_MODIFIERS )
 HOLOHUD2.settings.Register( settings, HOLOHUD2.SETTINGS_CLIENT )
 
 --- Returns the client settings.

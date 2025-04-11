@@ -36,6 +36,7 @@ local COMPONENT = {
     _count          = 0, -- how many bullets fit
     _angle          = 0,
     _texture        = surface.GetTextureID('debug/debugempty'),
+    _settexture     = surface.SetTexture,
     _reload         = 0, -- reload animation
     _attack         = 0, -- attack animation
     _attacking      = false, -- attack animation is playing
@@ -125,6 +126,7 @@ function COMPONENT:PerformLayout( force )
     self._marginx, self._marginy = self._marginx * self._dirx, self._marginy * self._diry
 
     self._texture = icon.texture
+    self._settexture = type( self._texture ) == "IMaterial" and surface.SetMaterial or surface.SetTexture
     self._angle = angle
 
     self.invalid_layout = false
@@ -307,7 +309,7 @@ function COMPONENT:PaintBackground( x, y )
 
     end
     
-    surface.SetTexture( self._texture )
+    self._settexture( self._texture )
     surface.SetDrawColor( self.color2 )
 
     for i = self.max_value + 1, self._count do
@@ -338,7 +340,7 @@ function COMPONENT:Paint( x, y )
     local bullets = math.min( self._count, self.value ) + self._extrabullet
     local first = math.max( bullets * self._firstbullet, 0 )
     
-    surface.SetTexture( self._texture )
+    self._settexture( self._texture )
 
     for i = 1, bullets do
 

@@ -71,7 +71,7 @@ function COMPONENT:PaintBackground( x, y )
     self.Salary:PaintBackground( x, y )
 
     if not self.gunlicense or not self.has_gunlicense then return end
-
+    
     surface.SetMaterial( RESOURCE_GUNLICENSE )
     surface.SetDrawColor( 255, 255, 255, self.gunlicense_alpha )
     surface.DrawTexturedRect( x + self._gunlicense_x, y + self._gunlicense_y, self._gunlicense_size, self._gunlicense_size )

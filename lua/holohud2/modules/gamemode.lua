@@ -7,7 +7,7 @@ HOLOHUD2.gamemode = {}
 local default   = {}
 local settings  = {}
 
-HOLOHUD2.settings.Register( default, HOLOHUD2.SETTINGS_LUADEFAULT )
+HOLOHUD2.settings.Register( default, HOLOHUD2.SETTINGS_LUA_DEFAULT )
 HOLOHUD2.settings.Register( settings, HOLOHUD2.SETTINGS_LUA )
 
 --- Sets a single parameter's default.

@@ -523,14 +523,12 @@ function ELEMENT_EXPERIENCE:PreDraw( settings )
 
     local localplayer = LocalPlayer()
     local curtime = CurTime()
-    local level = localplayer:InsaneStats_GetLevel()
-    local previous_exp = math.floor( InsaneStats:GetConVarValue( "hud_xp_cumulative" ) and 0 or InsaneStats:GetXPRequiredToLevel( level ) )
-    local exp = localplayer:InsaneStats_GetXP() - previous_exp
+    local data = InsaneStats:GetXPInfo()
 
-    if last_exp ~= exp then
+    if last_exp ~= data.current then
 
         time = curtime + settings.autohide_delay
-        last_exp = exp
+        last_exp = data.current
 
     end
 
@@ -547,9 +545,9 @@ function ELEMENT_EXPERIENCE:PreDraw( settings )
 
     if not panel:IsVisible() then return end
 
-    hudexperience:SetLevel( level )
-    hudexperience:SetExperience( exp )
-    hudexperience:SetMaxExperience( localplayer:InsaneStats_GetXPToNextLevel() - previous_exp )
+    hudexperience:SetLevel( data.level )
+    hudexperience:SetExperience( data.current )
+    hudexperience:SetMaxExperience( data.required )
     hudexperience:Think()
 
 end

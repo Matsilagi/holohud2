@@ -100,15 +100,6 @@ if CLIENT then
     --- Global HUD offset.
     HOLOHUD2.offset = { x = 0, y = 0 }
 
-    --- Settings layers
-    HOLOHUD2.SETTINGS_DEFAULT       = 0
-    HOLOHUD2.SETTINGS_LUADEFAULT    = 1
-    HOLOHUD2.SETTINGS_SERVERDEFAULT = 2
-    HOLOHUD2.SETTINGS_CLIENTMODS    = 3
-    HOLOHUD2.SETTINGS_CLIENT        = 4
-    HOLOHUD2.SETTINGS_LUA           = 5
-    HOLOHUD2.SETTINGS_SERVER        = 6
-
 end
 
 ---

@@ -376,8 +376,8 @@ HOLOHUD2.modifier.Add( "number_rendermode", "darkrp_job", "number_rendermode" )
 HOLOHUD2.modifier.Add( "number_background", "darkrp_job", "number_background" )
 HOLOHUD2.modifier.Add( "number2_font", "darkrp_job", { "currency_font", "number_font" } )
 HOLOHUD2.modifier.Add( "number2_offset", "darkrp_job", { "currency_pos", "number_pos" } )
-HOLOHUD2.modifier.Add( "text_font", "darkrp_job", "text_font" )
-HOLOHUD2.modifier.Add( "text_offset", "darkrp_job", "text_pos" )
+HOLOHUD2.modifier.Add( "text_font", "darkrp_job", "job_font" )
+HOLOHUD2.modifier.Add( "text_offset", "darkrp_job", "job_pos" )
 
 --- Presets
 HOLOHUD2.presets.Register( "darkrp_job", "element/darkrp_job" )
