@@ -344,6 +344,8 @@ hook.Add( "PreDrawHUD", "holohud2_util", function()
         if ammo then
 
             if not ammo.Draw then return end
+
+            primary = weapon:GetPrimaryAmmoType()
             
             -- if only the clip has been specified but not the reserve ammo, show clip as reserve
             if ( not ammo.PrimaryAmmo or ammo.PrimaryAmmo == -1 ) and ammo.PrimaryClip then
@@ -354,14 +356,13 @@ hook.Add( "PreDrawHUD", "holohud2_util", function()
 
             else
 
-                clip1, max_clip1 = ammo.PrimaryClip or -1, weapon:GetMaxClip1()
-                ammo1, max_ammo1 = ammo.PrimaryAmmo or 0, 1
+                clip1, max_clip1 = ammo.PrimaryClip or weapon:Clip1(), weapon:GetMaxClip1()
+                ammo1, max_ammo1 = ammo.PrimaryAmmo or localplayer:GetAmmoCount( primary ), ammo.PrimaryAmmo and 1 or game.GetAmmoMax( primary )
             
             end
 
-            primary = weapon:GetPrimaryAmmoType()
             secondary = weapon:GetSecondaryAmmoType()
-            ammo2, max_ammo2 = ammo.SecondaryAmmo or 0, 1
+            ammo2, max_ammo2 = ammo.SecondaryAmmo or localplayer:GetAmmoCount( secondary ), ammo.SecondaryAmmo and 1 or game.GetAmmoMax( secondary )
 
             return
 
@@ -376,6 +377,7 @@ hook.Add( "PreDrawHUD", "holohud2_util", function()
     secondary = weapon:GetSecondaryAmmoType()
     clip2, max_clip2 = weapon:Clip2(), weapon:GetMaxClip2()
     ammo2, max_ammo2 = localplayer:GetAmmoCount( secondary ), game.GetAmmoMax( secondary )
+    
     if max_clip2 == -1 then clip2 = -1 end -- HACK: the SLAM fix
 
 end)

@@ -150,8 +150,8 @@ local ELEMENT = {
         padding             = { name = "#holohud2.parameter.padding", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },
         spacing             = { name = "#holohud2.parameter.spacing", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },
         font                = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000, italic = false } },
-        color_foe           = { name = "#holohud2.common.color_foe", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 72, 64 ) },
-        color_friend        = { name = "#holohud2.common.color_friend", type = HOLOHUD2.PARAM_COLOR, value = Color( 64, 255, 92 ) },
+        color_foe           = { name = "#holohud2.deathnotice.hostile_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 72, 64 ) },
+        color_friend        = { name = "#holohud2.deathnotice.friend_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 64, 255, 92 ) },
         color_inflictor     = { name = "#holohud2.deathnotice.inflictor_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 255, 255 ) },
         inflictor_uppercase = { name = "#holohud2.deathnotice.inflictor_uppercase", type = HOLOHUD2.PARAM_BOOL, value = true },
         inflictor_size      = { name = "#holohud2.deathnotice.inflictor_size", type = HOLOHUD2.PARAM_NUMBER, value = 12, min = 0, helptext = "#holohud2.deathnotice.inflictor_size.helptext" }

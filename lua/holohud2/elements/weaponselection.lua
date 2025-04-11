@@ -779,6 +779,11 @@ end
 --- Preview
 ---
 local PREVIEW_FONTS = { "slot_font", "name_font", "selection_name_font" }
+local preview_volume = 100
+local preview_open_sound, preview_open_pitch = "", 100
+local preview_move_sound, preview_move_pitch = "", 100
+local preview_select_sound, preview_select_pitch = "", 100
+local preview_cancel_sound, preview_cancel_pitch = "", 100
 local preview_hudweaponselection = HOLOHUD2.component.Create( "HudWeaponSelection" )
 local preview_hudweaponbucket = HOLOHUD2.component.Create( "HudWeaponBucket" )
 
@@ -816,7 +821,7 @@ function ELEMENT:PreviewInit( panel )
     open:SetImage( "icon16/sound.png" )
     open.DoClick = function()
 
-        LocalPlayer():EmitSound( open_sound, nil, open_pitch, volume )
+        LocalPlayer():EmitSound( preview_open_sound, nil, preview_open_pitch, preview_volume )
 
     end
 
@@ -827,7 +832,7 @@ function ELEMENT:PreviewInit( panel )
     move:SetImage( "icon16/sound.png" )
     move.DoClick = function()
 
-        LocalPlayer():EmitSound( move_sound, nil, move_pitch, volume )
+        LocalPlayer():EmitSound( preview_move_sound, nil, preview_move_pitch, preview_volume )
 
     end
 
@@ -838,7 +843,7 @@ function ELEMENT:PreviewInit( panel )
     select:SetImage( "icon16/sound.png" )
     select.DoClick = function()
 
-        LocalPlayer():EmitSound( select_sound, nil, select_pitch, volume )
+        LocalPlayer():EmitSound( preview_select_sound, nil, preview_select_pitch, preview_volume )
 
     end
 
@@ -848,7 +853,7 @@ function ELEMENT:PreviewInit( panel )
     cancel:SetImage( "icon16/sound.png" )
     cancel.DoClick = function()
 
-        LocalPlayer():EmitSound( cancel_sound, nil, cancel_pitch, volume )
+        LocalPlayer():EmitSound( preview_cancel_sound, nil, preview_cancel_pitch, preview_volume )
 
     end
 
@@ -893,6 +898,12 @@ function ELEMENT:OnPreviewChanged( settings )
     preview_hudweaponbucket:ApplySettings( settings, self.preview_fonts )
     preview_hudweaponselection:SetPos( 0, 0 )
     preview_hudweaponbucket:SetColor( settings.color )
+
+    preview_volume = settings.volume
+    preview_move_sound, preview_move_pitch = settings.sound_move_path, settings.sound_move_pitch
+    preview_select_sound, preview_select_pitch = settings.sound_select_path, settings.sound_select_pitch
+    preview_cancel_sound, preview_cancel_pitch = settings.sound_cancel_path, settings.sound_cancel_pitch
+    preview_open_sound, preview_open_pitch = settings.sound_open_path, settings.sound_open_pitch
 
 end
 

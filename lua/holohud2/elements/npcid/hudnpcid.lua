@@ -85,9 +85,11 @@ function COMPONENT:PerformLayout( force )
 
     end
 
-    local healthbarh = self.HealthBar.__h
+    local healthbarh = 0
 
     if self.HealthBar.visible then
+
+        healthbarh = self.HealthBar.__h
 
         local dotline = self.HealthBar:GetDotLine()
 
@@ -155,7 +157,7 @@ function COMPONENT:PerformLayout( force )
 
         local h = numh + self.number_margin
 
-        if self.number_anchor == ANCHOR_NAME then
+        if self.number_anchor == ANCHOR_NAME or not self.HealthBar.visible then
 
             if self.number_pos == TOP then
 
@@ -187,7 +189,7 @@ function COMPONENT:PerformLayout( force )
 
             end
 
-            if self.healthbar_pos == TOP then
+            if self.HealthBar.visible and self.healthbar_pos == TOP then
 
                 name_y = name_y + h
 

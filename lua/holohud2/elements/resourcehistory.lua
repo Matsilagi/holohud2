@@ -159,7 +159,7 @@ local ELEMENT = {
                 { id = "ammo_color2" },
                 { id = "ammo_icon_size" },
                 { id = "ammo_fallback_font" },
-                { name = "#holohud2.resourcehistory.amount", parameters = {
+                { name = "#holohud2.parameter.amount", parameters = {
                     { id = "ammo_amount_offset" },
                     { id = "ammo_amount_font" },
                     { id = "ammo_amount_rendermode" },
@@ -183,7 +183,7 @@ local ELEMENT = {
             { id = "item_limit" },
             { id = "item_queue" },
             
-            { category = "#holohud2.category.panels", parameters = {
+            { category = "#holohud2.resourcehistory.category.panels", parameters = {
                 { id = "item_pos", parameters = {
                     { id = "item_dock" },
                     { id = "item_direction" },
