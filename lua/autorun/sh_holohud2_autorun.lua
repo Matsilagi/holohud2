@@ -17,7 +17,7 @@ HOLOHUD2.Credits        = { -- { name, { contribution, ... } }
 
     { "DyaMetR", { "code", "design", "art", "locale_es-ES" } },
     { "8Z", { "bugfix" } },
-    { "IRBS", { "locale_zh-CN" } }
+    { "IBRS", { "locale_zh-CN" } }
     
 }
 
