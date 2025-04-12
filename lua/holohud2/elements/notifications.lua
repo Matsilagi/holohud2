@@ -36,7 +36,7 @@ local ELEMENT = {
         animation_direction = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP },
 
         padding             = { name = "#holohud2.parameter.padding", type = HOLOHUD2.PARAM_NUMBER, value = 4 },
-        content_margin      = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 9 },
+        content_margin      = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 8 },
         font                = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000 } },
         spacing             = { name = "#holohud2.parameter.spacing", type = HOLOHUD2.PARAM_NUMBER, value = 2 },
 

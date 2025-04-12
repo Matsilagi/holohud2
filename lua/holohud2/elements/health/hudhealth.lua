@@ -340,7 +340,7 @@ function COMPONENT:Think()
         elseif self.healthwarn == HEALTHWARN_WAVEBLINK then
             
             self._alpha = math.abs( time / self.healthwarn_rate - .5 ) * 2
-            self.TextBackground:SetVisible( self._alpha == 0 )
+            self.TextBackground:SetVisible( self.Text.visible and self._alpha == 0 )
 
         else
 
@@ -360,7 +360,7 @@ function COMPONENT:Think()
 
             end
 
-            self.TextBackground:SetVisible( true )
+            self.TextBackground:SetVisible( self.Text.visible )
 
         end
 
@@ -556,7 +556,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     self:SetDrawTextOnBackground( settings.healthtext_on_background )
 
     local text_background = self.TextBackground
-    text_background:SetVisible( not settings.healthtext_on_background and self.value <= settings.healthwarn_threshold and settings.healthwarn > HEALTHWARN_PULSE )
+    text_background:SetVisible( settings.healthtext and not settings.healthtext_on_background and self.value <= settings.healthwarn_threshold and settings.healthwarn > HEALTHWARN_PULSE )
     text_background:SetColor( color2 )
     text_background:Copy( text )
 

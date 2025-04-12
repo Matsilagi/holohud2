@@ -42,6 +42,7 @@ local COMPONENT = {
     axisfont                    = "default",
     offset                      = 1,
     yaw                         = 0,
+    inverted                    = false,
     _x                          = 0,
     _y                          = 0,
     _w                          = 0,
@@ -102,6 +103,8 @@ function COMPONENT:PerformLayout( force )
     for i=1, total do
 
         local angle = range * ( i - 1 )
+
+        if self.inverted then angle = 360 - angle end
 
         -- build cardinal point
         if angle % cardinal_degrees == 0 then
@@ -186,6 +189,9 @@ function COMPONENT:PerformYawLayout( force )
     if not force and not ( self.visible and self.invalid_yaw_layout ) then return end
     
     local yaw = self.yaw + 180 -- compensate yaw
+
+    if self.inverted then yaw = 360 - yaw end
+
     local relative = math.floor( yaw / self._range ) -- get the closest bearing to where we're looking at
     local offset = ( yaw / self._range ) - math.floor( yaw / self._range ) -- get the relative position of the compass
     
@@ -232,6 +238,17 @@ function COMPONENT:SetVisible( visible )
     if self.visible == visible then return end
 
     self.visible = visible
+    self:InvalidateLayout()
+
+    return true
+
+end
+
+function COMPONENT:SetInverted( inverted )
+
+    if self.inverted == inverted then return end
+
+    self.inverted = inverted
     self:InvalidateLayout()
 
     return true

@@ -18,6 +18,7 @@ function COMPONENT:ApplySettings( settings, fonts )
 
     self:SetPos( settings.padding, settings.padding )
     self:SetSize( settings.size.x - settings.padding * 2, settings.size.y - settings.padding * 2 )
+    self:SetInverted( settings.inverted )
     self:SetMode( settings.mode )
     self:SetEightWind( settings.eightwind )
     self:SetThreeSixty( settings.threesixty )

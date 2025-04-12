@@ -163,6 +163,7 @@ local ELEMENT = {
         } },
 
         { category = "#holohud2.weaponselection.sounds", parameters = {
+            { id = "sound_volume" },
             { id = "sound_open_path", parameters = {
                 { id = "sound_open_pitch" }
             } },

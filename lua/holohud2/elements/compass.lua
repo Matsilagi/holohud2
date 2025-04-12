@@ -33,6 +33,7 @@ local ELEMENT = {
         color                       = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 255, 255 ) },
         color2                      = { name = "#holohud2.parameter.background_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 255, 255, 12 ) },
 
+        inverted                    = { name = "#holohud2.parameter.inverted", type = HOLOHUD2.PARAM_BOOL, value = false },
         padding                     = { name = "#holohud2.parameter.padding", type = HOLOHUD2.PARAM_NUMBER, value = 0, min = 0 },
         scale                       = { name = "#holohud2.compass.visible_width", type = HOLOHUD2.PARAM_RANGE, value = .5, min = 0, max = 1, decimals = 1, helptext = "#holohud2.compass.visible_width.helptext" },
         mode                        = { name = "#holohud2.compass.scroll_style", type = HOLOHUD2.PARAM_OPTION, options = { "#holohud2.compass.scroll_style_0", "#holohud2.compass.scroll_style_1", "#holohud2.compass.scroll_style_2" }, value = 3 },
@@ -67,6 +68,7 @@ local ELEMENT = {
         gauge_align                 = { name = "#holohud2.parameter.align", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_RIGHT }
     },
     menu = {
+        { id = "inverted" },
         { id = "mode" },
         { id = "eightwind" },
         { id = "threesixty" },
@@ -130,6 +132,7 @@ local ELEMENT = {
         } }
     },
     quickmenu = {
+        { id = "inverted" },
         { id = "eightwind" },
         { id = "threesixty" },
         { id = "northzero" },
