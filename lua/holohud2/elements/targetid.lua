@@ -422,7 +422,7 @@ function ELEMENT:PreDraw( settings )
 
     local target = result.Entity
 
-    if not IsValid( target ) or not target:IsPlayer() then return end
+    if not (IsValid( target ) and target:IsPlayer()) or hook_Call( "ShouldShowTargetID", target, result ) == false then return end
 
     if target == _target then
 

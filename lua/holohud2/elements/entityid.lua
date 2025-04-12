@@ -290,7 +290,7 @@ function ELEMENT:PreDraw( settings )
     
     local target = result.Entity
     
-    if not IsValid( target ) or hook_Call( "ShouldShowEntityID", target ) == false then
+    if not IsValid( target ) or hook_Call( "ShouldShowEntityID", target, result ) == false then
         
         warmup = curtime + WARMUP
         return
