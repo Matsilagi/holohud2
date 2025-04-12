@@ -84,7 +84,7 @@ local ELEMENT = {
             { id = "spacing" }
         } },
 
-        { category = "Notifications", parameters = {
+        { category = "#holohud2.notifications", parameters = {
             { name = "Generic", parameters = {
                 { id = "generic_color" },
                 { id = "generic_bullet", parameters = {
@@ -128,7 +128,7 @@ local ELEMENT = {
             { id = "font" }
         } },
 
-        { category = "Notifications", parameters = {
+        { category = "#holohud2.notifications", parameters = {
             { name = "Generic", parameters = {
                 { id = "generic_color" },
                 { id = "generic_bullet", parameters = {

@@ -388,12 +388,10 @@ function ELEMENT:PreDraw( settings )
 
     end
 
-    local class = target:GetClass()
-    local is_friend = hook_Call( "IsFriendEntityName", class )
-
+    local is_friend = hook_Call( "IsFriendEntity", target )
     if is_friend == nil then
         
-        is_friend = IsFriendEntityName( class )
+        is_friend = IsFriendEntityName( target:GetClass() )
 
     end
 

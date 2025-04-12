@@ -1,5 +1,4 @@
 local math = math
-local scale_Get = HOLOHUD2.scale.Get
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 
@@ -355,7 +354,7 @@ end
 
 function COMPONENT:PaintBackground( x, y )
 
-    if self._flashing then self.Icon:Paint( x, y ) end
+    if self._flashing and self.icon_background then self.Icon:Paint( x, y ) end
     if not self.sprint then self.Sprint:Paint( x, y ) end
     if not self.oxygen then self.Oxygen:Paint( x, y ) end
     if not self.flashlight then self.Flashlight:Paint( x, y ) end
@@ -434,7 +433,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     progressbar:Copy( progressbarbackground )
 
     local gauge = self.Gauge
-    gauge:SetVisible( settings.powerbar_guide )
+    gauge:SetVisible( settings.powerbar and settings.powerbar_guide )
 
     if settings.powerbar_growdirection == HOLOHUD2.GROWDIRECTION_RIGHT or settings.powerbar_growdirection == HOLOHUD2.GROWDIRECTION_LEFT or HOLOHUD2.GROWDIRECTION_CENTERHORIZONTAL then
 

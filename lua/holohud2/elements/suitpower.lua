@@ -347,7 +347,7 @@ function ELEMENT:DoStartupSequence( settings, curtime )
 
     elseif startup_phase == STARTUP_FILL then
 
-        local suitpower = hook_Call( "GetSuitPower" ) or localplayer:GetSuitPower()
+        local suitpower = math.max( hook_Call( "GetSuitPower" ) or localplayer:GetSuitPower(), 0 )
         local time = ( next_startup_phase - curtime ) / STARTUP_TIMINGS[ startup_phase ]
         local anim = ( 1 - time ) * 3
         
@@ -376,7 +376,7 @@ function ELEMENT:PreDraw( settings )
 
     if self:DoStartupSequence( settings ) then return end
 
-    local suitpower = hook_Call( "GetSuitPower" ) or localplayer:GetSuitPower()
+    local suitpower = math.max( hook_Call( "GetSuitPower" ) or localplayer:GetSuitPower(), 0 )
     hudsuitpower:SetValue( math.Round( suitpower ) )
     hudsuitpower:SetSprinting( localplayer:IsSprinting() )
     hudsuitpower:SetUnderwater( localplayer:WaterLevel() >= 3 )

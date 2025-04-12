@@ -152,7 +152,7 @@ function ELEMENT:PerformLayout( settings )
         else
 
             component:SetColor( settings.color )
-            component:SetBlinkAmount( settings.blinking and ( 1 - settings.blink_amount ) )
+            component:SetBlinkAmount( settings.blinking and settings.blink_amount )
 
         end
 

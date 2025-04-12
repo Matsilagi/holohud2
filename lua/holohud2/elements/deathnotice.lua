@@ -129,8 +129,8 @@ local ELEMENT = {
     name        = "#holohud2.deathnotice",
     helptext    = "#holohud2.deathnotice.helptext",
     parameters  = {
-        delay               = { name = "#holohud2.parameter.notify_delay", type = HOLOHUD2.PARAM_NUMBER, value = 6, min = 0, helptext = "#holohud2.parameter.notify_delay.helptext" },
-        queue               = { name = "#holohud2.parameter.notify_queue", type = HOLOHUD2.PARAM_BOOL, value = false, helptext = "#holohud2.parameter.notify_queue.helptext" },
+        delay               = { name = "#holohud2.parameter.notification_delay", type = HOLOHUD2.PARAM_NUMBER, value = 6, min = 0, helptext = "#holohud2.parameter.notify_delay.helptext" },
+        queue               = { name = "#holohud2.parameter.notification_queue", type = HOLOHUD2.PARAM_BOOL, value = false, helptext = "#holohud2.parameter.notify_queue.helptext" },
         limit               = { name = "#holohud2.parameter.limit", type = HOLOHUD2.PARAM_NUMBER, value = 6, helptext = "#holohud2.parameter.notify_limit.helptext" },
 
         pos                 = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 12 } },
