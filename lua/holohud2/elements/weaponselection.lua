@@ -46,13 +46,16 @@ local ELEMENT = {
         selection_size                      = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 144, y = 72 } },
         selection_animated                  = { name = "#holohud2.parameter.animated", type = HOLOHUD2.PARAM_BOOL, value = true },
         
+        selection_name                      = { name = "#holohud2.weaponselection.name", type = HOLOHUD2.PARAM_BOOL, value = true },
         selection_name_pos                  = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 56 } },
         selection_name_font                 = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Condensed Light", size = 14, weight = 0, italic = false } },
         selection_name_align                = { name = "#holohud2.parameter.align", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_LEFT },
         
+        selection_icon                      = { name = "#holohud2.component.icon", type = HOLOHUD2.PARAM_BOOL, value = true },
         selection_icon_pos                  = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 72, y = 36 } },
         selection_icon_size                 = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_NUMBER, value = 140, min = 0 },
         
+        selection_ammo                      = { name = "#holohud2.weaponselection.ammo", type = HOLOHUD2.PARAM_BOOL, value = true },
         selection_ammo1_pos                 = { name = "#holohud2.weaponselection.ammo1_pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 106, y = 4 } },
         selection_ammo2_pos                 = { name = "#holohud2.weaponselection.ammo2_pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 68, y = 4 } },
         selection_ammo_size                 = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 34, y = 5 }, min_x = 1, min_y = 1 },
@@ -128,16 +131,16 @@ local ELEMENT = {
         { category = "#holohud2.weaponselection.category.selection", parameters = {
             { id = "selection_size" },
             { id = "selection_animated" },
-            { name = "#holohud2.weaponselection.name", parameters = {
+            { id = "selection_name", parameters = {
                 { id = "selection_name_pos" },
                 { id = "selection_name_font" },
                 { id = "selection_name_align" }
             } },
-            { id = "#holohud2.component.icon", parameters = {
+            { id = "selection_icon", parameters = {
                 { id = "selection_icon_pos" },
                 { id = "selection_icon_size" }
             } },
-            { id = "#holohud2.weaponselection.ammo", parameters = {
+            { id = "selection_ammo", parameters = {
                 { id = "selection_ammo1_pos" },
                 { id = "selection_ammo2_pos" },
                 { name = "#holohud2.component.percentage_bar", parameters = {
@@ -208,15 +211,15 @@ local ELEMENT = {
         { category = "#holohud2.weaponselection.category.selection", parameters = {
             { id = "selection_size" },
             { id = "selection_animated" },
-            { name = "#holohud2.weaponselection.name", parameters = {
+            { id = "selection_name", parameters = {
                 { id = "selection_name_pos" },
                 { id = "selection_name_font" }
             } },
-            { id = "#holohud2.component.icon", parameters = {
+            { id = "selection_icon", parameters = {
                 { id = "selection_icon_pos" },
                 { id = "selection_icon_size" }
             } },
-            { id = "#holohud2.weaponselection.ammo", parameters = {
+            { id = "selection_name", parameters = {
                 { id = "selection_ammo1_pos" },
                 { id = "selection_ammo2_pos" },
                 { id = "selection_ammo_size", name = "Percentage bar size" },

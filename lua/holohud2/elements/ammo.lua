@@ -1005,6 +1005,8 @@ function ELEMENT:PreDraw( settings )
         if settings.ammo1_separate or has_clip1 then
 
             clip1_layout:SetPos( settings.clip1_pos.x, settings.clip1_pos.y )
+            clip1_layout:SetMargin( settings.ammo1_margin )
+            clip1_layout:SetOrder( settings.clip1_order )
             clip1_panel:SetAnimation( settings.clip1_animation )
             clip1_panel:SetAnimationDirection( settings.clip1_animation_direction )
             clip1_panel:SetDrawBackground( settings.clip1_background )
@@ -1015,6 +1017,8 @@ function ELEMENT:PreDraw( settings )
         else
 
             clip1_layout:SetPos( settings.ammo1_pos.x, settings.ammo1_pos.y )
+            clip1_layout:SetMargin( settings.ammo1_margin )
+            clip1_layout:SetOrder( settings.ammo1_order )
             clip1_panel:SetAnimation( settings.ammo1_animation )
             clip1_panel:SetAnimationDirection( settings.ammo1_animation_direction )
             clip1_panel:SetDrawBackground( settings.ammo1_background )
@@ -1039,6 +1043,8 @@ function ELEMENT:PreDraw( settings )
         if settings.ammo2_separate or has_clip2 then
             
             clip2_layout:SetPos( settings.clip2_pos.x, settings.clip2_pos.y )
+            clip2_layout:SetMargin( settings.clip2_margin )
+            clip2_layout:SetOrder( settings.clip2_order )
             clip2_panel:SetAnimation( settings.clip2_animation )
             clip2_panel:SetAnimationDirection( settings.clip2_animation_direction )
             clip2_panel:SetDrawBackground( settings.clip2_background )
@@ -1049,6 +1055,8 @@ function ELEMENT:PreDraw( settings )
         else
 
             clip2_layout:SetPos( settings.ammo2_pos.x, settings.ammo2_pos.y )
+            clip2_layout:SetMargin( settings.ammo2_margin )
+            clip2_layout:SetOrder( settings.ammo2_order )
             clip2_panel:SetAnimation( settings.ammo2_animation )
             clip2_panel:SetAnimationDirection( settings.ammo2_animation_direction )
             clip2_panel:SetDrawBackground( settings.ammo2_background )

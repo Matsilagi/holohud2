@@ -321,6 +321,8 @@ end
 
 function COMPONENT:Paint( x, y )
 
+    if not self.visible then return end
+
     x, y = x + self._x, y + self._y
 
     render.SetStencilWriteMask( 0xFF )

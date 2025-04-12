@@ -124,8 +124,6 @@ local LAYER_FOREGROUND  = HOLOHUD2.LAYER_FOREGROUND
 local LAYER_SCANLINES   = HOLOHUD2.LAYER_SCANLINES
 
 local dock = 0
-local queued = false
-local limit = 0
 
 local ELEMENT = {
     name        = "#holohud2.deathnotice",
@@ -547,8 +545,6 @@ end
 ---
 function ELEMENT:OnSettingsChanged( settings )
 
-    visible = settings._visible
-
     if not settings._visible then
         
         layout:SetVisible(false)
@@ -563,8 +559,6 @@ function ELEMENT:OnSettingsChanged( settings )
     layout:SetOrder( settings.order )
 
     dock = HOLOHUD2.HORIZONTAL_DOCK.LEFT[ settings.dock ] and 0 or ( HOLOHUD2.HORIZONTAL_DOCK.CENTER[ settings.dock ] and .5 ) or 1
-    queued = settings.queue
-    limit = settings.limit
 
     invalid_layout = true
 

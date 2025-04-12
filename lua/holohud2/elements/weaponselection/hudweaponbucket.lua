@@ -3,6 +3,8 @@ local CurTime = CurTime
 local FrameTime = FrameTime
 
 local COMPONENT = {
+    ammo_visible            = true,
+    ammo_icon_visible       = true,
     ammo1                   = 0,
     ammo2                   = 0,
     animated                = false,
@@ -199,8 +201,8 @@ function COMPONENT:SetAmmo1( ammo )
     if self.ammo1 == ammo then return end
 
     self.ammo1 = ammo
-    self.Ammo1Background:SetVisible( self.background and ammo ~= -1 )
-    self.Ammo1Icon:SetVisible( ammo ~= -1 )
+    self.Ammo1Background:SetVisible( self.ammo_visible and self.background and ammo ~= -1 )
+    self.Ammo1Icon:SetVisible( self.ammo_visible and self.ammo_icon_visible and ammo ~= -1 )
 
     if self.animated then return end
 
@@ -219,8 +221,8 @@ function COMPONENT:SetAmmo2( ammo )
     if self.ammo2 == ammo then return end
 
     self.ammo2 = ammo
-    self.Ammo2Background:SetVisible( self.background and ammo ~= -1 )
-    self.Ammo2Icon:SetVisible( ammo ~= -1 )
+    self.Ammo2Background:SetVisible( self.ammo_visible and self.background and ammo ~= -1 )
+    self.Ammo2Icon:SetVisible( self.ammo_visible and self.ammo_icon_visible and ammo ~= -1 )
 
     if self.animated then return end
 
@@ -271,14 +273,20 @@ end
 
 function COMPONENT:ApplySettings( settings, fonts )
 
+    self.ammo_visible = settings.selection_ammo
+    self.ammo_icon_visible = settings.selection_ammo_icon
+    self.background = settings.selection_ammo_background
+
     self.Header:SetFont( fonts.slot_font )
     self.Header:SetColor( settings.slot_color )
     self.Header:SetPos( settings.slot_pos.x, settings.slot_pos.y )
 
+    self.Name:SetVisible( settings.selection_name )
     self.Name:SetPos( settings.selection_name_pos.x, settings.selection_name_pos.y )
     self.Name:SetFont( fonts.selection_name_font )
     self.Name:SetAlign( settings.selection_name_align )
     
+    self.Icon:SetVisible( settings.selection_icon )
     self.Icon:SetPos( settings.selection_icon_pos.x, settings.selection_icon_pos.y )
     self.Icon:SetSize( settings.selection_icon_size )
     
@@ -287,6 +295,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     self.Ammo1Background:SetPos( settings.selection_ammo1_pos.x, settings.selection_ammo1_pos.y )
     self.Ammo1Background:SetColor( settings.selection_ammo_color2 )
     
+    self.Ammo1:SetVisible( self.ammo_visible )
     self.Ammo1:Copy( self.Ammo1Background )
     self.Ammo1:SetColor( settings.selection_ammo_color )
     self.Ammo1:SetGrowDirection( settings.selection_ammo_growdirection )
@@ -295,13 +304,13 @@ function COMPONENT:ApplySettings( settings, fonts )
     self.Ammo2Background:SetPos( settings.selection_ammo2_pos.x, settings.selection_ammo2_pos.y )
     self.Ammo2Background:SetColor( settings.selection_ammo_color2 )
     
+    self.Ammo2:SetVisible( self.ammo_visible )
     self.Ammo2:Copy( self.Ammo2Background )
     self.Ammo2:SetColor( settings.selection_ammo_color )
     self.Ammo2:SetGrowDirection( settings.selection_ammo_growdirection )
 
-    self.background = settings.selection_ammo_background
-    self.Ammo1Background:SetVisible( self.background and self.Ammo1.value ~= -1 )
-    self.Ammo2Background:SetVisible( self.background and self.Ammo2.value ~= -1 )
+    self.Ammo1Background:SetVisible( self.ammo_visible and self.background and self.Ammo1.value ~= -1 )
+    self.Ammo2Background:SetVisible( self.ammo_visible and self.background and self.Ammo2.value ~= -1 )
 
     self.Ammo1Icon:SetPos( self.Ammo1.x + settings.selection_ammo_icon_offset.x, self.Ammo1.y + settings.selection_ammo_icon_offset.y )
     self.Ammo1Icon:SetSize( settings.selection_ammo_icon_size )
