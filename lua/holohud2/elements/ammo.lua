@@ -896,6 +896,7 @@ local localplayer -- reference set in PreDraw
 local ammotime = 0
 local last_firemode
 local _clip1, _clip2, _ammo1, _ammo2 = 0, 0, 0, 0
+local _grenades = 0
 function ELEMENT:PreDraw( settings )
 
     localplayer = localplayer or LocalPlayer()
@@ -1203,8 +1204,16 @@ function ELEMENT:PreDraw( settings )
     end
         
     -- quick nades
-    hudquicknades:SetAmount( localplayer:GetAmmoCount( 10 ) )
+    local grenades = localplayer:GetAmmoCount( 10 )
+    hudquicknades:SetAmount( grenades )
     hudquicknades:Think()
+
+    if settings.quicknades and grenades ~= _grenades and ( has_clip1 or settings.quicknades_separate ) then
+        
+        ammotime = curtime + settings.autohide_delay
+        _grenades = grenades
+
+    end
 
     if settings.quicknades_separate then
 
@@ -1874,16 +1883,18 @@ ELEMENT.components = {
 --- Add common parameters to modifiers
 ---
 HOLOHUD2.modifier.Add( "autohide", "ammo", "autohide" )
-HOLOHUD2.modifier.Add( "panel_animation", "ammo", { "clip1_animation", "ammo1_animation", "clip2_animation", "ammo2_animation", "firemode_separate_animation" } )
-HOLOHUD2.modifier.Add( "background", "ammo", { "clip1_background", "ammo1_background", "clip2_background", "ammo2_background", "firemode_separate_background" } )
-HOLOHUD2.modifier.Add( "background_color", "ammo", { "clip1_background_color", "ammo1_background_color", "clip2_background_color", "ammo2_background_color", "firemode_separate_background_color" } )
+HOLOHUD2.modifier.Add( "panel_animation", "ammo", { "clip1_animation", "ammo1_animation", "clip2_animation", "ammo2_animation", "firemode_separate_animation", "quicknades_separate_animation" } )
+HOLOHUD2.modifier.Add( "background", "ammo", { "clip1_background", "ammo1_background", "clip2_background", "ammo2_background", "firemode_separate_background", "quicknades_separate_background" } )
+HOLOHUD2.modifier.Add( "background_color", "ammo", { "clip1_background_color", "ammo1_background_color", "clip2_background_color", "ammo2_background_color", "firemode_separate_background_color", "quicknades_separate_background_color" } )
 HOLOHUD2.modifier.Add( "color2", "ammo", { "clip1_color2", "ammo1_color2", "clip2_color2", "ammo2_color2" } )
-HOLOHUD2.modifier.Add( "number_rendermode", "ammo", { "clip1num_rendermode", "clip1num2_rendermode", "ammo1num_rendermode", "clip2num_rendermode", "clip2num2_rendermode", "ammo2num_rendermode" } )
-HOLOHUD2.modifier.Add( "number_background", "ammo", { "clip1num_background", "clip1num2_background", "ammo1num_background", "clip2num_background", "clip2num2_background", "ammo2num_background" } )
+HOLOHUD2.modifier.Add( "number_rendermode", "ammo", { "clip1num_rendermode", "clip1num2_rendermode", "ammo1num_rendermode", "clip2num_rendermode", "clip2num2_rendermode", "ammo2num_rendermode", "quicknades_num_rendermode" } )
+HOLOHUD2.modifier.Add( "number_background", "ammo", { "clip1num_background", "clip1num2_background", "ammo1num_background", "clip2num_background", "clip2num2_background", "ammo2num_background", "quicknades_num_background" } )
 HOLOHUD2.modifier.Add( "number_font", "ammo", { "clip1num_font", "ammo1num_font", "clip2num_font", "ammo2num_font" })
 HOLOHUD2.modifier.Add( "number_offset", "ammo", { "clip1num_pos", "ammo1num_pos", "clip2num_pos", "ammo2num_pos" } )
 HOLOHUD2.modifier.Add( "number2_font", "ammo", { "clip1num2_font", "clip2num2_font" } )
 HOLOHUD2.modifier.Add( "number2_offset", "ammo", { "clip1num2_pos", "clip2num2_pos" } )
+HOLOHUD2.modifier.Add( "number3_font", "ammo", "quicknades_num_font" )
+HOLOHUD2.modifier.Add( "number3_offset", "ammo", "quicknades_num_offset" )
 HOLOHUD2.modifier.Add( "text_font", "ammo", { "clip1text_font", "ammo1text_font", "clip2text_font", "ammo2text_font" } )
 HOLOHUD2.modifier.Add( "text_offset", "ammo", { "clip1text_pos", "ammo1text_pos", "clip2text_pos", "ammo2text_pos" } )
 
