@@ -65,7 +65,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     icon:SetSize(settings.clip1icon_size)
     icon:SetAngle(settings.clip1icon_angle)
     icon:SetAlign(settings.clip1icon_align)
-    icon:SetColor( settings.clip1icon_on_background and self.Colors2:GetColor() or self.Colors:GetColor() )
+    icon:SetColor( settings.clip1icon_on_background and color2 or color )
     self:SetDrawIconOnBackground(settings.clip1icon_on_background)
 
     local text = self.Text
@@ -75,14 +75,6 @@ function COMPONENT:ApplySettings( settings, fonts )
     text:SetText( settings.clip1text_text )
     text:SetAlign( settings.clip1text_align )
     self:SetDrawTextOnBackground( settings.clip1text_on_background )
-
-    --[[local firemode = self.FireMode
-    firemode:SetVisible( self.firemode and FIREMODES[ self.firemode ] and settings.firemode )
-    firemode:SetPos( settings.firemode_pos.x, settings.firemode_pos.y )
-    firemode:SetSize( settings.firemode_size )
-    firemode:SetColor( color )
-    self.firemode_visible = settings.firemode
-    self.transform_oversize.firemode_pos = settings.clip1_oversize_firemodepos]]
     
     self:InvalidateLayout()
 
