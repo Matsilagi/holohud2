@@ -28,6 +28,8 @@ if SERVER then
 end
 
 local util = util
+local IsValid = IsValid
+local IsFriendEntityName = IsFriendEntityName
 local CurTime = CurTime
 local hook_Call = HOLOHUD2.hook.Call
 
