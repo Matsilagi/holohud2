@@ -108,15 +108,19 @@ local ELEMENT = {
                 { id = "quicknades_num_digits" }
             } },
             { id = "quicknades_separate", parameters = {
-                { id = "quicknades_separate_pos" },
-                { id = "quicknades_separate_direction" },
-                { id = "quicknades_separate_margin" },
-                { id = "quicknades_separate_order" },
+                { id = "quicknades_separate_pos", parameters = {
+                    { id = "quicknades_separate_dock" },
+                    { id = "quicknades_separate_direction" },
+                    { id = "quicknades_separate_margin" },
+                    { id = "quicknades_separate_order" },
+                } },
                 { id = "quicknades_separate_padding" },
-                { id = "quicknades_separate_background" },
-                { id = "quicknades_separate_background_color" },
-                { id = "quicknades_separate_animation" },
-                { id = "quicknades_separate_animation_direction" }
+                { id = "quicknades_separate_background", parameters = {
+                    { id = "quicknades_separate_background_color" }
+                } },
+                { id = "quicknades_separate_animation", parameters = {
+                    { id = "quicknades_separate_animation_direction" }
+                } }
             } }
         } }
     },

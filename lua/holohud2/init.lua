@@ -162,11 +162,10 @@ local ComputeHUD = HOLOHUD2.render.ComputeHUD
 local RenderHUDBackground = HOLOHUD2.render.RenderHUDBackground
 local RenderHUD = HOLOHUD2.render.RenderHUD
 
-local index = HOLOHUD2.element.Index()
-local elements = HOLOHUD2.element.All()
 local offset = HOLOHUD2.offset
 
-local chud = {}
+local predraw = {} -- elements to call predraw on
+local chud = {} -- CHud elements to hide
 local on_overlay = false
 local settings = {}
 local init = false
@@ -186,14 +185,11 @@ hook.Add( "PreDrawHUD", "holohud2", function()
 
     if not hook_Call( "PreDrawHUD", settings ) then
 
-        for i=1, #index do
+        for i=1, #predraw do
 
-            local id = index[ i ]
-            local element = elements[ id ]
+            local element = predraw[ i ]
 
-            if not element:IsVisible() then continue end
-
-            element:PreDraw( settings[ id ] )
+            element:PreDraw( settings[ element.id ] )
 
         end
 
@@ -225,7 +221,7 @@ end)
 --- Draw HUD
 ---
 hook.Add( "HUDPaint", "holohud2", function()
-
+    
     if on_overlay then return end
     if not IsVisible() then return end
     if not init then return end
@@ -292,12 +288,14 @@ end)
 ---
 HOLOHUD2.hook.Add( "OnSettingsChanged", "holohud2", function( data )
 
+    local elements = HOLOHUD2.element.All()
+    predraw = {}
     chud = {}
     settings = data
     HOLOHUD2.font.Fetch( settings )
 
     for id, parameters in pairs( settings ) do
-
+        
         local element = elements[ id ]
 
         if not element then continue end -- skip removed elements
@@ -309,6 +307,8 @@ HOLOHUD2.hook.Add( "OnSettingsChanged", "holohud2", function( data )
         element.IsVisible = function() return parameters._visible end
 
         if not parameters._visible then continue end
+
+        table.insert( predraw, element )
 
         -- get CHud elements to hide
         for _, name in ipairs( element.hide ) do

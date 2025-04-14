@@ -34,45 +34,45 @@ local FIREMODE_TRANSLATE = {
 ---
 --- Extend settings
 ---
-local ELEMENT_AMMO = HOLOHUD2.element.Get( "ammo" )
+local element_ammo = HOLOHUD2.element.Get( "ammo" )
 
 -- JAMMED!
-ELEMENT_AMMO:DefineParameter( "arc9_jammed", { name = "#holohud2.arc9.jammed", type = HOLOHUD2.PARAM_BOOL, value = true } )
-ELEMENT_AMMO:DefineParameter( "arc9_jammed_color", { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 72, 72 ) } )
-ELEMENT_AMMO:DefineParameter( "arc9_jammed_font", { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 18, weight = 1000, italic = false } } )
-ELEMENT_AMMO:DefineParameter( "arc9_jammed_vertical", { name = "#holohud2.arc9.vertical", type = HOLOHUD2.PARAM_BOOL, value = false } )
-ELEMENT_AMMO:DefineParameter( "arc9_jammed_override", { name = "#holohud2.parameter.override", type = HOLOHUD2.PARAM_STRING, value = "", helptext = "Leave blank to use default values" } )
+element_ammo:DefineParameter( "arc9_jammed", { name = "#holohud2.arc9.jammed", type = HOLOHUD2.PARAM_BOOL, value = true } )
+element_ammo:DefineParameter( "arc9_jammed_color", { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 72, 72 ) } )
+element_ammo:DefineParameter( "arc9_jammed_font", { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 18, weight = 1000, italic = false } } )
+element_ammo:DefineParameter( "arc9_jammed_vertical", { name = "#holohud2.arc9.vertical", type = HOLOHUD2.PARAM_BOOL, value = false } )
+element_ammo:DefineParameter( "arc9_jammed_override", { name = "#holohud2.parameter.override", type = HOLOHUD2.PARAM_STRING, value = "", helptext = "Leave blank to use default values" } )
 
 -- Thermometer
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer", { name = "#holohud2.arc9.thermometer", type = HOLOHUD2.PARAM_BOOL, value = true } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_pos", { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 70, y = 26 } } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_size", { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 24, y = 2 } } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_vertical", { name = "#holohud2.arc9.vertical", type = HOLOHUD2.PARAM_BOOL, value = false } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_background", { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate", { name = "#holohud2.parameter.standalone", type = HOLOHUD2.PARAM_BOOL, value = false } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_pos", { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 62 } } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_dock", { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_RIGHT } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_direction", { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_LEFT } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_margin", { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, min = 0, value = 4 } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_order", { name = "#holohud2.parameter.order", type = HOLOHUD2.PARAM_ORDER, value = 21 } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_padding", { name = "#holohud2.parameter.padding", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 3 } } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_background", { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_background_color", { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 0, 0, 0, 94 ) } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_animation", { name = "#holohud2.parameter.animation", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PANELANIMATIONS, value = HOLOHUD2.PANELANIMATION_FLASH } )
-ELEMENT_AMMO:DefineParameter( "arc9_thermometer_separate_animation_direction", { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP } )
+element_ammo:DefineParameter( "arc9_thermometer", { name = "#holohud2.arc9.thermometer", type = HOLOHUD2.PARAM_BOOL, value = true } )
+element_ammo:DefineParameter( "arc9_thermometer_pos", { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 70, y = 26 } } )
+element_ammo:DefineParameter( "arc9_thermometer_size", { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 24, y = 2 } } )
+element_ammo:DefineParameter( "arc9_thermometer_vertical", { name = "#holohud2.arc9.vertical", type = HOLOHUD2.PARAM_BOOL, value = false } )
+element_ammo:DefineParameter( "arc9_thermometer_background", { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true } )
+element_ammo:DefineParameter( "arc9_thermometer_separate", { name = "#holohud2.parameter.standalone", type = HOLOHUD2.PARAM_BOOL, value = false } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_pos", { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 62 } } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_dock", { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_RIGHT } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_direction", { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_LEFT } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_margin", { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, min = 0, value = 4 } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_order", { name = "#holohud2.parameter.order", type = HOLOHUD2.PARAM_ORDER, value = 21 } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_padding", { name = "#holohud2.parameter.padding", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 3 } } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_background", { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_background_color", { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 0, 0, 0, 94 ) } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_animation", { name = "#holohud2.parameter.animation", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PANELANIMATIONS, value = HOLOHUD2.PANELANIMATION_FLASH } )
+element_ammo:DefineParameter( "arc9_thermometer_separate_animation_direction", { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP } )
 
-local tab, quicktab = ELEMENT_AMMO:FindMenuTab( "ARC9" ), ELEMENT_AMMO:FindQuickTab( "ARC9" )
-if not tab then tab = ELEMENT_AMMO:AddMenuTab( "ARC9", { icon = "arc9/icon_16.png" } ) end
-if not quicktab then quicktab = ELEMENT_AMMO:AddQuickTab( "ARC9", { icon = "arc9/icon_16.png" } ) end
+local tab, quicktab = element_ammo:FindMenuTab( "ARC9" ), element_ammo:FindQuickTab( "ARC9" )
+if not tab then tab = element_ammo:AddMenuTab( "ARC9", { icon = "arc9/icon_16.png" } ) end
+if not quicktab then quicktab = element_ammo:AddQuickTab( "ARC9", { icon = "arc9/icon_16.png" } ) end
 
-ELEMENT_AMMO:AddMenuParameter( { tab = tab, id = "arc9_jammed", parameters = {
+element_ammo:AddMenuParameter( { tab = tab, id = "arc9_jammed", parameters = {
     { id = "arc9_jammed_color" },
     { id = "arc9_jammed_font" },
     { id = "arc9_jammed_vertical" },
     { id = "arc9_jammed_override" }
 } } )
 
-ELEMENT_AMMO:AddMenuParameter( { tab = tab, id = "arc9_thermometer", parameters = {
+element_ammo:AddMenuParameter( { tab = tab, id = "arc9_thermometer", parameters = {
     { id = "arc9_thermometer_pos"  },
     { id = "arc9_thermometer_size" },
     { id = "arc9_thermometer_vertical" },
@@ -95,12 +95,12 @@ ELEMENT_AMMO:AddMenuParameter( { tab = tab, id = "arc9_thermometer", parameters 
 } } )
 
 
-ELEMENT_AMMO:AddQuickParameter( { tab = tab, id = "arc9_jammed", parameters = {
+element_ammo:AddQuickParameter( { tab = tab, id = "arc9_jammed", parameters = {
     { id = "arc9_jammed_font" },
     { id = "arc9_jammed_vertical" }
 } } )
 
-ELEMENT_AMMO:AddQuickParameter( { tab = quicktab, id = "arc9_thermometer", parameters = {
+element_ammo:AddQuickParameter( { tab = quicktab, id = "arc9_thermometer", parameters = {
     { id = "arc9_thermometer_pos"  },
     { id = "arc9_thermometer_size" },
     { id = "arc9_thermometer_separate", parameters = {
@@ -165,7 +165,7 @@ HOLOHUD2.hook.Add( "PreDrawHUD", "arc9", function()
     if not separate then return end
 
     panel:Think()
-    panel:SetDeployed( ELEMENT_AMMO.components.clip1_panel.deployed and visible and can_overheat )
+    panel:SetDeployed( element_ammo.components.clip1_panel.deployed and visible and can_overheat )
     layout:SetVisible( panel:IsVisible() )
 
 end)
@@ -198,7 +198,7 @@ HOLOHUD2.hook.Add( "HUDPaintScanlines", "arc9", function( settings, x, y, on_ove
 
     if not separate or on_overlay then return end
 
-    StartAlphaMultiplier( ELEMENT_AMMO.components.hudclip1.Blur:GetAmount() )
+    StartAlphaMultiplier( element_ammo.components.hudclip1.Blur:GetAmount() )
     panel:Paint( x, y )
     EndAlphaMultiplier()
 
@@ -234,10 +234,10 @@ HOLOHUD2.hook.Add( "OnSettingsChanged", "arc9", function( settings )
     thermometer:Copy( thermometerbackground )
     
     thermometer:SetVisible( visible )
-    thermometer:SetColor( ELEMENT_AMMO.components.hudclip1.Colors:GetColor() )
+    thermometer:SetColor( element_ammo.components.hudclip1.Colors:GetColor() )
 
     thermometerbackground:SetVisible( visible and settings.arc9_thermometer_background )
-    thermometerbackground:SetColor( ELEMENT_AMMO.components.hudclip1.Colors2:GetColor() )
+    thermometerbackground:SetColor( element_ammo.components.hudclip1.Colors2:GetColor() )
 
     if settings.arc9_thermometer_separate then
 
@@ -268,7 +268,7 @@ end)
 --- Paint integrated components
 ---
 local JAMMED_FONT = "holohud2_ammo_arc9_jammed_font"
-HOLOHUD2.hook.Add( "DrawOverClip1", "arc9", function( x, y, w, h, layer, hudclip1 )
+HOLOHUD2.hook.Add( "DrawOverClip1", "arc9", function( x, y, w, h, layer )
 
     -- Thermometer
     if not separate then
@@ -280,7 +280,7 @@ HOLOHUD2.hook.Add( "DrawOverClip1", "arc9", function( x, y, w, h, layer, hudclip
 
         end
 
-        if layer == LAYER_SCANLINES then StartAlphaMultiplier( hudclip1.Blur:GetAmount() ) end
+        if layer == LAYER_SCANLINES then StartAlphaMultiplier( element_ammo.components.hudclip1.Blur:GetAmount() ) end
 
         thermometer:Paint( x, y )
 

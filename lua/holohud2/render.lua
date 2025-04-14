@@ -14,8 +14,6 @@ local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 
 local SCREEN_HEIGHT = HOLOHUD2.SCREEN_HEIGHT
 
-local index         = HOLOHUD2.element.Index() -- retrieve table reference
-local elements      = HOLOHUD2.element.All() -- retrieve table reference
 local offset        = HOLOHUD2.offset
 
 local QUALITY3D_INSANE      = 5
@@ -44,6 +42,7 @@ local COLOR_CLR, COLOR_ABR  = Vector( 1, 1, 1 ), { Vector( 0, 0, 1 ), Vector( 0,
 
 local MOD_ABERRATION        = { "aberration_r", "aberration_g", "aberration_b" }
 
+local elements = {}
 local rt_ready = false -- are render targets generated
 local rt_w, rt_h = 0, 0 -- render target size
 local glow_spread = 0 -- calculated spread for the current screen size
@@ -86,14 +85,13 @@ local function draw_elements( func, hook, settings, x, y, on_overlay )
 
     if hook_Call( hook, settings, x, y, on_overlay ) then return end
 
-    for i=1, #index do
+    for i=1, #elements do
         
-        local id = index[ i ]
-        local element = elements[ id ]
+        local element = elements[ i ]
 
-        if not element:IsVisible() or ( on_overlay and not element.on_overlay ) then continue end
+        if ( on_overlay and not element.on_overlay ) then continue end
 
-        element[ func ]( element, settings[ id ], x, y )
+        element[ func ]( element, settings[ element.id ], x, y )
 
     end
 
@@ -425,6 +423,10 @@ function HOLOHUD2.render.RenderHUDBackground( settings )
 
 end
 
+-- raw draw hooks
+local skip_paint = false
+local skip_paintover = false
+
 --- Renders the HUD.
 --- @param settings table
 --- @param on_overlay boolean
@@ -434,10 +436,39 @@ function HOLOHUD2.render.RenderHUD( settings, on_overlay )
     if not r_pp:GetBool() then
 
         local x, y = offset.x, offset.y
-        draw_elements( "PaintFrame", "HUDPaintFrame", settings, x, y, on_overlay )
-        draw_elements( "PaintBackground", "HUDPaintBackground", settings, x, y, on_overlay )
-        draw_elements( "Paint", "HUDPaint", settings, x, y, on_overlay )
-        draw_elements( "PaintOver", "HUDPaintOver", settings, 0, 0, on_overlay )
+        local skip_frame = hook_Call( "HUDPaintFrame", settings, x, y, on_overlay )
+
+        if not skip_frame then
+
+            for i=1, #elements do
+            
+                local element = elements[ i ]
+
+                if ( on_overlay and not element.on_overlay ) then continue end
+
+                element:PaintFrame( settings, x, y )
+
+            end
+
+        end
+        
+        local skip_background = hook_Call( "HUDPaintBackground", settings, x, y, on_overlay )
+
+        for i=1, #elements do
+            
+            local element = elements[ i ]
+
+            if ( on_overlay and not element.on_overlay ) then continue end
+
+            if not skip_background then element:PaintBackground( settings, x, y ) end
+            if not skip_paint then element:Paint( settings, x, y ) end
+            if not skip_paintover then element:PaintOver( settings, x, y ) end
+
+        end
+
+        skip_paint = hook_Call( "HUDPaint", settings, x, y, on_overlay )
+        skip_paintover = hook_Call( "HUDPaintOver", settings, 0, 0, on_overlay )
+
         return
 
     end
@@ -512,5 +543,22 @@ HOLOHUD2.hook.Add( "InvalidateMaterials", "render", function()
 
     generate_render_targets()
     generate_scanlines()
+
+end)
+
+---
+--- Refresh visible elements list.
+---
+HOLOHUD2.hook.Add( "OnSettingsChanged", "render", function( settings )
+
+    elements = {}
+
+    for _, element in pairs( HOLOHUD2.element.All() ) do
+        
+        if not settings[ element.id ]._visible then continue end
+
+        table.insert( elements, element )
+
+    end
 
 end)

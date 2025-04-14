@@ -68,6 +68,7 @@ end
 function COMPONENT:Think()
 
     if not BaseClass.Think( self ) then return end
+    if ( self.deployed and self.progress == 1 ) or ( not self.deployed and self.progress == 0 ) then return end
 
     local frametime = FrameTime()
 

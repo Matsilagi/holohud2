@@ -67,7 +67,7 @@ if SERVER then
 
 end
 
-
+local game = game
 local math = math
 local LocalPlayer = LocalPlayer
 local EyePos = EyePos
@@ -273,16 +273,23 @@ function HOLOHUD2.util.ContainsIllegalCharacters( filename )
 
 end
 
+--- Returns the stored weapon.
+---@return Weapon
+function HOLOHUD2.util.GetWeapon()
+
+    return weapon
+
+end
+
 --- Returns the stored information about the current weapon's primary ammunition.
 --- @return number clip1
 --- @return number max_clip1
 --- @return number ammo1
 --- @return number max_ammo1
 --- @return number primary
---- @return Weapon weapon
 function HOLOHUD2.util.GetPrimaryAmmo()
 
-    return clip1, max_clip1, ammo1, max_ammo1, primary, weapon
+    return clip1, max_clip1, ammo1, max_ammo1, primary
 
 end
 
@@ -292,10 +299,9 @@ end
 --- @return number ammo2
 --- @return number max_ammo2
 --- @return number secondary
---- @return Weapon weapon
 function HOLOHUD2.util.GetSecondaryAmmo()
 
-    return clip2, max_clip2, ammo2, max_ammo2, secondary, weapon
+    return clip2, max_clip2, ammo2, max_ammo2, secondary
 
 end
 

@@ -681,14 +681,15 @@ end
 local healthtime, armortime = 0, 0
 local _health, _armor = 100, 0
 function ELEMENT:PreDraw( settings )
-    
+
     localplayer = localplayer or LocalPlayer()
     local curtime = CurTime()
+    local is_minimized, is_inspecting, is_peeking = self:IsMinimized(), self:IsInspecting(), localplayer:KeyDown( IN_SCORE )
 
     -- startup sequence
     if self:DoStartupSequence( settings, curtime ) then return end
 
-    -- health indicator
+    -- health
     local health, max_health = localplayer:Health(), localplayer:GetMaxHealth()
     local armor, max_armor = localplayer:Armor(), localplayer:GetMaxArmor()
 
@@ -699,50 +700,53 @@ function ELEMENT:PreDraw( settings )
 
     end
 
-    hudhealth:SetMaxValue( max_health )
-    hudhealth:SetValue( math.max( health, 0 ) )
-
     -- accelerate heart rate if we sprint
-    if ( localplayer:IsSprinting() and localplayer:OnGround() ) and hudhealth.Pulse.pain < .8 then
+    if localplayer:OnGround() and localplayer:IsSprinting() and hudhealth.Pulse.pain < .8 then
         
         hudhealth.Pulse:SetPain( hudhealth.Pulse.pain + FrameTime() / 8 )
 
     end
 
     health_panel:Think()
-    health_panel:SetDeployed( not self:IsMinimized() and ( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or not settings.autohide or healthtime > curtime or health <= settings.autohide_threshold ) )
+    health_panel:SetDeployed( not is_minimized and ( is_inspecting or is_peeking or not settings.autohide or healthtime > curtime or health <= settings.autohide_threshold ) )
 
-    local w, h = 0, 0
-
-    -- apply transforms when the suit hides
-    if not settings.suit_separate and armor <= 0 and settings.suit_depleted == SUITDEPLETED_HIDE then
-
-        w = settings.health_suit_depleted_size.x
-        h = settings.health_suit_depleted_size.y
-        hudhealth:SetSuitDepleted( true )
-
-    else
-
-        hudhealth:SetSuitDepleted( false )
-
-    end
-
-    health_layout:SetSize( settings.size.x + hudhealth:GetOversizeOffset() + ( not settings.suit_separate and ( settings.health_suit_oversize_size and hudbattery:GetOversizeOffset() or 0 ) or 0 ) + w, settings.size.y + h )
-    health_layout:SetVisible( health_panel:IsVisible() )
-    
     if health_panel:IsVisible() then
         
+        local w, h = 0, 0
+
+        if armor <= 0 and settings.suit_depleted == SUITDEPLETED_HIDE and not settings.suit_separate then
+            
+            w, h = settings.health_suit_depleted_size.x, settings.health_suit_depleted_size.y
+            hudhealth:SetSuitDepleted( true )
+
+        else
+
+            hudhealth:SetSuitDepleted( false )
+
+        end
+
+        health_layout:SetSize( settings.size.x + hudhealth:GetOversizeOffset() + ( not settings.suit_separate and settings.health_suit_oversize_size and hudbattery:GetOversizeOffset() or 0 ) + w, settings.size.y + h )
+        health_layout:SetVisible( true )
+
+        hudhealth:SetMaxValue( max_health )
+        hudhealth:SetValue( math.max( health, 0 ) )
         hudhealth:Think()
 
         if not settings.suit_separate then
             
+            hudbattery:SetMaxValue( max_armor )
+            hudbattery:SetValue( armor )
             hudbattery:Think()
 
         end
 
+    else
+
+        health_layout:SetVisible( false )
+
     end
 
-    -- suit battery indicator
+    -- suit battery
     if _armor ~= armor then
         
         if not settings.suit_separate then
@@ -756,20 +760,25 @@ function ELEMENT:PreDraw( settings )
 
     end
 
-    hudbattery:SetMaxValue( max_armor )
-    hudbattery:SetValue( armor )
-
     if not settings.suit_separate then return end
 
     suit_panel:Think()
-    suit_panel:SetDeployed( not self:IsMinimized() and ( self:IsInspecting() or localplayer:KeyDown( IN_SCORE ) or ( armor > 0 or settings.suit_depleted ~= SUITDEPLETED_HIDE ) and ( not settings.suit_autohide or armortime > curtime ) ) )
+    suit_panel:SetDeployed( not is_minimized and ( is_inspecting or is_peeking or ( armor > 0 or settings.suit_depleted ~= SUITDEPLETED_HIDE ) and ( not settings.suit_autohide or armortime > curtime ) ) )
 
-    suit_layout:SetSize( settings.suit_size.x + ( settings.suit_oversize_size and hudbattery:GetOversizeOffset() or 0 ), settings.suit_size.y )
-    suit_layout:SetVisible( suit_panel:IsVisible() )
+    if suit_panel:IsVisible() then
+        
+        suit_layout:SetSize( settings.suit_size.x + ( settings.suit_oversize_size and hudbattery:GetOversizeOffset() or 0 ), settings.suit_size.y )
+        suit_layout:SetVisible( true )
 
-    if not suit_panel:IsVisible() then return end
+        hudbattery:SetMaxValue( max_armor )
+        hudbattery:SetValue( armor )
+        hudbattery:Think()
 
-    hudbattery:Think()
+    else
+
+        suit_layout:SetVisible( false )
+
+    end
 
 end
 

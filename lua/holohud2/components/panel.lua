@@ -40,7 +40,7 @@ end
 
 function COMPONENT:PerformLayout( force )
 
-    if not force and not self.invalid_layout then return end
+    if not self.invalid_layout and not force then return end
 
     local scale = scale_Get()
     self._x, self._y = math.Round( self.x * scale ), math.Round( self.y * scale )
@@ -64,6 +64,8 @@ function COMPONENT:Think()
     end
 
     if lerp:GetBool() then
+
+        if self._x0 ~= self.x and self._y0 ~= self.y and self._x1 ~= self.w and self._y1 ~= self.h then return end
 
         local scale = scale_Get()
         local speed = self.lerp and ( FrameTime() * LERP_TIME ) or 1

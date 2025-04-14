@@ -390,7 +390,7 @@ local function open_properties()
 
                 if hardcoded then
 
-                    local data = HOLOHUD2.persistence.Get( hardcoded )
+                    local data = table.Copy( HOLOHUD2.persistence.Get( hardcoded ) )
                     read0, read1 = data.settings, data.modifiers
 
                 else
