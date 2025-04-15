@@ -51,7 +51,7 @@ end
 
 function COMPONENT:PerformLayout( force )
 
-    if not force and not self.invalid_layout then return end
+    if not self.invalid_layout and not force then return end
 
     self.Name:SetText( self.name )
     self.Name:SetAlign( self.align )

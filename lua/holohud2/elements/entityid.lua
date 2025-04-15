@@ -2,6 +2,7 @@ HOLOHUD2.AddCSLuaFile( "entityid/hudentityid.lua" )
 
 if SERVER then return end
 
+local IsValid = IsValid
 local LocalPlayer = LocalPlayer
 local CurTime = CurTime
 local util_NicePath = HOLOHUD2.util.NicePath

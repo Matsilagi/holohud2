@@ -65,7 +65,9 @@ function COMPONENT:Think()
 
     if lerp:GetBool() then
 
-        if self._x0 ~= self.x and self._y0 ~= self.y and self._x1 ~= self.w and self._y1 ~= self.h then return end
+        -- if self._x0 ~= self.x and self._y0 ~= self.y and self._x1 ~= self.w and self._y1 ~= self.h then return end -- NOTE: ???
+
+        if self._x0 == self.x and self._y0 == self.y and self._x1 == self.w and self._y1 == self.h then return true end
 
         local scale = scale_Get()
         local speed = self.lerp and ( FrameTime() * LERP_TIME ) or 1

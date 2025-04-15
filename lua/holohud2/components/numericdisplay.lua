@@ -1,4 +1,5 @@
 
+local Lerp = Lerp
 local FrameTime = FrameTime
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier

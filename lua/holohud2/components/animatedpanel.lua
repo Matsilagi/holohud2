@@ -68,6 +68,7 @@ end
 function COMPONENT:Think()
 
     if not BaseClass.Think( self ) then return end
+    if ( self.deployed and self.progress >= 1 ) or ( not self.deployed and self.progress <= 0 ) then return end
 
     local frametime = FrameTime()
 
@@ -117,6 +118,12 @@ function COMPONENT:SetPos( x, y )
     if self._visible then return end
     
     self._x0, self._y0, self._x1, self._y1 = self.x, self.y, self.w, self.h
+
+    local scale = HOLOHUD2.scale.Get()
+    self._x = math.Round( self._x0 * scale )
+    self._y = math.Round( self._y0 * scale )
+    self._w = math.Round( ( self._x0 + self._x1 ) * scale ) - self._x
+    self._h = math.Round( ( self._y0 + self._y1 ) * scale ) - self._y
 
     return true
 

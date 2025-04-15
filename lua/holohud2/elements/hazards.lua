@@ -286,12 +286,13 @@ end
 --- Queue received hazards
 ---
 local queue = {}
-
+local queue_count = 0
 HOLOHUD2.hook.Add( "OnTakeDamage", "hazards", function( _, dmgtype, _ )
 
     if startup_phase ~= STARTUP_NONE then return end
 
     table.Merge( queue, HOLOHUD2.hazard.Read( dmgtype ) )
+    queue_count = table.Count( queue )
 
 end )
 
@@ -303,73 +304,82 @@ function ELEMENT:PreDraw( settings )
     local curtime = CurTime()
 
     -- tick existing hazards
-    local next = 1
-    for i=1, #hazards do
+    if #hazards > 0 then
 
-        local hazard = hazards[ next ]
+        local next = 1
+        for i=1, #hazards do
 
-        -- we're trying to add this same hazard again
-        if queue[ hazard.dmgtype ] then
+            local hazard = hazards[ next ]
 
-            if settings.damage then
-                
-                hazard.component:Damage()
+            -- we're trying to add this same hazard again
+            if queue[ hazard.dmgtype ] then
+
+                if settings.damage then
+                    
+                    hazard.component:Damage()
+
+                end
+
+                hazard.time = curtime + settings.delay
+                queue[ hazard.dmgtype ] = nil
 
             end
 
-            hazard.time = curtime + settings.delay
-            queue[ hazard.dmgtype ] = nil
+            -- tick component
+            hazard.component:Think()
+
+            -- fade away expired hazards
+            if singletray then
+
+                hazard.component:SetFading( hazard.time <= curtime )
+
+                -- if it hasn't faded, don't remove yet
+                if not hazard.component:IsFaded() then
+
+                    next = next + 1
+                    continue
+
+                end
+
+            else
+                
+                hazard.panel:Think()
+                hazard.panel:SetDeployed( not self:IsMinimized() and hazard.time > curtime )
+
+                -- if the panel hasn't closed, don't remove yet
+                if hazard.panel:IsVisible() then
+                    
+                    next = next + 1
+                    continue
+
+                end
+
+            end
+
+            table.remove( hazards, next )
+            self:InvalidateLayout()
 
         end
-
-        -- tick component
-        hazard.component:Think()
-
-        -- fade away expired hazards
-        if singletray then
-
-            hazard.component:SetFading( hazard.time <= curtime )
-
-            -- if it hasn't faded, don't remove yet
-            if not hazard.component:IsFaded() then
-
-                next = next + 1
-                continue
-
-            end
-
-        else
-            
-            hazard.panel:Think()
-            hazard.panel:SetDeployed( not self:IsMinimized() and hazard.time > curtime )
-
-            -- if the panel hasn't closed, don't remove yet
-            if hazard.panel:IsVisible() then
-                
-                next = next + 1
-                continue
-
-            end
-
-        end
-
-        table.remove( hazards, next )
-        self:InvalidateLayout()
 
     end
 
     -- add new hazards from queue
-    for dmgtype, _ in pairs( queue ) do
+    if queue_count > 0 then
 
-        local hazard = self:AddHazard( dmgtype, settings.delay )
+        for dmgtype, _ in pairs( queue ) do
 
-        if settings.damage then
+            local hazard = self:AddHazard( dmgtype, settings.delay )
 
-            hazard.component:Damage()
+            if settings.damage then
+
+                hazard.component:Damage()
+
+            end
+
+            queue[ dmgtype ] = nil
+            queue_count = table.Count( queue )
 
         end
-
-        queue[ dmgtype ] = nil
 
     end
 

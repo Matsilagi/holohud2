@@ -766,7 +766,7 @@ function ELEMENT:PaintOver( settings )
 
     if pain <= 0 then return end
     if not MAT_PAIN then return end
-
+    
     MAT_PAIN:SetVector( "$color", color_vector )
     MAT_PAIN:SetFloat( "$alpha", ( settings.color.a / 255 ) * ( pain * settings.pain_alpha ) )
 
