@@ -1,4 +1,6 @@
 
+if SERVER then return end
+
 local hook_Call = HOLOHUD2.hook.Call
 
 local LAYER_FRAME       = HOLOHUD2.LAYER_FRAME
@@ -6,54 +8,41 @@ local LAYER_BACKGROUND  = HOLOHUD2.LAYER_BACKGROUND
 local LAYER_FOREGROUND  = HOLOHUD2.LAYER_FOREGROUND
 local LAYER_SCANLINES   = HOLOHUD2.LAYER_SCANLINES
 
-local RESOURCE = { surface.GetTextureID("holohud2/hunger"), 64, 64, 0, 0, 64, 64 }
-
 local ELEMENT = {
-    name        = "#holohud2.hunger",
-    helptext    = "#holohud2.hunger.helptext",
+    name        = "#holohud2.stims",
+    helptext    = "#holohud2.stims.helptext",
     parameters  = {
         pos                         = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 12 } },
         dock                        = { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_LEFT },
         direction                   = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_DIRECTION, value = HOLOHUD2.DIRECTION_UP },
         margin                      = { name = "#holohud2.parameter.margin", type = HOLOHUD2.PARAM_NUMBER, value = 4, min = 0 },
-        order                       = { name = "#holohud2.parameter.order", type = HOLOHUD2.PARAM_ORDER, value = 16 },
+        order                       = { name = "#holohud2.parameter.order", type = HOLOHUD2.PARAM_ORDER, value = 48 },
     
-        size                        = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 114, y = 22 } },
+        size                        = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 44, y = 22 } },
         background                  = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
         background_color            = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 0, 0, 0, 94 ) },
         animation                   = { name = "#holohud2.parameter.animation", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PANELANIMATIONS, value = HOLOHUD2.PANELANIMATION_FLASH },
         animation_direction         = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP },
 
-        color                       = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLORRANGES, value = { colors = { [25] = Color(255, 64, 48), [100] = Color(255, 168, 72) }, fraction = true, gradual = false } },
-        color2                      = { name = "#holohud2.parameter.background_color", type = HOLOHUD2.PARAM_COLORRANGES, value = { colors = { [0] = Color(255, 255, 255, 12) }, fraction = true, gradual = false } },
-
+        color                       = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 200, 200, 200, 255 ) },
+        color2                      = { name = "#holohud2.parameter.background_color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 255, 255, 12 ) },
+    
         icon                        = { name = "#holohud2.component.icon", type = HOLOHUD2.PARAM_BOOL, value = true },
         icon_pos                    = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 5, y = 5 } },
-        icon_size                   = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_NUMBER, value = 10 },
-        icon_rendermode             = { name = "#holohud2.parameter.rendermode", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.ICONRENDERMODES, value = HOLOHUD2.ICONRENDERMODE_STATIC },
-        icon_background             = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
-        icon_lerp                   = { name = "#holohud2.parameter.lerp", type = HOLOHUD2.PARAM_BOOL, value = true },
+        icon_size                   = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_NUMBER, value = 13 },
 
-        number                      = { name = "#holohud2.component.number", type = HOLOHUD2.PARAM_BOOL, value = false },
-        number_pos                  = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 18, y = 3 } },
-        number_font                 = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Condensed Light", size = 15, weight = 1000, italic = false } },
+        number                      = { name = "#holohud2.component.number", type = HOLOHUD2.PARAM_BOOL, value = true },
+        number_pos                  = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 22, y = 2 } },
+        number_font                 = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Condensed Light", size = 18, weight = 1000, italic = false } },
         number_rendermode           = { name = "#holohud2.parameter.rendermode", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.NUMBERRENDERMODES, value = HOLOHUD2.NUMBERRENDERMODE_STATIC },
         number_background           = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.NUMBERBACKGROUNDS, value = HOLOHUD2.NUMBERBACKGROUND_EXPENSIVE },
         number_align                = { name = "#holohud2.parameter.align", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_RIGHT },
-        number_digits               = { name = "#holohud2.parameter.digits", type = HOLOHUD2.PARAM_NUMBER, min = 1, value = 3 },
-
-        progressbar                 = { name = "#holohud2.component.percentage_bar", type = HOLOHUD2.PARAM_BOOL, value = true },
-        progressbar_pos             = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 18, y = 8 } },
-        progressbar_size            = { name = "#holohud2.parameter.size", type = HOLOHUD2.PARAM_VECTOR, value = { x = 90, y = 6 }, min_x = 1, min_y = 1 },
-        progressbar_style           = { name = "#holohud2.parameter.style", type = HOLOHUD2.PARAM_OPTION, options = HOLOHUD2.PROGRESSBARSTYLES, value = HOLOHUD2.PROGRESSBAR_DOT },
-        progressbar_growdirection   = { name = "#holohud2.parameter.grow_direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_RIGHT },
-        progressbar_background      = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
-        progressbar_lerp            = { name = "#holohud2.parameter.lerp", type = HOLOHUD2.PARAM_BOOL, value = true },
+        number_digits               = { name = "#holohud2.parameter.digits", type = HOLOHUD2.PARAM_NUMBER, min = 1, value = 2 },
 
         text                        = { name = "#holohud2.component.label", type = HOLOHUD2.PARAM_BOOL, value = false },
         text_pos                    = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 2 } },
         text_font                   = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000, italic = false } },
-        text_text                   = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "#holohud2.HUNGER" },
+        text_text                   = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "#holohud2.STIMS" },
         text_align                  = { name = "#holohud2.parameter.align", type = HOLOHUD2.PARAM_TEXTALIGN, value = TEXT_ALIGN_LEFT },
         text_on_background          = { name = "#holohud2.parameter.on_background", type = HOLOHUD2.PARAM_BOOL, value = false }
     },
@@ -82,10 +71,7 @@ local ELEMENT = {
         { category = "#holohud2.category.composition", parameters = {
             { id = "icon", parameters = {
                 { id = "icon_pos" },
-                { id = "icon_size" },
-                { id = "icon_rendermode" },
-                { id = "icon_background" },
-                { id = "icon_lerp" }
+                { id = "icon_size" }
             } },
             { id = "number", parameters = {
                 { id = "number_pos" },
@@ -94,14 +80,6 @@ local ELEMENT = {
                 { id = "number_background" },
                 { id = "number_align" },
                 { id = "number_digits" }
-            } },
-            { id = "progressbar", parameters = {
-                { id = "progressbar_pos" },
-                { id = "progressbar_size" },
-                { id = "progressbar_style" },
-                { id = "progressbar_growdirection" },
-                { id = "progressbar_background" },
-                { id = "progressbar_lerp" }
             } },
             { id = "text", parameters = {
                 { id = "text_pos" },
@@ -132,10 +110,6 @@ local ELEMENT = {
                 { id = "number_pos" },
                 { id = "number_font" }
             } },
-            { id = "progressbar", parameters = {
-                { id = "progressbar_pos" },
-                { id = "progressbar_size" }
-            } },
             { id = "text", parameters = {
                 { id = "text_pos" },
                 { id = "text_font" }
@@ -147,47 +121,45 @@ local ELEMENT = {
 ---
 --- Composition
 ---
-local layout = HOLOHUD2.layout.Register( "hunger" )
+local layout = HOLOHUD2.layout.Register( "stims" )
 local panel = HOLOHUD2.component.Create( "AnimatedPanel" )
 panel:SetLayout( layout )
 
-local hudhunger = HOLOHUD2.component.Create( "HudExtensionMeter" )
-hudhunger.Blur:SetEnabled( false )
-hudhunger.IconBackground:SetTexture( RESOURCE )
+local hudstims = HOLOHUD2.component.Create( "HudExtensionStims" )
 
 panel.PaintOverFrame = function( self, x, y )
 
-    hook_Call( "DrawHunger", x, y, LAYER_FRAME )
+    hook_Call( "DrawStims", x, y, LAYER_FRAME )
 
 end
 
 panel.PaintOverBackground = function( _, x, y )
 
-    if hook_Call( "DrawHunger", x, y, LAYER_BACKGROUND ) then return end
+    if hook_Call( "DrawStims", x, y, LAYER_BACKGROUND ) then return end
 
-    hudhunger:PaintBackground( x, y )
+    hudstims:PaintBackground( x, y )
 
-    hook_Call( "DrawOverHunger", x, y, LAYER_BACKGROUND, hudhunger )
+    hook_Call( "DrawOverStims", x, y, LAYER_BACKGROUND, hudstims )
 
 end
 
 panel.PaintOver = function( _, x, y )
 
-    if hook_Call( "DrawHunger", x, y, LAYER_FOREGROUND ) then return end
+    if hook_Call( "DrawStims", x, y, LAYER_FOREGROUND ) then return end
 
-    hudhunger:Paint( x, y )
+    hudstims:Paint( x, y )
 
-    hook_Call( "DrawOverHunger", x, y, LAYER_FOREGROUND, hudhunger )
+    hook_Call( "DrawOverStims", x, y, LAYER_FOREGROUND, hudstims )
 
 end
 
 panel.PaintOverScanlines = function( _, x, y )
 
-    if hook_Call( "DrawHunger", x, y, LAYER_SCANLINES ) then return end
+    if hook_Call( "DrawStims", x, y, LAYER_SCANLINES ) then return end
 
-    hudhunger:PaintScanlines( x, y )
+    hudstims:PaintScanlines( x, y )
     
-    hook_Call( "DrawOverHunger", x, y, LAYER_SCANLINES, hudhunger )
+    hook_Call( "DrawOverStims", x, y, LAYER_SCANLINES, hudstims )
 
 end
 
@@ -217,14 +189,13 @@ function ELEMENT:PreDraw( settings )
     if startup then return end
 
     panel:Think()
-    panel:SetDeployed( not self:IsMinimized() and hook_Call( "ShouldDrawHunger" ) == true )
+    panel:SetDeployed( not self:IsMinimized() and hook_Call( "ShouldDrawStims" ) == true )
     layout:SetVisible( panel:IsVisible() )
 
     if not panel:IsVisible() then return end
-
-    hudhunger:SetMaxValue( hook_Call( "GetMaxHunger" ) or 100 )
-    hudhunger:SetValue( hook_Call( "GetHunger" ) or 0 )
-    hudhunger:Think()
+    
+    hudstims:SetValue( hook_Call( "GetStims" ) or 0 )
+    hudstims:Think()
 
 end
 
@@ -258,31 +229,30 @@ end
 ---
 --- Preview
 ---
-local preview_hudhunger = HOLOHUD2.component.Create( "HudExtensionMeter" )
-preview_hudhunger.IconBackground:SetTexture( RESOURCE )
-preview_hudhunger:SetMaxValue( 100 )
-preview_hudhunger:SetValue( 100 )
+local preview_hudstims = HOLOHUD2.component.Create( "HudExtensionStims" )
+preview_hudstims:SetValue( 2 )
 
 function ELEMENT:PreviewInit( panel )
 
-    local hunger = vgui.Create( "HOLOHUD2_DPreviewProperty_NumSlider", panel )
-    hunger:SetSize( 172, 24 )
-    hunger:SetPos( 4, panel:GetTall() - hunger:GetTall() - 4 )
-    hunger:SetIcon( "icon16/cake.png" )
-    hunger:SetValue( preview_hudhunger.value )
-    hunger.OnValueChanged = function( _, value )
+    local stims = vgui.Create( "HOLOHUD2_DPreviewProperty_NumSlider", panel )
+    stims:SetSize( 172, 24 )
+    stims:SetPos( 4, panel:GetTall() - stims:GetTall() - 4 )
+    stims:SetIcon( "icon16/pill.png" )
+    stims.Slider:SetMax( 99 )
+    stims:SetValue( preview_hudstims.value )
+    stims.OnValueChanged = function( _, value )
 
-        preview_hudhunger:SetValue( value )
+        preview_hudstims:SetValue( value )
 
     end
 
     local reset = vgui.Create( "DImageButton", panel )
     reset:SetSize( 16, 16 )
-    reset:SetPos( hunger:GetWide() + 4, panel:GetTall() - reset:GetTall() - 8 )
+    reset:SetPos( stims:GetWide() + 4, panel:GetTall() - reset:GetTall() - 8 )
     reset:SetImage( "icon16/arrow_refresh.png" )
     reset.DoClick = function()
 
-        hunger:SetValue( 100 )
+        stims:SetValue( 2 )
 
     end
 
@@ -303,15 +273,15 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
     surface.SetDrawColor( HOLOHUD2.WIREFRAME_COLOR )
     surface.DrawOutlinedRect( x, y, u, v )
 
-    preview_hudhunger:Think()
-    preview_hudhunger:PaintBackground( x, y )
-    preview_hudhunger:Paint( x, y )
+    preview_hudstims:Think()
+    preview_hudstims:PaintBackground( x, y )
+    preview_hudstims:Paint( x, y )
 
 end
 
 function ELEMENT:OnPreviewChanged( settings )
 
-    preview_hudhunger:ApplySettings( settings, self.preview_fonts )
+    preview_hudstims:ApplySettings( settings, self.preview_fonts )
 
 end
 
@@ -339,7 +309,7 @@ function ELEMENT:OnSettingsChanged( settings )
     panel:SetDrawBackground( settings.background )
     panel:SetColor( settings.background_color )
 
-    hudhunger:ApplySettings( settings, self.fonts )
+    hudstims:ApplySettings( settings, self.fonts )
 
 end
 
@@ -349,31 +319,31 @@ end
 function ELEMENT:OnScreenSizeChanged()
 
     panel:InvalidateLayout()
-    hudhunger:InvalidateLayout()
+    hudstims:InvalidateLayout()
 
 end
 
-HOLOHUD2.element.Register( "hunger", ELEMENT )
+HOLOHUD2.element.Register( "stims", ELEMENT )
 
 ---
 --- Add common parameters to modifiers
 ---
-HOLOHUD2.modifier.Add( "panel_animation", "hunger", "animation" )
-HOLOHUD2.modifier.Add( "background", "hunger", "background" )
-HOLOHUD2.modifier.Add( "background_color", "hunger", "background_color" )
-HOLOHUD2.modifier.Add( "number3_font", "hunger", "number_font" )
-HOLOHUD2.modifier.Add( "number3_pos", "hunger", "number_offset" )
-HOLOHUD2.modifier.Add( "color2", "hunger", "color2" )
+HOLOHUD2.modifier.Add( "panel_animation", "stims", "animation" )
+HOLOHUD2.modifier.Add( "background", "stims", "background" )
+HOLOHUD2.modifier.Add( "background_color", "stims", "background_color" )
+HOLOHUD2.modifier.Add( "number3_font", "stims", "number_font" )
+HOLOHUD2.modifier.Add( "number3_pos", "stims", "number_offset" )
+HOLOHUD2.modifier.Add( "color2", "stims", "color2" )
 
 ---
 --- Export components
 ---
 ELEMENT.components = {
     panel       = panel,
-    hudhunger   = hudhunger
+    hudstims    = hudstims
 }
 
 ---
 --- Presets
 ---
-HOLOHUD2.presets.Register( "hunger", "element/hunger" )
+HOLOHUD2.presets.Register( "stims", "element/stims" )

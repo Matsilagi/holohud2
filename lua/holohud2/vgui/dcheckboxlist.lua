@@ -31,6 +31,15 @@ function PANEL:AddLine( ... )
 
 end
 
+function PANEL:AddSpacer()
+
+    local line = BaseClass.AddLine( self, "" )
+    line:SetMouseInputEnabled( false )
+
+    return line
+
+end
+
 function PANEL:PerformLayout()
 
     BaseClass.PerformLayout( self )

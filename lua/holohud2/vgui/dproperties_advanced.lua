@@ -36,6 +36,7 @@ function PANEL:Init()
     contents:Dock( FILL )
     self.Contents = contents
 
+    local i = 1
     for _, id in ipairs( HOLOHUD2.element.Index() ) do
 
         local element = HOLOHUD2.element.Get( id )
@@ -52,6 +53,8 @@ function PANEL:Init()
 
         end
         self.Lines[ id ] = line
+
+        i = i + 1
 
     end
 

@@ -34,7 +34,7 @@ local ELEMENT = {
         damage_color        = { name = "#holohud2.parameter.color", type = HOLOHUD2.PARAM_COLOR, value = Color( 255, 42, 42 ) },
         damage_time         = { name = "#holohud2.parameter.duration", type = HOLOHUD2.PARAM_NUMBER, value = 1, min = 0, decimals = 1, helptext = "#holohud2.hazards.duration.helptext" },
         blinking            = { name = "#holohud2.hazards.blinking", type = HOLOHUD2.PARAM_BOOL, value = true },
-        blink_amount        = { name = "#holohud2.hazards.blinking_amount", type = HOLOHUD2.PARAM_RANGE, value = .6, min = 0, max = 1, decimals = 1 },
+        blink_amount        = { name = "#holohud2.hazards.blinking_amount", type = HOLOHUD2.PARAM_RANGE, value = .4, min = 0, max = 1, decimals = 1 },
         blink_rate          = { name = "#holohud2.hazards.blinking_rate", type = HOLOHUD2.PARAM_NUMBER, value = .6, min = 0, decimals = 1 }
     },
     menu = {

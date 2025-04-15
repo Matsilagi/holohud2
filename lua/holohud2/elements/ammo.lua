@@ -27,6 +27,9 @@ local LAYER_BACKGROUND  = HOLOHUD2.LAYER_BACKGROUND
 local LAYER_FOREGROUND  = HOLOHUD2.LAYER_FOREGROUND
 local LAYER_SCANLINES   = HOLOHUD2.LAYER_SCANLINES
 
+local clip2_size, clip2_animation, clip2_animation_direction, clip2_background, clip2_background_color = { x = 0, y = 0 }, 0, 0, true, color_black
+local ammo2_size, ammo2_animation, ammo2_animation_direction, ammo2_background, ammo2_background_color = { x = 0, y = 0 }, 0, 0, true, color_black
+
 local ELEMENT = {
     name        = "#holohud2.ammo",
     helptext    = "#holohud2.ammo.helptext",
@@ -1144,10 +1147,10 @@ function ELEMENT:PreDraw( settings )
             clip2_layout:SetPos( settings.clip2_pos.x, settings.clip2_pos.y )
             clip2_layout:SetMargin( settings.clip2_margin )
             clip2_layout:SetOrder( settings.clip2_order )
-            clip2_panel:SetAnimation( settings.clip2_animation )
-            clip2_panel:SetAnimationDirection( settings.clip2_animation_direction )
-            clip2_panel:SetDrawBackground( settings.clip2_background )
-            clip2_panel:SetColor( settings.clip2_background_color )
+            clip2_panel:SetAnimation( clip2_animation )
+            clip2_panel:SetAnimationDirection( clip2_animation_direction )
+            clip2_panel:SetDrawBackground( clip2_background )
+            clip2_panel:SetColor( clip2_background_color )
 
             hudclip2:Think()
         
@@ -1156,10 +1159,10 @@ function ELEMENT:PreDraw( settings )
             clip2_layout:SetPos( settings.ammo2_pos.x, settings.ammo2_pos.y )
             clip2_layout:SetMargin( settings.ammo2_margin )
             clip2_layout:SetOrder( settings.ammo2_order )
-            clip2_panel:SetAnimation( settings.ammo2_animation )
-            clip2_panel:SetAnimationDirection( settings.ammo2_animation_direction )
-            clip2_panel:SetDrawBackground( settings.ammo2_background )
-            clip2_panel:SetColor( settings.ammo2_background_color )
+            clip2_panel:SetAnimation( ammo2_animation )
+            clip2_panel:SetAnimationDirection( ammo2_animation_direction )
+            clip2_panel:SetDrawBackground( ammo2_background )
+            clip2_panel:SetColor( ammo2_background_color )
 
             hudammo2:Think()
 
@@ -1688,10 +1691,10 @@ function ELEMENT:OnSettingsChanged(settings)
     hudammo1:ApplySettings( settings, self.fonts )
 
     -- secondary clip
-    local clip2_animation = settings.clip2_animation
-    local clip2_animation_direction = settings.clip2_animation_direction
-    local clip2_background = settings.clip2_background
-    local clip2_background_color = settings.clip2_background_color
+    clip2_animation = settings.clip2_animation
+    clip2_animation_direction = settings.clip2_animation_direction
+    clip2_background = settings.clip2_background
+    clip2_background_color = settings.clip2_background_color
 
     if settings.clip2_copy then
 
@@ -1767,11 +1770,11 @@ function ELEMENT:OnSettingsChanged(settings)
     end
 
     -- secondary reserve
-    local ammo2_size = settings.ammo2_size
-    local ammo2_animation = settings.ammo2_animation
-    local ammo2_animation_direction = settings.ammo2_animation_direction
-    local ammo2_background = settings.ammo2_background
-    local ammo2_background_color = settings.ammo2_background_color
+    ammo2_size = settings.ammo2_size
+    ammo2_animation = settings.ammo2_animation
+    ammo2_animation_direction = settings.ammo2_animation_direction
+    ammo2_background = settings.ammo2_background
+    ammo2_background_color = settings.ammo2_background_color
 
     if settings.ammo2_copy then
 
