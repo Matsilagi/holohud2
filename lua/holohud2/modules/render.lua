@@ -9,7 +9,8 @@ local MATERIAL_CONVARS = { -- convars that wreck havoc when changed
     "mat_specular",
     "mat_aaquality",
     "mat_picmip",
-    "mat_showlowresimage"
+    "mat_showlowresimage",
+    "mat_reloadallmaterials"
 }
 
 local BLURSCREEN_MATERIAL   = Material( "pp/blurscreen" )

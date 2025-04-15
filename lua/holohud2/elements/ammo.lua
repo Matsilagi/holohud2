@@ -11,9 +11,11 @@ if SERVER then return end
 
 -- SUGGESTION: tray with remaining reserve ammunition of all vanilla (?) types
 
+local IsValid = IsValid
 local CurTime = CurTime
 local LocalPlayer = LocalPlayer
 local hook_Call = HOLOHUD2.hook.Call
+local GetWeapon = HOLOHUD2.util.GetWeapon
 local GetPrimaryAmmo = HOLOHUD2.util.GetPrimaryAmmo
 local GetSecondaryAmmo = HOLOHUD2.util.GetSecondaryAmmo
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
@@ -898,9 +900,8 @@ end
 ---
 local localplayer -- reference set in PreDraw
 local ammotime = 0
-local last_firemode
 local _clip1, _clip2, _ammo1, _ammo2 = 0, 0, 0, 0
-local _grenades = 0
+local _grenades, _firemode = 0
 function ELEMENT:PreDraw( settings )
 
     localplayer = localplayer or LocalPlayer()
@@ -911,6 +912,7 @@ function ELEMENT:PreDraw( settings )
 
     local minimized = self:IsMinimized()
     local visible = self:IsInspecting() or ammotime > curtime
+    local weapon = GetWeapon()
 
     -- tick all panels early to apply previous transforms before showing up
     clip1_panel:Think()
@@ -919,7 +921,7 @@ function ELEMENT:PreDraw( settings )
     ammo2_panel:Think()
 
     -- primary ammo
-    local clip1, max_clip1, ammo1, max_ammo1, primary, weapon = GetPrimaryAmmo()
+    local clip1, max_clip1, ammo1, max_ammo1, primary = GetPrimaryAmmo()
 
     if primary > 0 then
 
@@ -1177,10 +1179,10 @@ function ELEMENT:PreDraw( settings )
 
         firemode = hook_Call( "GetWeaponFiremode", weapon )
 
-        if last_firemode ~= firemode then
+        if _firemode ~= firemode then
 
             ammotime = curtime + settings.autohide_delay
-            last_firemode = firemode
+            _firemode = firemode
 
         end
 
