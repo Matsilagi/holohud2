@@ -95,14 +95,17 @@ function COMPONENT:PerformLayout( force )
     -- build background
     local len = string.len( self._value )
     local char = self.background == NUMBERBACKGROUND_DIGITAL and BACKGROUND_DIGITAL or BACKGROUND_SIMPLE
-    local digits = self.mode == NUMBERRENDERMODE_MODERN and math.max( self.digits - len, 0 ) or math.max( self.digits, len )
+    local digits = math.max( self.digits, len )
+    local visible_digits = self.mode == NUMBERRENDERMODE_MODERN and math.max( self.digits - len, 0 ) or digits
     local decimals = shortnumbers_decimals:GetInt() -- if abbreviated, how many decimals are there
-    self._background = string.rep( char, digits ) -- actual background
+    local background = string.rep( char, digits )
+    self._background = string.rep( char, visible_digits ) -- actual background
 
     -- if abbreviated it means it's decimal, so place a dot
     if abbreviation and digits > 0 then
         
-        self._background = string.SetChar( self._background, digits - decimals, "." )
+        self._background = string.SetChar( self._background, visible_digits - decimals, "." )
+        background = string.SetChar( background, digits - decimals, "." )
 
     end
 
@@ -113,12 +116,12 @@ function COMPONENT:PerformLayout( force )
 
         for i=1, #BACKGROUND_EXPENSIVE do
 
-            self._expensive[ i ] = string.rep( BACKGROUND_EXPENSIVE[ i ], digits )
+            self._expensive[ i ] = string.rep( BACKGROUND_EXPENSIVE[ i ], visible_digits )
 
             -- apply decimal number dot for every layer
-            if abbreviation and digits > 0 then
+            if abbreviation and visible_digits > 0 then
                 
-                self._expensive[ i ] = string.SetChar( self._expensive[ i ], digits - decimals, "." )
+                self._expensive[ i ] = string.SetChar( self._expensive[ i ], visible_digits - decimals, "." )
                 
             end
 
@@ -136,7 +139,7 @@ function COMPONENT:PerformLayout( force )
     surface.SetFont( self.font )
 
     local default_w = surface.GetTextSize( string.rep( char, self.digits ) )
-    local w0, h = surface.GetTextSize( string.rep( char, math.max( self.digits, len ) ) )
+    local w0, h = surface.GetTextSize( background )
     local w1 = surface.GetTextSize( self._value )
 
     self._x0 = 0 -- reset background offset
@@ -178,7 +181,7 @@ function COMPONENT:PerformLayout( force )
         local w2 = surface.GetTextSize( abbreviation )
         self._x2 = x + w0
         self._w = self._w + w2
-        self.__w = self.__w + w2 / scale
+        self.__w = self._w / scale
 
     end
 
