@@ -903,7 +903,7 @@ local ammotime = 0
 local _clip1, _clip2, _ammo1, _ammo2 = 0, 0, 0, 0
 local _grenades, _firemode = 0
 function ELEMENT:PreDraw( settings )
-
+    
     localplayer = localplayer or LocalPlayer()
     local curtime = CurTime()
 

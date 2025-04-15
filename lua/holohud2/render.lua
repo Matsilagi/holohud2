@@ -236,6 +236,7 @@ HOLOHUD2.render.RefreshScreenTextures = generate_render_targets
 --- @param on_overlay boolean
 function HOLOHUD2.render.ComputeHUD( settings, on_overlay )
 
+    if not r_pp:GetBool() then return end -- do not compute HUD if post processing is disabled
     if not rt_ready then return end -- require render targets to proceed
 
     local scale = scale_Get()
@@ -446,7 +447,7 @@ function HOLOHUD2.render.RenderHUD( settings, on_overlay )
 
                 if ( on_overlay and not element.on_overlay ) then continue end
 
-                element:PaintFrame( settings, x, y )
+                element:PaintFrame( settings[ element.id ], x, y )
 
             end
 
@@ -460,9 +461,11 @@ function HOLOHUD2.render.RenderHUD( settings, on_overlay )
 
             if ( on_overlay and not element.on_overlay ) then continue end
 
-            if not skip_background then element:PaintBackground( settings, x, y ) end
-            if not skip_paint then element:Paint( settings, x, y ) end
-            if not skip_paintover then element:PaintOver( settings, x, y ) end
+            local element_settings = settings[ element.id ]
+
+            if not skip_background then element:PaintBackground( element_settings, x, y ) end
+            if not skip_paint then element:Paint( element_settings, x, y ) end
+            if not skip_paintover then element:PaintOver( element_settings ) end
 
         end
 

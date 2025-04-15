@@ -66,8 +66,8 @@ local function calculate()
     local strafe_velocity = -velocity:Dot( localplayer:GetAngles():Right() ) / 128
     local fall_velocity = velocity.z / 128
 
-    movement.x = Lerp( delta * MOVEMENT_SWAY_SPEED, movement.x, math.Clamp( strafe_velocity, -MOVEMENT_MAX_SPEED, MOVEMENT_MAX_SPEED ) ) -- + math.sin( curtime * rate ) * amount / 2 )
-    movement.y = Lerp( delta * MOVEMENT_SWAY_SPEED, movement.y, math.min( fall_velocity, MOVEMENT_MAX_SPEED ) ) -- + math.abs( math.cos( curtime * rate + 1 ) ) * amount )
+    movement.x = Lerp( delta * MOVEMENT_SWAY_SPEED, movement.x, math.Clamp( strafe_velocity, -MOVEMENT_MAX_SPEED, MOVEMENT_MAX_SPEED ) )
+    movement.y = Lerp( delta * MOVEMENT_SWAY_SPEED, movement.y, math.min( fall_velocity, MOVEMENT_MAX_SPEED ) )
     
     -- head bobbing
     if swaying == SWAY_HEADBOB and localplayer:OnGround() and not localplayer:InVehicle() then
