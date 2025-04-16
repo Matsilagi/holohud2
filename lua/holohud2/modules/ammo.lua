@@ -20,7 +20,7 @@ local icons = HOLOHUD2.ammo._icons
 function HOLOHUD2.ammo.Register( ammotype, texture, filew, fileh, w, h, data )
 
     local ammoName = ammotype
-    if isnumber(ammotype) then
+    if isnumber( ammotype ) then
         if ammotype == -1 then
             return
         else
@@ -73,6 +73,12 @@ end
 --- @param ammotype number ammunition type
 --- @return boolean found has icon
 function HOLOHUD2.ammo.Has( ammotype )
+
+    if isnumber( ammotype ) then
+        if ammotype == -1 then return false end
+
+        ammotype = game.GetAmmoName( ammotype )
+    end
 
     return icons[ ammotype ] ~= nil
 
