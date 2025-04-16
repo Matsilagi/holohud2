@@ -264,9 +264,9 @@ end
 --- Logic
 ---
 local localplayer
-local mins, maxs = Vector(0, 0, 0), Vector(0, 0, 0)
+local mins, maxs = Vector( 0, 0, 0 ), Vector( 0, 0, 0 )
 local time = 0
-local _cache = Vector(0, 0, 0)
+local _cache = Vector( 0, 0, 0 )
 function ELEMENT:PreDraw( settings )
 
     if startup_phase == STARTUP_QUEUED then return end
@@ -329,7 +329,7 @@ function ELEMENT:PreDraw( settings )
         end
 
         -- check NPC visibility
-        if not ent:IsNPC() then continue end
+        if not ent:IsNPC() and not ent:IsNextBot() then continue end
         
         local vis = npc_vis:GetInt()
 
