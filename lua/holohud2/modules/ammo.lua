@@ -2,15 +2,16 @@
 --- Ammunition icons.
 ---
 
-HOLOHUD2.ammo = {}
+HOLOHUD2.ammo = HOLOHUD2.ammo or {}
 
-local DEFAULT_AMMOTYPE  = 1
+local DEFAULT_AMMOTYPE  = "AR2"
 
-local icons = {}
+HOLOHUD2.ammo._icons = HOLOHUD2.ammo._icons or {}
+local icons = HOLOHUD2.ammo._icons
 
 --- Registers a texture as an ammunition icon.
 --- @param ammotype number|string ammunition type ID (or name)
---- @param texture number|string texture (or ammunition type to copy icon from)
+--- @param texture number|string texture (or ammunition name to copy icon from)
 --- @param filew number texture width
 --- @param fileh number texture height
 --- @param w number|nil icon width
@@ -18,17 +19,25 @@ local icons = {}
 --- @param data table rendering specific properties
 function HOLOHUD2.ammo.Register( ammotype, texture, filew, fileh, w, h, data )
 
-    ammotype = isstring( ammotype ) and game.GetAmmoID( ammotype ) or ammotype
+    local ammoName = ammotype
+    if isnumber( ammotype ) then
+        if ammotype == -1 then
+            return
+        else
+            ammoName = game.GetAmmoName( ammotype )
+        end
+    end
+
     data = data or {}
 
     if isstring( texture ) then
-        
-        icons[ ammotype ] = icons[ texture ]
+
+        icons[ ammoName ] = icons[ texture ]
         return
 
     end
 
-    icons[ ammotype ] = {
+    icons[ ammoName ] = {
         texture         = texture,
         filew           = filew,
         fileh           = fileh,
@@ -46,13 +55,17 @@ function HOLOHUD2.ammo.Register( ammotype, texture, filew, fileh, w, h, data )
 end
 
 --- Returns a registered ammo type's icon.
---- @param ammotype number ammunition type
+--- @param ammotype number|string ammunition type
 --- @return table icon
 function HOLOHUD2.ammo.Get( ammotype )
 
-    if not icons[ ammotype ] then return icons[ DEFAULT_AMMOTYPE ] end
+    if isnumber( ammotype ) then
+        if ammotype == -1 then return icons[ DEFAULT_AMMOTYPE ] end
 
-    return icons[ ammotype ]
+        ammotype = game.GetAmmoName( ammotype )
+    end
+
+    return icons[ ammotype ] or icons[ DEFAULT_AMMOTYPE ]
 
 end
 
@@ -60,6 +73,12 @@ end
 --- @param ammotype number ammunition type
 --- @return boolean found has icon
 function HOLOHUD2.ammo.Has( ammotype )
+
+    if isnumber( ammotype ) then
+        if ammotype == -1 then return false end
+
+        ammotype = game.GetAmmoName( ammotype )
+    end
 
     return icons[ ammotype ] ~= nil
 
