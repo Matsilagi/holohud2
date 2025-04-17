@@ -54,7 +54,6 @@ function COMPONENT:Init()
     self.Icon = icon
 
     local healthicon = HOLOHUD2.component.Create( "ProgressIcon" )
-    healthicon:SetPos( 0, 7 )
     healthicon:SetTexture( RESOURCE_HEALTH )
     healthicon:SetGrowDirection( HOLOHUD2.GROWDIRECTION_UP )
     healthicon:SetColor( color )
@@ -256,7 +255,8 @@ end
 function COMPONENT:SetSize( size )
 
     self.Icon:SetSize( size )
-    self.HealthIcon:SetSize( size - 7 )
+    self.HealthIcon:SetPos( 0, size * .22 )
+    self.HealthIcon:SetSize( size  * .77 )
 
 end
 

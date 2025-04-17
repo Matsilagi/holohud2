@@ -880,8 +880,8 @@ HOLOHUD2.modifier.Add( "number_font", "zoom", "distancenum_font" )
 HOLOHUD2.modifier.Add( "number_offset", "zoom", "distancenum_pos" )
 HOLOHUD2.modifier.Add( "number3_font", "zoom", { "elevation_font", "zoomnum_font" } )
 HOLOHUD2.modifier.Add( "number3_offset", "zoom", { "elevation_pos", "zoomnum_pos" } )
-HOLOHUD2.modifier.Add( "text_font", "zoom", { "zoomtext_font", "distancetext_font" } )
-HOLOHUD2.modifier.Add( "text_offset", "zoom", { "zoomtext_pos", "distancetext_pos" } )
+HOLOHUD2.modifier.Add( "text_font", "zoom", { "zoomtext_font", "distancetext_font", "distanceunit_font" } )
+HOLOHUD2.modifier.Add( "text_offset", "zoom", { "zoomtext_pos", "distancetext_pos", "distanceunit_pos" } )
 
 ---
 --- Presets

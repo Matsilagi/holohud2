@@ -536,6 +536,7 @@ function COMPONENT:ApplySettings( settings, fonts )
 
     local plus = self.Plus
     plus:SetFont( fonts.pile_num_font )
+    plus:SetColor( settings.color )
     plus:PerformLayout( true )
     self:SetDrawPileNumber( settings.pile_num )
 

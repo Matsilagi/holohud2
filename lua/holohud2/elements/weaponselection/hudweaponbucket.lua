@@ -263,7 +263,6 @@ function COMPONENT:Paint( x, y )
     self.Ammo2:Paint( x, y )
 
     if not self.clip_on_background then self.Clip:Paint( x, y ) end
-
     if self.ammoicon_on_background then return end
 
     self.Ammo1Icon:Paint( x, y )
@@ -318,6 +317,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     self.Ammo1Icon:SetAlign( settings.selection_ammo_icon_align )
     self.Ammo1Icon:SetColor( settings.selection_ammo_icon_on_background and settings.selection_ammo_color2 or settings.selection_ammo_color )
 
+    self.Ammo2Icon:SetVisible( self.ammo_visible and self.ammo_icon_visible and self.Ammo2.value ~= -1 )
     self.Ammo2Icon:SetPos( self.Ammo2.x + settings.selection_ammo_icon_offset.x, self.Ammo2.y + settings.selection_ammo_icon_offset.y )
     self.Ammo2Icon:SetSize( settings.selection_ammo_icon_size )
     self.Ammo2Icon:SetAngle( settings.selection_ammo_icon_angle )

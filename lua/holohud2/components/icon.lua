@@ -49,8 +49,8 @@ function COMPONENT:PerformLayout( force )
     local w, h = self.size * ( u1 - u0 ) / ( v1 - v0 ), self.size
 
     local scale = scale_Get()
-    self._x, self._y = self.x * scale, self.y * scale
-    self._w, self._h = w * scale, h * scale
+    self._x, self._y = math.Round( self.x * scale ), math.Round( self.y * scale )
+    self._w, self._h = math.Round( w * scale ), math.Round( h * scale )
 
     self._u0, self._v0, self._u1, self._v1 = u0 / self.w, v0 / self.h, u1 / self.w, v1 / self.h
     self.__w, self.__h = w, h
