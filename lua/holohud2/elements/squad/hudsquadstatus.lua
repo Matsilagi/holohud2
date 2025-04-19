@@ -442,6 +442,7 @@ function COMPONENT:Think()
     self.Blur:Think()
     self.Plus:PerformLayout()
     self.Count:PerformLayout()
+    self.Text:PerformLayout()
     self:PerformLayout()
 
     for i=1, #self.members do

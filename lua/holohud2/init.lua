@@ -144,8 +144,6 @@ if GAMEMODE then load_addons() end
 ---
 if SERVER then return end
 
-timer.Simple( .08, function() HOLOHUD2.render.RefreshScreenTextures() end) -- HACK: we need a timer otherwise the render targets won't generate correctly
-
 local IsValid = IsValid
 local LocalPlayer = LocalPlayer
 
@@ -331,6 +329,8 @@ cvars.AddChangeCallback( "gmod_language", function() HOLOHUD2.element.OnScreenSi
 ---
 local function initialize()
     
+    timer.Simple( .16, HOLOHUD2.render.RefreshScreenTextures )
+
     HOLOHUD2.settings.Register( HOLOHUD2.element.GetDefaultValues(), HOLOHUD2.SETTINGS_DEFAULT )
 
     local settings, modifiers = HOLOHUD2.persistence.ReadTemp()
