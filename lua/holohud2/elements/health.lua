@@ -89,7 +89,7 @@ local ELEMENT = {
         healthpulse_brackets_offset             = { name = "#holohud2.parameter.offset", type = HOLOHUD2.PARAM_NUMBER, value = -3 },
         healthpulse_on_background               = { name = "#holohud2.parameter.on_background", type = HOLOHUD2.PARAM_BOOL, value = false },
 
-        healthtext                              = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_BOOL, value = false },
+        healthtext                              = { name = "#holohud2.component.label", type = HOLOHUD2.PARAM_BOOL, value = false },
         healthtext_pos                          = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 2 } },
         healthtext_font                         = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000, italic = false } },
         healthtext_text                         = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "#Valve_Hud_HEALTH" },
@@ -127,7 +127,7 @@ local ELEMENT = {
         suit_separate                           = { name = "#holohud2.parameter.standalone", type = HOLOHUD2.PARAM_BOOL, value = false },
         
         suit_autohide                           = { name = "#holohud2.parameter.autohide", type = HOLOHUD2.PARAM_BOOL, value = true },
-        suit_autohide_delay                     = { name = "#holohud2.parameter.delay", type = HOLOHUD2.PARAM_NUMBER, value = 48 },
+        suit_autohide_delay                     = { name = "#holohud2.parameter.delay", type = HOLOHUD2.PARAM_NUMBER, value = 4 },
         
         suit_pos                                = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 12, y = 12 } },
         suit_dock                               = { name = "#holohud2.parameter.dock", type = HOLOHUD2.PARAM_DOCK, value = HOLOHUD2.DOCK.BOTTOM_LEFT },
@@ -174,7 +174,7 @@ local ELEMENT = {
         suiticon_background                     = { name = "#holohud2.parameter.background", type = HOLOHUD2.PARAM_BOOL, value = true },
         suiticon_lerp                           = { name = "#holohud2.parameter.lerp", type = HOLOHUD2.PARAM_BOOL, value = true },
 
-        suittext                                = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_BOOL, value = false },
+        suittext                                = { name = "#holohud2.component.label", type = HOLOHUD2.PARAM_BOOL, value = false },
         suittext_pos                            = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 24, y = 2 } },
         suittext_font                           = { name = "#holohud2.parameter.font", type = HOLOHUD2.PARAM_FONT, value = { font = "Roboto Light", size = 12, weight = 1000, italic = false } },
         suittext_text                           = { name = "#holohud2.parameter.text", type = HOLOHUD2.PARAM_STRING, value = "#Valve_Hud_SUIT" },

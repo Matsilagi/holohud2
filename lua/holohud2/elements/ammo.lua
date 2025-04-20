@@ -596,8 +596,8 @@ function ELEMENT:Init()
 
     self:DefineClip( "clip1", "#holohud2.ammo.tab.clip1", "#Valve_Hud_AMMO", 16, false, true )
     self:DefineReserve( "ammo1", "#holohud2.ammo.tab.ammo1", "#Valve_Hud_AMMO", 32 )
-    self:DefineClip( "clip2", "#holohud2.ammo.tab.clip2", "#Valve_Hud_ALT", 48, true )
-    self:DefineReserve( "ammo2", "#holohud2.ammo.tab.ammo2", "#Valve_Hud_ALT", 64, true )
+    self:DefineClip( "clip2", "#holohud2.ammo.tab.clip2", "#Valve_Hud_AMMO_ALT", 48, true )
+    self:DefineReserve( "ammo2", "#holohud2.ammo.tab.ammo2", "#Valve_Hud_AMMO_ALT", 64, true )
 
 end
 

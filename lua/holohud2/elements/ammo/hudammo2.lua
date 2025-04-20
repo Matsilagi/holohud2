@@ -67,7 +67,6 @@ function COMPONENT:ApplySettings( settings, fonts )
         ammotext = settings.ammo1text
         ammotext_pos = settings.ammo1text_pos
         ammotext_font = fonts.ammo1text_font
-        ammotext_text = settings.ammo1text_text
         ammotext_align = settings.ammo1text_align
         ammotext_on_background = settings.ammo1text_on_background
 

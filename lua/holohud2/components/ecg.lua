@@ -81,8 +81,13 @@ end
 function COMPONENT:Add( pos )
 
     if #self._shape <= 0 then return end
+    if #self._shape >= 128 then
+        
+        table.remove( self._cache, 1 )
 
-    table.insert(self._cache, { pos = pos, shape = self._shape })
+    end
+
+    table.insert( self._cache, { pos = pos, shape = self._shape } )
 
 end
 
@@ -93,8 +98,8 @@ function COMPONENT:PerformLayout( force )
     local shape = {}
 
     local w, h, margin = 1, 1, 1
-    local animation = animations[self.animation]
-    if animation then w, h, margin = animation(self) end
+    local animation = animations[ self.animation ]
+    if animation then w, h, margin = animation( self ) end
 
     if h <= 0 then
 

@@ -90,7 +90,6 @@ function COMPONENT:ApplySettings( settings, fonts )
         clipicon_align = settings.clip1icon_align
         clipicon_angle = settings.clip1icon_angle
         clipicon_on_background = settings.clip1icon_on_background
-        cliptext = settings.clip1text
         cliptext_pos = settings.clip1text_pos
         cliptext_text = settings.clip1text_text
         cliptext_font = fonts.clip1text_font
