@@ -4,13 +4,19 @@ HOLOHUD2.AddCSLuaFile( "quickinfo/hudquickinfo1.lua" )
 
 if SERVER then return end
 
+local hideonads = CreateClientConVar( "holohud2_quickinfo_hideonads", 1, true, false, "Whether the Quick Info element should hide when aiming down sights.", 0, 1 )
+
+local IsValid = IsValid
 local LocalPlayer = LocalPlayer
+local CurTime = CurTime
 local FrameTime = FrameTime
+local ScrW, ScrH = ScrW, ScrH
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
 local EndAlphaMultiplier = HOLOHUD2.render.EndAlphaMultiplier
 local GetMinimumGlow = HOLOHUD2.render.GetMinimumGlow
 local GetPrimaryAmmo = HOLOHUD2.util.GetPrimaryAmmo
 local GetSecondaryAmmo = HOLOHUD2.util.GetSecondaryAmmo
+local GetWeapon = HOLOHUD2.util.GetWeapon
 local hook_Call = HOLOHUD2.hook.Call
 
 local LAYER_BACKGROUND  = HOLOHUD2.LAYER_BACKGROUND
@@ -205,6 +211,7 @@ local animation = 0
 local zoom = 0
 local _health, _armor, _healthwarn = 0, 0, false
 local _ammo, _ammo2, _ammowarn = 0, 0, false
+local _x, _y = 0, 0
 function ELEMENT:PreDraw( settings )
 
     if self:DoStartupSequence( settings ) then return end
@@ -355,7 +362,7 @@ function ELEMENT:PreDraw( settings )
     if can_zoom == nil then can_zoom = localplayer:GetCanZoom() end
 
     -- fade out if using zoom
-    if self:IsMinimized() or ( localplayer:KeyDown( IN_ZOOM ) and can_zoom ) then
+    if self:IsMinimized() or ( hook_Call( "ForceQuickInfoFadeOut" ) and hideonads:GetBool() ) or ( localplayer:KeyDown( IN_ZOOM ) and can_zoom ) then
 
         zoom = math.min( zoom + frametime / ZOOM_FADE_OUT, 1 )
 
@@ -384,12 +391,29 @@ function ELEMENT:PreDraw( settings )
 
     alpha = ( ( settings.min_alpha + ( settings.max_alpha - settings.min_alpha ) * animation ) / 255 ) * ( 1 - zoom )
 
+    -- follow crosshair
+    local trace = localplayer:GetEyeTraceNoCursor()
+
+    if not localplayer:ShouldDrawLocalPlayer() or not trace.Hit then
+        
+        _x, _y = 0, 0
+        return
+
+    end
+
+    local center_x, center_y = ScrW() * .5, ScrH() * .5
+    local aimpos = trace.HitPos:ToScreen()
+
+    _x, _y = aimpos.x - center_x, aimpos.y - center_y
+
 end
 
 ---
 --- Paint
 ---
 function ELEMENT:PaintBackground( settings, x, y )
+
+    x, y = x + _x, y + _y
 
     if hook_Call( "DrawQuickInfo", x, y, alpha, LAYER_BACKGROUND ) then return end
 
@@ -404,6 +428,8 @@ end
 
 function ELEMENT:Paint( settings, x, y )
 
+    x, y = x + _x, y + _y
+
     if hook_Call( "DrawQuickInfo", x, y, alpha, LAYER_FOREGROUND ) then return end
 
     StartAlphaMultiplier( alpha )
@@ -417,7 +443,7 @@ end
 
 function ELEMENT:PaintScanlines( settings, x, y )
 
-    if hook_Call( "DrawQuickInfo", x, y, alpha, LAYER_SCANLINES ) then return end
+    if hook_Call( "DrawQuickInfo", x + _x, y + _y, alpha, LAYER_SCANLINES ) then return end
 
     local alpha = GetMinimumGlow()
 

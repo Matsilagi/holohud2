@@ -51,8 +51,14 @@ local function calculate()
 
     local x = math.AngleDifference( angle.y, last_angle.y ) * sway_mul:GetFloat()
     local y = -math.AngleDifference( angle.p, last_angle.p ) * sway_mul:GetFloat()
-    local speed = delta * CAMERA_SWAY_SPEED * sway_speed:GetFloat()
 
+    if math.abs( x ) > 128 or math.abs( y ) > 64 then
+        
+        x, y = 0, 0
+
+    end
+
+    local speed = delta * CAMERA_SWAY_SPEED * sway_speed:GetFloat()
     camera.x = camera.x + ( x - camera.x ) * speed
     camera.y = camera.y + ( y - camera.y ) * speed
 

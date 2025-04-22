@@ -13,6 +13,9 @@ local FIREMODE_AUTO     = HOLOHUD2.FIREMODE_AUTO
 local FIREMODE_3BURST   = HOLOHUD2.FIREMODE_3BURST
 local FIREMODE_2BURST   = HOLOHUD2.FIREMODE_2BURST
 
+---
+--- Fire mode
+---
 HOLOHUD2.hook.Add( "GetWeaponFiremode", "mwbase", function( weapon )
 
     if not weapons.IsBasedOn( weapon:GetClass(), "mg_base" ) then return end
@@ -42,5 +45,18 @@ HOLOHUD2.hook.Add( "GetWeaponFiremode", "mwbase", function( weapon )
         return FIREMODE_AUTO
 
     end
+
+end)
+
+---
+--- ADS
+---
+HOLOHUD2.hook.Add( "ForceQuickInfoFadeOut", "arccw", function()
+
+    local weapon = LocalPlayer():GetActiveWeapon()
+
+    if not IsValid( weapon ) or not weapons.IsBasedOn( weapon:GetClass(), "mg_base" ) then return end
+
+    return weapon:HasFlag( "Aiming" )
 
 end)

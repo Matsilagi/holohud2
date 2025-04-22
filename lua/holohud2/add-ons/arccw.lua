@@ -7,6 +7,9 @@ if SERVER then return end
 
 if not ArcCW then return end
 
+local IsValid = IsValid
+local LocalPlayer = LocalPlayer
+
 local FIREMODE_SAFE     = HOLOHUD2.FIREMODE_SAFE
 local FIREMODE_SEMI     = HOLOHUD2.FIREMODE_SEMI
 local FIREMODE_AUTO     = HOLOHUD2.FIREMODE_AUTO
@@ -43,5 +46,18 @@ HOLOHUD2.hook.Add( "GetWeaponFiremode", "arccw", function( weapon )
         return FIREMODE_3BURST
         
     end
+
+end)
+
+---
+--- ADS
+---
+HOLOHUD2.hook.Add( "ForceQuickInfoFadeOut", "arccw", function()
+
+    local weapon = LocalPlayer():GetActiveWeapon()
+
+    if not IsValid( weapon ) or not weapon.ArcCW then return end
+
+    return weapon.Sighted
 
 end)

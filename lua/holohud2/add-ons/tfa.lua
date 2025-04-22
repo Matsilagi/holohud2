@@ -87,3 +87,16 @@ HOLOHUD2.hook.Add( "IsInspectingWeapon", "tfa", function( weapon )
     return weapon.Inspecting
 
 end)
+
+---
+--- ADS
+---
+HOLOHUD2.hook.Add( "ForceQuickInfoFadeOut", "tfa", function()
+
+    local weapon = LocalPlayer():GetActiveWeapon()
+
+    if not IsValid( weapon ) or not weapon.IsTFAWeapon then return end
+
+    return weapon:GetIronSightsRaw()
+
+end)

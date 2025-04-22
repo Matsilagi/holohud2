@@ -71,6 +71,7 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
         panel:ToolPresets( "holohud2_access",  CVAR_ACCESSIBILITY )
 
         panel:CheckBox( "#holohud2.accessibility.nosuit", "holohud2_nosuit" )
+        panel:CheckBox( "#holohud2.accessibility.quickinfo_hideonads", "holohud2_quickinfo_hideonads" )
         panel:CheckBox( "#holohud2.accessibility.panel_lerp", "holohud2_draw_smoothpaneltransforms" )
 
         panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header0" ) )

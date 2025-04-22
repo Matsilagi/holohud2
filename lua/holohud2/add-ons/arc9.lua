@@ -10,6 +10,8 @@ HOLOHUD2.AddCSLuaFile( "arc9/progressthermometer.lua" )
 
 if SERVER then return end
 
+local surface = surface
+local draw = draw
 local IsValid = IsValid
 local LocalPlayer = LocalPlayer
 local StartAlphaMultiplier = HOLOHUD2.render.StartAlphaMultiplier
@@ -360,5 +362,18 @@ HOLOHUD2.hook.Add( "IsInspectingWeapon", "arc9", function( weapon )
     if not weapon:GetInspecting() or not weapon:HasAnimation( "inspect" ) then return end
 
     return true
+
+end)
+
+---
+--- ADS
+---
+HOLOHUD2.hook.Add( "ForceQuickInfoFadeOut", "arc9", function()
+
+    local weapon = LocalPlayer():GetActiveWeapon()
+
+    if not IsValid( weapon ) or not weapon.ARC9 then return end
+
+    return weapon:GetInSights()
 
 end)

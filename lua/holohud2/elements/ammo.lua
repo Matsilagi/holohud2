@@ -55,6 +55,7 @@ local ELEMENT = {
         firemode_separate_animation_direction   = { name = "#holohud2.parameter.direction", type = HOLOHUD2.PARAM_GROWDIRECTION, value = HOLOHUD2.GROWDIRECTION_UP },
     
         quicknades                              = { name = "#holohud2.ammo.quicknades", type = HOLOHUD2.PARAM_BOOL, value = false, helptext = "#holohud2.ammo.quicknades.helptext" },
+        quicknades_ammotype                     = { name = "#holohud2.ammo.quicknades_ammotype", type = HOLOHUD2.PARAM_OPTION, value = 10, options = game.GetAmmoTypes() },
         quicknades_pos                          = { name = "#holohud2.parameter.pos", type = HOLOHUD2.PARAM_VECTOR, value = { x = 4, y = 2 } },
         quicknades_icon_alt                     = { name = "#holohud2.ammo.quicknades_icon_alt", type = HOLOHUD2.PARAM_BOOL, value = false },
         quicknades_icon_size                    = { name = "#holohud2.ammo.quicknades_icon_size", type = HOLOHUD2.PARAM_NUMBER, value = 11, min = 0 },
@@ -101,6 +102,7 @@ local ELEMENT = {
             } }
         } },
         { id = "quicknades", parameters = {
+            { id = "quicknades_ammotype" },
             { id = "quicknades_pos" },
             { id = "quicknades_icon_alt" },
             { id = "quicknades_icon_size" },
@@ -140,6 +142,7 @@ local ELEMENT = {
             } }
         } },
         { id = "quicknades", parameters = {
+            { id = "quicknades_ammotype" },
             { id = "quicknades_pos" },
             { id = "quicknades_icon_alt" },
             { id = "quicknades_icon_size" },
@@ -990,7 +993,7 @@ function ELEMENT:PreDraw( settings )
 
     -- secondary ammo
     local clip2, max_clip2, ammo2, max_ammo2, secondary = GetSecondaryAmmo()
-    local quicknades = settings.quicknades and secondary == 10
+    local quicknades = settings.quicknades and secondary == settings.quicknades_ammotype
 
     if secondary > 0 then
         
@@ -1215,7 +1218,7 @@ function ELEMENT:PreDraw( settings )
     end
         
     -- quick nades
-    local grenades = localplayer:GetAmmoCount( 10 )
+    local grenades = localplayer:GetAmmoCount( settings.quicknades_ammotype )
     hudquicknades:SetAmount( grenades )
     hudquicknades:Think()
 
@@ -1241,7 +1244,7 @@ function ELEMENT:PreDraw( settings )
         end
         
         quicknades_panel:Think()
-        quicknades_panel:SetDeployed( settings.quicknades and settings.quicknades_separate and clip1_panel.deployed and primary ~= 10 )
+        quicknades_panel:SetDeployed( settings.quicknades and settings.quicknades_separate and clip1_panel.deployed and primary ~= settings.quicknades_ammotype )
         quicknades_layout:SetSize( hudquicknades.__w + settings.quicknades_separate_padding.x * 2, hudquicknades.__h + settings.quicknades_separate_padding.y * 2 )
         quicknades_layout:SetVisible( quicknades_panel:IsVisible() )
 
