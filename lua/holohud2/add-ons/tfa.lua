@@ -83,8 +83,8 @@ end)
 HOLOHUD2.hook.Add( "IsInspectingWeapon", "tfa", function( weapon )
 
     if not weapon.IsTFAWeapon then return end
-
-    return weapon.Inspecting
+    
+    return weapon.Inspecting or weapon:GetStatus() == TFA.GetStatus( "fidget" )
 
 end)
 

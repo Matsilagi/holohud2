@@ -3,7 +3,6 @@
 --- https://github.com/polivilas/DepthHUD
 ---
 
-local EyeAngles = EyeAngles
 local LocalPlayer = LocalPlayer
 local FrameTime = FrameTime
 local Lerp = Lerp
@@ -41,7 +40,7 @@ local function calculate()
     local delta = FrameTime()
 
     -- camera based swaying
-    local angle = EyeAngles()
+    local angle = localplayer:EyeAngles()
 
     if not last_angle then
         
@@ -51,12 +50,6 @@ local function calculate()
 
     local x = math.AngleDifference( angle.y, last_angle.y ) * sway_mul:GetFloat()
     local y = -math.AngleDifference( angle.p, last_angle.p ) * sway_mul:GetFloat()
-
-    if math.abs( x ) > 128 or math.abs( y ) > 64 then
-        
-        x, y = 0, 0
-
-    end
 
     local speed = delta * CAMERA_SWAY_SPEED * sway_speed:GetFloat()
     camera.x = camera.x + ( x - camera.x ) * speed
@@ -78,7 +71,7 @@ local function calculate()
     -- head bobbing
     if swaying == SWAY_HEADBOB and localplayer:OnGround() and not localplayer:InVehicle() then
 
-        local velocity = math.min( localplayer:GetVelocity():Length() / 350, 1 )
+        local velocity = math.min( velocity:Length() / 350, 1 )
         
         camera.x = camera.x + math.sin( headbob * 3 ) * .45 * velocity
         camera.y = camera.y + math.sin( headbob * 9 ) * .45 * velocity

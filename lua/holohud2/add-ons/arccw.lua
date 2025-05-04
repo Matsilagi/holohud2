@@ -50,6 +50,17 @@ HOLOHUD2.hook.Add( "GetWeaponFiremode", "arccw", function( weapon )
 end)
 
 ---
+--- Inspecting
+---
+HOLOHUD2.hook.Add( "IsInspectingWeapon", "arccw", function( weapon )
+
+    if not weapon.ArcCW then return end
+    
+    return weapon:GetState() == ArcCW.STATE_CUSTOMIZE
+
+end)
+
+---
 --- ADS
 ---
 HOLOHUD2.hook.Add( "ForceQuickInfoFadeOut", "arccw", function()
