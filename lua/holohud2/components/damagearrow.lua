@@ -152,9 +152,10 @@ function COMPONENT:SetAnimated( animated )
 end
 
 function COMPONENT:Skip()
-
+    
     if self._elapsed >= self._fadetime then return end
 
+    self:SetFadeDuration(.33) -- make the fading much shorter
     self._elapsed = self._fadetime
 
 end

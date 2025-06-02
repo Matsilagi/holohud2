@@ -618,7 +618,7 @@ function ELEMENT:PreDraw( settings )
             table.insert(arrows.instances, { component = component, angle = queued.direction + queued.yaw })
             table.insert(arrows.active, component)
 
-            if #arrows.active >= settings.arrow_max then
+            if #arrows.active > settings.arrow_max then
 
                 arrows.active[1]:Skip()
                 table.remove( arrows.active, 1 )

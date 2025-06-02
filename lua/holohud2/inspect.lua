@@ -15,7 +15,7 @@ local inspect_time = 0
 --- Inspect HUD when pressing a key.
 ---
 HOLOHUD2.hook.Add( "IsInspectingHUD", "inspect", function()
-
+    
     if inspect_time > CurTime() then return true end
 
     if gui.IsGameUIVisible() or vgui.GetKeyboardFocus() then return end
@@ -28,6 +28,15 @@ HOLOHUD2.hook.Add( "IsInspectingHUD", "inspect", function()
 
     return true
 
+end)
+
+---
+--- Inspect HUD with a console command.
+---
+concommand.Add( "holohud2_inspect", function()
+    
+    inspect_time = CurTime() + 4
+    
 end)
 
 ---
