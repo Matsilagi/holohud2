@@ -4,6 +4,8 @@ HOLOHUD2.AddCSLuaFile( "weaponselection/hudweaponselection.lua" )
 
 if SERVER then return end
 
+HOLOHUD2.WeaponSelectionSlots = 6 -- maximum tracked weapon inventory slots
+
 local FrameTime = FrameTime
 local CurTime = CurTime
 local LocalPlayer = LocalPlayer
@@ -515,7 +517,7 @@ function ELEMENT:MoveCursor( forward )
 
                 hudweaponselection:SetSlot( hudweaponselection.slot + 1 )
     
-                if hudweaponselection.slot > 6 then
+                if hudweaponselection.slot > HOLOHUD2.WeaponSelectionSlots then
     
                     hudweaponselection:SetSlot( 1 )
     
@@ -535,7 +537,7 @@ function ELEMENT:MoveCursor( forward )
     
                 if hudweaponselection.slot < 1 then
     
-                    hudweaponselection:SetSlot( 6 )
+                    hudweaponselection:SetSlot( HOLOHUD2.WeaponSelectionSlots )
     
                 end
     
@@ -664,7 +666,7 @@ UnintrusiveBindPress.add( "holohud2", function( ply, bind, pressed, code )
         
         local slot = tonumber( string.sub( bind, 5, 6 ) )
 
-        if slot < 1 or slot > 6 then return end
+        if slot < 1 or slot > HOLOHUD2.WeaponSelectionSlots then return end
 
         ELEMENT:CycleSlot( slot )
         has_selected = false

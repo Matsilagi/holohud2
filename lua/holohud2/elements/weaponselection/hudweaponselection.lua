@@ -330,7 +330,7 @@ function COMPONENT:SetWeapons( weapons )
     local cache = {}
     self._find = {}
 
-    for i=1, 6 do
+    for i=1, HOLOHUD2.WeaponSelectionSlots do
 
         self.weapons[ i ] = {}
         cache[ i ] = {}
@@ -343,13 +343,13 @@ function COMPONENT:SetWeapons( weapons )
 
         local slot = weapon:GetSlot() + 1
 
-        if slot < 1 or slot > 6 then continue end
+        if slot < 1 or slot > HOLOHUD2.WeaponSelectionSlots then continue end
 
         table.insert( cache[ slot ], weapon )
 
     end
 
-    for i=1, 6 do
+    for i=1, HOLOHUD2.WeaponSelectionSlots do
 
         table.sort( cache[ i ], sort )
 

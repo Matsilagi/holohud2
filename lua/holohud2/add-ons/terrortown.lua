@@ -38,6 +38,11 @@ local ROUNDSTATE_STR = {
 }
 
 ---
+--- Accomodate weapon selection to check up to slot 9.
+---
+HOLOHUD2.WeaponSelectionSlots = 9
+
+---
 --- Hide TTT HUD
 ---
 hook.Add( "HUDShouldDraw", "holohud2_terrortown", function( name )
