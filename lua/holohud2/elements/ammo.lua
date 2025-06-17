@@ -957,11 +957,13 @@ function ELEMENT:PreDraw( settings )
         
         if has_clip1 then
             
+            visible = visible or clip1 / max_clip1 <= settings.autohide_threshold / 100
             clip1_panel:SetDeployed( not minimized and ( settings.clip1_always or not settings.autohide or visible ) )
             ammo1_panel:SetDeployed( not minimized and ( settings.ammo1_separate and ( settings.ammo1_always or not settings.autohide or visible ) ) )
 
         else
 
+            visible = visible or ammo1 / max_ammo1 <= settings.autohide_threshold / 100
             clip1_panel:SetDeployed( not minimized and ( not settings.ammo1_separate and ( settings.clip1_always or not settings.autohide or visible ) ) )
             ammo1_panel:SetDeployed( not minimized and ( settings.ammo1_separate and ( settings.ammo1_always or not settings.autohide or visible ) ) )
 
@@ -1029,10 +1031,22 @@ function ELEMENT:PreDraw( settings )
 
         if has_clip2 then
             
+            if primary <= 0 then
+            
+            	visible = visible or clip2 / max_clip2 <= settings.threshold / 100
+            
+            end
+            
             clip2_panel:SetDeployed( not minimized and ( settings.clip2_always or not settings.autohide or visible ) and not quicknades )
             ammo2_panel:SetDeployed( not minimized and ( settings.ammo2_separate and ( settings.ammo2_always or not settings.autohide or visible ) ) and not quicknades )
 
         else
+            
+            if primary <= 0 then
+            
+            	visible = visible or clip2 / max_clip2 <= settings.threshold / 100
+            
+            end
             
             clip2_panel:SetDeployed( not minimized and ( not settings.ammo2_separate and ( settings.clip2_always or not settings.autohide or visible ) ) and not quicknades )
             ammo2_panel:SetDeployed( not minimized and ( settings.ammo2_separate and ( settings.ammo2_always or not settings.autohide or visible ) ) and not quicknades )
