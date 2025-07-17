@@ -3,6 +3,8 @@ HOLOHUD2.AddCSLuaFile( "speedometer/hudspeedometer.lua" )
 
 if SERVER then return end
 
+local worldsize = CreateClientConVar( "holohud2_speedometer_worldsize", 0, true, false, "Calculates the speed relative to world size instead of player size.", 0, 1 )
+
 local CurTime = CurTime
 local hook_Call = HOLOHUD2.hook.Call
 
@@ -459,6 +461,13 @@ function ELEMENT:PreDraw( settings )
         end
 
         local speed = vehicle:GetVelocity():Length()
+        
+        if worldsize:GetBool() then
+        
+        		speed = speed * .75
+        
+        end
+        
         hudspeedometer:SetSpeed( speed )
 
         -- get vehicle damage

@@ -17,6 +17,8 @@ local SWAY_HEADBOB  = 3
 local swaying       = CreateClientConVar( "holohud2_sway", 1, true, false, "Selects the type of swaying. ( 0 = disabled, 1 = camera only, 2 = strafing and falling, 3 = headbobbing )" )
 local sway_mul      = CreateClientConVar( "holohud2_sway_mul", 1, true, false, "Scales the swaying intesity." )
 local sway_speed    = CreateClientConVar( "holohud2_sway_speed", 1, true, false, "Scales the speed of the swaying." )
+local headbob_mul	= CreateClientConVar( "holohud2_headbob_mul", 1, true, false, "Scales the intensity of the head bobbing." )
+local headbob_speed	= CreateClientConVar( "holohud2_headbob_speed", 1, true, false, "Scales the speed of the head bobbing." )
 
 local CAMERA_SWAY_SPEED     = 8
 local MOVEMENT_SWAY_SPEED   = 8
@@ -71,12 +73,13 @@ local function calculate()
     -- head bobbing
     if swaying == SWAY_HEADBOB and localplayer:OnGround() and not localplayer:InVehicle() then
 
+		local mul = headbob_mul:GetFloat()
         local velocity = math.min( velocity:Length() / 350, 1 )
         
-        camera.x = camera.x + math.sin( headbob * 3 ) * .45 * velocity
-        camera.y = camera.y + math.sin( headbob * 9 ) * .45 * velocity
+        camera.x = camera.x + math.sin( headbob * 3 ) * .45 * velocity * mul
+        camera.y = camera.y + math.sin( headbob * 9 ) * .45 * velocity * mul
 
-        headbob = headbob + delta * Lerp( velocity, 1, 2.5 )
+        headbob = headbob + delta * Lerp( velocity, 1, 2.5 ) * headbob_speed:GetFloat()
 
     end
 

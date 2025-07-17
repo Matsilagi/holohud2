@@ -1,5 +1,5 @@
 ---
---- Support for nMoney2.
+--- nMoney2.
 --- https://steamcommunity.com/sharedfiles/filedetails/?id=2430255692
 ---
 

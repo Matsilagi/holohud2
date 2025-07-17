@@ -1033,7 +1033,7 @@ function ELEMENT:PreDraw( settings )
             
             if primary <= 0 then
             
-            	visible = visible or clip2 / max_clip2 <= settings.threshold / 100
+            	visible = visible or clip2 / max_clip2 <= settings.autohide_threshold / 100
             
             end
             
@@ -1044,7 +1044,7 @@ function ELEMENT:PreDraw( settings )
             
             if primary <= 0 then
             
-            	visible = visible or clip2 / max_clip2 <= settings.threshold / 100
+            	visible = visible or clip2 / max_clip2 <= settings.autohide_threshold / 100
             
             end
             

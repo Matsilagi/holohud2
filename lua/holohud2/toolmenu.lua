@@ -8,6 +8,8 @@ local CVAR_ACCESSIBILITY = {
     holohud2_sway                   = 1,
     holohud2_sway_mul               = 2,
     holohud2_sway_speed             = 1,
+    holohud2_headbob_mul			= 1,
+    holohud2_headbob_speed			= 1,
     holohud2_draw_minglow           = .2,
     holohud2_r_scanlinesmul         = 6,
     holohud2_r_scanlinespasses      = 2,
@@ -92,6 +94,9 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
 
         panel:NumSlider( "#holohud2.accessibility.sway_mul", "holohud2_sway_mul", 0, 4, 1 )
         panel:NumSlider( "#holohud2.accessibility.sway_speed", "holohud2_sway_speed", 0, 2, 1 )
+        
+        panel:NumSlider( "#holohud2.accessibility.headbob_mul", "holohud2_headbob_mul", 0, 2, 1 )
+        panel:NumSlider( "#holohud2.accessibility.headbob_speed", "holohud2_headbob_speed", 0, 2, 1 )
 
         panel:ControlHelp( "\n\n" .. language.GetPhrase( "holohud2.accessibility.header2" ) )
         panel:KeyBinder( "#holohud2.accessibility.inspect_hud", "holohud2_inspect_key" )
@@ -123,6 +128,7 @@ hook.Add( "PopulateToolMenu", "holohud2", function()
         panel:ControlHelp( "#holohud2.accessibility.3dmargin.helptext" )
 
         panel:NumSlider( "#holohud2.accessibility.compassprecision", "holohud2_draw_compassprecision", 0, 1, 1 )
+        panel:CheckBox( "#holohud2.accessibility.worldsizespeed", "holohud2_speedometer_worldsize" )
 
     end )
 
