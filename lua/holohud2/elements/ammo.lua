@@ -1275,9 +1275,9 @@ function ELEMENT:PaintFrame( settings, x, y )
     ammo1_panel:PaintFrame( x, y )
     clip2_panel:PaintFrame( x, y )
     ammo2_panel:PaintFrame( x, y )
-
-    if settings.firemode_separate then firemode_panel:PaintFrame( x, y ) return end
-    if settings.quicknades_separate then quicknades_panel:PaintFrame( x, y ) return end
+	
+    if settings.firemode_separate then firemode_panel:PaintFrame( x, y ) end
+    if settings.quicknades_separate then quicknades_panel:PaintFrame( x, y ) end
 
 end
 
@@ -1288,8 +1288,8 @@ function ELEMENT:PaintBackground( settings, x, y )
     clip2_panel:PaintBackground( x, y )
     ammo2_panel:PaintBackground( x, y )
 
-    if settings.firemode_separate then firemode_panel:PaintBackground( x, y ) return end
-    if settings.quicknades_separate then quicknades_panel:PaintBackground( x, y ) return end
+    if settings.firemode_separate then firemode_panel:PaintBackground( x, y ) end
+    if settings.quicknades_separate then quicknades_panel:PaintBackground( x, y ) end
 
 end
 
@@ -1302,8 +1302,8 @@ function ELEMENT:Paint( settings, x, y )
     clip2_panel:Paint( x, y )
     ammo2_panel:Paint( x, y )
 
-    if settings.firemode_separate then firemode_panel:Paint( x, y ) return end
-    if settings.quicknades_separate then quicknades_panel:Paint( x, y ) return end
+    if settings.firemode_separate then firemode_panel:Paint( x, y ) end
+    if settings.quicknades_separate then quicknades_panel:Paint( x, y ) end
     
 end
 
@@ -1316,8 +1316,8 @@ function ELEMENT:PaintScanlines( settings, x, y )
     clip2_panel:PaintScanlines( x, y )
     ammo2_panel:PaintScanlines( x, y )
 
-    if settings.firemode_separate then firemode_panel:PaintScanlines( x, y ) return end
-    if settings.quicknades_separate then quicknades_panel:PaintScanlines( x, y ) return end
+    if settings.firemode_separate then firemode_panel:PaintScanlines( x, y ) end
+    if settings.quicknades_separate then quicknades_panel:PaintScanlines( x, y ) end
     
 end
 
