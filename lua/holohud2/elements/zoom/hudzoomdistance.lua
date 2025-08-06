@@ -20,7 +20,7 @@ function COMPONENT:ApplySettings( settings, fonts )
     unit:SetVisible( settings.distanceunit )
     unit:SetPos( settings.distanceunit_pos.x, settings.distanceunit_pos.y )
     unit:SetFont( fonts.distanceunit_font )
-    unit:SetAlign( fonts.distanceunit_align )
+    unit:SetAlign( settings.distanceunit_align )
     unit:SetText( settings.distance_unit == HOLOHUD2.DISTANCE_METRIC and HOLOHUD2.UNIT_METRIC or ( settings.distance_unit == HOLOHUD2.DISTANCE_IMPERIAL and HOLOHUD2.UNIT_IMPERIAL ) or HOLOHUD2.UNIT_HAMMER )
     self:SetDrawUnitOnBackground( settings.distanceunit_on_background )
 

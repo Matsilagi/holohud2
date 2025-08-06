@@ -1,6 +1,6 @@
 ---
 --- Oxygen and Stamina System (And Flashlight Battery).
---- https://steamcommunity.com/sharedfiles/filedetails/?id=2358652168%22
+--- https://steamcommunity.com/sharedfiles/filedetails/?id=2358652168
 ---
 
 if SERVER then return end
