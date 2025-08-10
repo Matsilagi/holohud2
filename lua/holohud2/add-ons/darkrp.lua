@@ -38,6 +38,7 @@ HOLOHUD2.gamemode.SetElementDefaults( "health", {
     health_suit_oversize_pulsesize          = false,
     suit_depleted                           = 3,
     suit_separate                           = true,
+    suit_autohide                           = false,
     suit_size                               = { x = 35, y = 35 },
     suitnum_pos                             = { x = 19, y = 24 },
     suitnum_font                            = { font = "Roboto Condensed Light", size = 12, weight = 1000, italic = false },
@@ -75,7 +76,7 @@ HOLOHUD2.gamemode.SetParameterOverride( "radar", "insight_fov", 60 )
 ---
 --- HungerMod
 ---
-if DarkRP.disabledDefaults.hungermod == false then
+if not DarkRP.disabledDefaults.modules.hungermod then
 
     HOLOHUD2.hook.Add( "ShouldDrawHunger", "darkrp_hungermod", function()
 

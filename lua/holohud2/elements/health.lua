@@ -1170,6 +1170,7 @@ HOLOHUD2.presets.Add( "health", "Classic - Electrocardiogram with kevlar", {
     health_suit_oversize_pulsesize          = false,
     suit_depleted                           = 3,
     suit_separate                           = true,
+    suit_autohide                           = false,
     suit_size                               = { x = 35, y = 35 },
     suitnum_pos                             = { x = 18, y = 24 },
     suitnum_font                            = { font = "Roboto Condensed Light", size = 12, weight = 1000, italic = false },
