@@ -1,7 +1,7 @@
 ---
 --- D/GL4: Customizable Holographic HUD
---- 1.8.2
---- August 10th, 2025
+--- 1.8.3
+--- September 21st, 2025
 --- Made by DyaMetR
 --- * full credits found in the details below
 ---
@@ -13,15 +13,15 @@ HOLOHUD2 = HOLOHUD2 or {}
 ---
 HOLOHUD2.Name           = "D/GL4 HUD"
 HOLOHUD2.CodeName       = "D/GL4" -- overly technical nomenclature for aesthetic purposes
-HOLOHUD2.Version        = "1.8.2"
-HOLOHUD2.Date           = 1754850360 -- epoch timestamp of the build date
+HOLOHUD2.Version        = "1.8.3"
+HOLOHUD2.Date           = 1758440317 -- epoch timestamp of the build date
 HOLOHUD2.Credits        = { -- { name, { contribution, ... } }
 
     { "DyaMetR", { "code", "design", "art", "locale_es-ES" } },
     { "8Z", { "bugfix" } },
     { "IBRS", { "locale_zh-CN" } },
     { "homonovus", { "misc", "plugin" } }
-    
+
 }
 
 --- Adds a client side file.

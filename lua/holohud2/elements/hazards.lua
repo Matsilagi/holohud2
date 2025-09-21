@@ -109,7 +109,7 @@ tray.PaintOver = function( self, x, y )
     x, y = x + self._w * dock_x, y + self._h * dock_y
 
     for _, hazard in ipairs( hazards ) do
-        
+
         hazard.component:Paint( x, y )
 
     end
@@ -145,14 +145,14 @@ function ELEMENT:PerformLayout( settings )
 
         -- apply special settings during startup
         if hazard.preview then
-            
+
             component:SetColor( Color( settings.color.r * .8, settings.color.g * .8, settings.color.b * .8, settings.color.a * .8 ) )
             component:SetBlinkAmount( 0 )
 
         else
 
             component:SetColor( settings.color )
-            component:SetBlinkAmount( settings.blinking and settings.blink_amount )
+            component:SetBlinkAmount( settings.blinking and settings.blink_amount or 0 )
 
         end
 
@@ -252,7 +252,7 @@ function ELEMENT:Startup()
         self:AddHazard( dmgtype, STARTUP_TIME ).preview = true
 
     end
-    
+
     startup_phase = STARTUP_ACTIVE
     startup_time = CurTime() + STARTUP_TIME
 
@@ -269,7 +269,7 @@ function ELEMENT:IsStartupOver()
     if startup_phase == STARTUP_ACTIVE and startup_time < CurTime() then
 
         startup_phase = STARTUP_NONE
-        
+
     end
 
     return startup_phase == STARTUP_NONE
@@ -315,7 +315,7 @@ function ELEMENT:PreDraw( settings )
             if queue[ hazard.dmgtype ] then
 
                 if settings.damage then
-                    
+
                     hazard.component:Damage()
 
                 end
@@ -342,13 +342,13 @@ function ELEMENT:PreDraw( settings )
                 end
 
             else
-                
+
                 hazard.panel:Think()
                 hazard.panel:SetDeployed( not self:IsMinimized() and hazard.time > curtime )
 
                 -- if the panel hasn't closed, don't remove yet
                 if hazard.panel:IsVisible() then
-                    
+
                     next = next + 1
                     continue
 
@@ -418,14 +418,14 @@ end)
 function ELEMENT:PaintFrame( settings, x, y )
 
     if singletray then
-        
+
         tray:PaintFrame( x, y )
         return
 
     end
 
     for _, hazard in ipairs( hazards ) do
-        
+
         hazard.panel:PaintFrame( x, y )
 
     end
@@ -433,16 +433,16 @@ function ELEMENT:PaintFrame( settings, x, y )
 end
 
 function ELEMENT:Paint( settings, x, y )
-    
+
     if singletray then
-        
+
         tray:Paint( x, y )
         return
 
     end
 
     for _, hazard in ipairs( hazards ) do
-        
+
         hazard.panel:Paint( x, y )
 
     end
@@ -470,7 +470,7 @@ local preview_damage = 0
 local preview_hazards = {}
 
 for _, hazard in ipairs( PREVIEW_HAZARDS[ 1 ] ) do
-    
+
     local component = HOLOHUD2.component.Create( "Hazard" )
     component:SetHazard( hazard )
 
@@ -535,7 +535,7 @@ function ELEMENT:PreviewPaint( x, y, w, h, settings )
             surface.DrawOutlinedRect( x, y, backgroundsize, backgroundsize )
 
         end
-    
+
         if settings.damage and preview_damage < curtime then
 
             hazard:Damage()
@@ -572,7 +572,7 @@ function ELEMENT:OnSettingsChanged( settings )
 
         layout:SetVisible( false )
         return
-    
+
     end
 
     singletray = settings.singletray
@@ -626,7 +626,7 @@ function ELEMENT:OnSettingsChanged( settings )
     end
 
     table.Empty( hazards )
-    
+
     self:InvalidateLayout()
 
 end

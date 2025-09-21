@@ -1,8 +1,6 @@
 local CurTime = CurTime
 local FrameTime = FrameTime
 
-local BaseClass = HOLOHUD2.component.Get( "Icon" )
-
 local COMPONENT = {
     dmgcolor    = color_white,
     blinkamount = .4,
